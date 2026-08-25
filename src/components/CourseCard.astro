@@ -1,0 +1,154 @@
+---
+interface Props {
+  course: {
+    id: string;
+
+    status: string;
+    statusLabel: string;
+
+    title: string;
+
+    registrationMode: string;
+    registrationModeLabel: string;
+
+    level: string;
+    levelLabel: string;
+
+    unit: string;
+    unitLabel: string;
+
+    instructors: string;
+    description: string;
+    delivery: string;
+
+    date: string;
+    time: string;
+    location: string;
+
+    href: string;
+  };
+}
+
+const { course } = Astro.props;
+---
+
+<article
+  class="course-card"
+  data-course-card
+
+  data-status={course.status}
+  data-registration={course.registrationMode}
+  data-level={course.level}
+  data-unit={course.unit}
+>
+
+  <div class="course-card-header">
+
+    <span
+      class:list={[
+        "course-status",
+        `course-status--${course.status}`
+      ]}
+    >
+      {course.statusLabel}
+    </span>
+
+
+    <h2 class="course-card-title">
+      {course.title}
+    </h2>
+
+  </div>
+
+
+  <div class="course-tags">
+
+    <span>
+      {course.registrationModeLabel}
+    </span>
+
+    <span>
+      {course.levelLabel}
+    </span>
+
+    <span>
+      {course.unitLabel}
+    </span>
+
+  </div>
+
+
+  <div class="course-card-body">
+
+    <div class="course-main-info">
+
+      <div class="course-info-block">
+        <p class="course-info-label">
+          INSTRUCTOR
+        </p>
+
+        <p class="course-info-value">
+          {course.instructors}
+        </p>
+      </div>
+
+
+      <div class="course-info-block">
+        <p class="course-info-label">
+          COURSE DESCRIPTION
+        </p>
+
+        <p class="course-description">
+          {course.description}
+        </p>
+      </div>
+
+
+      <div class="course-info-block">
+        <p class="course-info-label">
+          FORMAT
+        </p>
+
+        <p class="course-info-value">
+          {course.delivery}
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="course-schedule">
+
+      <div>
+        <span>日期</span>
+        <strong>{course.date}</strong>
+      </div>
+
+      <div>
+        <span>時間</span>
+        <strong>{course.time}</strong>
+      </div>
+
+      <div>
+        <span>地點</span>
+        <strong>{course.location}</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="course-card-footer">
+
+    <a
+      class="course-detail-link"
+      href={course.href}
+    >
+      查看課程與報名
+      <span aria-hidden="true">→</span>
+    </a>
+
+  </div>
+
+</article>

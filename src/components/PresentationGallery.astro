@@ -1,0 +1,316 @@
+---
+import { events } from "../data/events";
+
+import "../styles/presentation.css";
+
+const firstEvent = events[0];
+---
+
+<section class="presentation-section">
+
+  <div class="presentation-layout">
+
+    <!-- =========================
+         Left
+    ========================== -->
+
+    <aside class="presentation-sidebar">
+
+      <div class="presentation-sidebar-inner">
+
+        <p class="presentation-eyebrow">
+          COURSE HIGHLIGHTS
+        </p>
+
+        <h1 class="presentation-title">
+          活動回顧
+        </h1>
+
+
+        <!-- Current Event -->
+
+        <div class="presentation-current">
+
+          <p
+            class="presentation-current-date"
+            data-current-date
+          >
+            {firstEvent.date}
+          </p>
+
+          <h2 data-current-title>
+            {firstEvent.title}
+          </h2>
+
+          <p
+            class="presentation-current-description"
+            data-current-description
+          >
+            {firstEvent.description}
+          </p>
+
+        </div>
+
+
+        <!-- Event Selector -->
+
+        <div
+          class="event-selector"
+          aria-label="選擇活動"
+        >
+
+          {
+            events.map((event, index) => (
+
+              <button
+                class:list={[
+                  "event-selector-button",
+                  {
+                    "is-active":
+                      index === 0
+                  }
+                ]}
+                type="button"
+                data-event-button={event.id}
+              >
+
+                <span class="event-selector-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                <span class="event-selector-text">
+
+                  <span>
+                    {event.title}
+                  </span>
+
+                  <small>
+                    {event.date}
+                  </small>
+
+                </span>
+
+              </button>
+
+            ))
+          }
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <!-- =========================
+         Right Photo Stack
+    ========================== -->
+
+    <div
+      class="presentation-gallery"
+      data-gallery
+    >
+
+      {
+        firstEvent.images.map((image, index) => (
+
+          <article
+            class="presentation-photo-card"
+            style={`--card-index: ${index};`}
+          >
+
+            <figure>
+
+              <img
+                src={image.src}
+                alt={image.alt}
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+
+              <figcaption>
+
+                <span>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                <p>
+                  {image.caption}
+                </p>
+
+              </figcaption>
+
+            </figure>
+
+          </article>
+
+        ))
+      }
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- 把 Astro 資料交給瀏覽器 -->
+
+<script
+  define:vars={{
+    eventData: events
+  }}
+>
+
+  const buttons =
+    document.querySelectorAll(
+      "[data-event-button]"
+    );
+
+
+  const gallery =
+    document.querySelector(
+      "[data-gallery]"
+    );
+
+
+  const title =
+    document.querySelector(
+      "[data-current-title]"
+    );
+
+
+  const date =
+    document.querySelector(
+      "[data-current-date]"
+    );
+
+
+  const description =
+    document.querySelector(
+      "[data-current-description]"
+    );
+
+
+  function renderEvent(eventId) {
+
+    const event =
+      eventData.find(
+        item =>
+          item.id === eventId
+      );
+
+
+    if (!event || !gallery) {
+      return;
+    }
+
+
+    /* 左側文字 */
+
+    if (title) {
+      title.textContent =
+        event.title;
+    }
+
+
+    if (date) {
+      date.textContent =
+        event.date;
+    }
+
+
+    if (description) {
+      description.textContent =
+        event.description;
+    }
+
+
+    /* 右側圖片 */
+
+    gallery.innerHTML =
+      event.images
+        .map(
+          (image, index) => `
+            <article
+              class="presentation-photo-card"
+              style="--card-index: ${index};"
+            >
+              <figure>
+
+                <img
+                  src="${image.src}"
+                  alt="${image.alt}"
+                  loading="lazy"
+                />
+
+                <figcaption>
+
+                  <span>
+                    ${String(index + 1)
+                      .padStart(2, "0")}
+                  </span>
+
+                  <p>
+                    ${image.caption}
+                  </p>
+
+                </figcaption>
+
+              </figure>
+            </article>
+          `
+        )
+        .join("");
+
+
+    /* 按鈕狀態 */
+
+    buttons.forEach(button => {
+
+      button.classList.toggle(
+        "is-active",
+        button.dataset.eventButton === eventId
+      );
+
+    });
+
+
+    /*
+      切換活動後回到 gallery 頂部附近，
+      避免使用者留在前一活動的深處
+    */
+
+    const top =
+      gallery.getBoundingClientRect().top +
+      window.scrollY -
+      110;
+
+
+    window.scrollTo({
+      top,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  buttons.forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        const eventId =
+          button.dataset.eventButton;
+
+
+        if (eventId) {
+          renderEvent(eventId);
+        }
+
+      }
+    );
+
+  });
+
+</script>

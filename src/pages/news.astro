@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import { newsItems } from "../data/news";
+
+import "../styles/news-page.css";
+---
+
+<BaseLayout title="最新消息｜AI × 護理">
+
+  <section class="news-page">
+
+    <div class="news-page-container">
+
+      <!-- Heading -->
+
+      <header class="news-page-heading">
+
+        <p class="news-page-eyebrow">
+          LATEST NEWS
+        </p>
+
+        <h1>
+          最新消息
+        </h1>
+
+      </header>
+
+
+      <!-- News -->
+
+      <div class="news-page-list">
+
+        {
+          newsItems.map((item) => (
+
+            <article class="news-page-item">
+
+              <div class="news-page-meta">
+
+                <time datetime={item.date}>
+                  {item.displayDate}
+                </time>
+
+                <span>
+                  {item.category}
+                </span>
+
+              </div>
+
+
+              <h2>
+                {item.title}
+              </h2>
+
+            </article>
+
+          ))
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+</BaseLayout>

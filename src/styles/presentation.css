@@ -1,0 +1,498 @@
+/* =========================
+   Presentation
+========================= */
+
+.presentation-section {
+  background-color: #f4f1e9;
+  color: #191a2f;
+
+  border-bottom:
+    1px solid #191a2f;
+}
+
+
+.presentation-layout {
+  display: grid;
+
+  /* 左 1 : 右 2 */
+  grid-template-columns:
+    minmax(280px, 1fr)
+    minmax(0, 2fr);
+
+  max-width: 1600px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================
+   Left
+========================= */
+
+.presentation-sidebar {
+  position: relative;
+
+  padding:
+    100px
+    55px
+    100px
+    6vw;
+
+  border-right:
+    1px solid
+    #191a2f;
+}
+
+
+.presentation-sidebar-inner {
+  position: sticky;
+
+  top: 120px;
+}
+
+
+.presentation-eyebrow {
+  margin:
+    0 0
+    18px;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+
+.presentation-title {
+  margin: 0;
+
+  font-size:
+    clamp(
+      3rem,
+      5vw,
+      5.5rem
+    );
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing:
+    -0.055em;
+}
+
+
+/* =========================
+   Current Event
+========================= */
+
+.presentation-current {
+  margin-top: 60px;
+}
+
+
+.presentation-current-date {
+  margin:
+    0 0
+    12px;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  color: #5b3fa3;
+}
+
+
+.presentation-current h2 {
+  margin:
+    0 0
+    20px;
+
+  font-size:
+    clamp(
+      1.5rem,
+      2.5vw,
+      2.4rem
+    );
+
+  font-weight: 550;
+
+  line-height: 1.25;
+
+  letter-spacing:
+    -0.03em;
+}
+
+
+.presentation-current-description {
+  max-width: 430px;
+
+  margin: 0;
+
+  font-size: 0.9rem;
+
+  line-height: 1.8;
+
+  color: #555564;
+}
+
+
+/* =========================
+   Selector
+========================= */
+
+.event-selector {
+  margin-top: 55px;
+
+  border-top:
+    1px solid #191a2f;
+}
+
+
+.event-selector-button {
+  display: grid;
+
+  grid-template-columns:
+    38px
+    1fr;
+
+  gap: 15px;
+
+  width: 100%;
+
+  padding:
+    18px 0;
+
+  border: 0;
+
+  border-bottom:
+    1px solid
+    rgba(25,26,47,0.35);
+
+  background: transparent;
+
+  color: #191a2f;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    padding-left 0.2s ease,
+    color 0.2s ease;
+}
+
+
+.event-selector-button:hover,
+.event-selector-button.is-active {
+  padding-left: 12px;
+
+  color: #5b3fa3;
+}
+
+
+.event-selector-number {
+  padding-top: 3px;
+
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+
+.event-selector-text {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+.event-selector-text > span {
+  font-size: 0.88rem;
+  font-weight: 650;
+
+  line-height: 1.4;
+}
+
+
+.event-selector-text small {
+  font-size: 0.67rem;
+
+  color: #747483;
+}
+
+
+/* =========================
+   Gallery
+========================= */
+
+.presentation-gallery {
+  position: relative;
+
+  padding:
+    100px
+    6vw
+    140px
+    55px;
+}
+
+
+/* =========================
+   Sticky Stack
+========================= */
+
+.presentation-photo-card {
+  position: sticky;
+
+  /*
+    每張往下錯開一點，
+    才會看見下面有卡片
+  */
+
+  top:
+    calc(
+      110px +
+      var(--card-index) * 22px
+    );
+
+  margin-bottom: 70px;
+}
+
+
+.presentation-photo-card figure {
+  overflow: hidden;
+
+  margin: 0;
+
+  border:
+    1px solid #191a2f;
+
+  border-radius: 24px;
+
+  background-color: #fff;
+}
+
+
+.presentation-photo-card img {
+  display: block;
+
+  width: 100%;
+
+  aspect-ratio: 16 / 10;
+
+  object-fit: cover;
+}
+
+
+/* caption */
+
+.presentation-photo-card figcaption {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  gap: 30px;
+
+  padding:
+    18px 22px;
+
+  border-top:
+    1px solid
+    #191a2f;
+
+  background-color: #fffdf8;
+}
+
+
+.presentation-photo-card figcaption span {
+  font-size: 0.67rem;
+  font-weight: 700;
+}
+
+
+.presentation-photo-card figcaption p {
+  margin: 0;
+
+  font-size: 0.8rem;
+
+  color: #555564;
+}
+
+
+/* =========================
+   不同卡片稍微改背景
+========================= */
+
+.presentation-photo-card:nth-child(3n + 2)
+  figure {
+  background-color: #dfe8ff;
+}
+
+
+.presentation-photo-card:nth-child(3n + 3)
+  figure {
+  background-color: #e6ddf4;
+}
+
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 1000px) {
+
+  .presentation-layout {
+    grid-template-columns:
+      0.8fr
+      1.5fr;
+  }
+
+
+  .presentation-sidebar {
+    padding:
+      80px
+      35px
+      80px
+      40px;
+  }
+
+
+  .presentation-gallery {
+    padding:
+      80px
+      40px
+      120px
+      35px;
+  }
+
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 720px) {
+
+  .presentation-layout {
+    display: block;
+  }
+
+
+  .presentation-sidebar {
+    padding:
+      70px
+      24px
+      45px;
+
+    border-right: 0;
+
+    border-bottom:
+      1px solid
+      #191a2f;
+  }
+
+
+  .presentation-sidebar-inner {
+    position: static;
+  }
+
+
+  .presentation-current {
+    margin-top: 40px;
+  }
+
+
+  /*
+    手機活動選單改橫向
+  */
+
+  .event-selector {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 40px;
+
+    padding-bottom: 8px;
+
+    overflow-x: auto;
+
+    border-top: 0;
+  }
+
+
+  .event-selector-button {
+    flex:
+      0 0
+      220px;
+
+    display: block;
+
+    padding:
+      14px 16px;
+
+    border:
+      1px solid
+      #191a2f;
+
+    border-radius: 999px;
+
+    background-color:
+      #fffdf8;
+  }
+
+
+  .event-selector-button:hover,
+  .event-selector-button.is-active {
+    padding-left: 16px;
+
+    background-color:
+      #191a2f;
+
+    color: #fff;
+  }
+
+
+  .event-selector-number {
+    display: none;
+  }
+
+
+  .event-selector-text small {
+    display: none;
+  }
+
+
+  /* photos */
+
+  .presentation-gallery {
+    padding:
+      45px
+      24px
+      90px;
+  }
+
+
+  .presentation-photo-card {
+    top:
+      calc(
+        80px +
+        var(--card-index) * 12px
+      );
+
+    margin-bottom: 45px;
+  }
+
+
+  .presentation-photo-card figure {
+    border-radius: 17px;
+  }
+
+
+  .presentation-photo-card img {
+    aspect-ratio: 4 / 3;
+  }
+
+}

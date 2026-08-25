@@ -1,0 +1,860 @@
+/* =========================
+   Registration Page
+========================= */
+
+.registration-page {
+  padding:
+    105px 5vw
+    130px;
+
+  background-color: #f4f1e9;
+  color: #191a2f;
+}
+
+
+.registration-container {
+  max-width: 1450px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================
+   Heading
+========================= */
+
+.registration-heading {
+  max-width: 850px;
+
+  margin:
+    0 auto
+    70px;
+
+  text-align: center;
+}
+
+
+.registration-eyebrow {
+  margin:
+    0 0
+    18px;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+
+.registration-heading h1 {
+  margin: 0;
+
+  font-size:
+    clamp(
+      4rem,
+      8vw,
+      8rem
+    );
+
+  font-weight: 500;
+
+  line-height: 0.95;
+
+  letter-spacing: -0.06em;
+}
+
+
+.registration-heading > p:last-child {
+  max-width: 650px;
+
+  margin:
+    32px auto
+    0;
+
+  line-height: 1.8;
+
+  color: #555564;
+}
+
+
+/* =========================
+   Selector
+========================= */
+
+.registration-selector {
+  max-width: 900px;
+
+  margin:
+    0 auto
+    50px;
+}
+
+
+.registration-selector label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+}
+
+
+.registration-selector select {
+  width: 100%;
+
+  min-height: 60px;
+
+  padding:
+    0
+    50px
+    0
+    22px;
+
+  border:
+    1px solid
+    #191a2f;
+
+  border-radius: 999px;
+
+  background-color: #fffdf8;
+
+  color: #191a2f;
+
+  font-size: 1rem;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   Course
+========================= */
+
+.registration-course[hidden] {
+  display: none;
+}
+
+
+.registration-course-info {
+  padding: 45px;
+
+  border:
+    1px solid
+    #191a2f;
+
+  border-radius: 24px;
+
+  background-color: #fffdf8;
+}
+
+
+/* =========================
+   Course title
+========================= */
+
+.registration-course-title {
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr);
+
+  align-items: start;
+
+  gap: 25px;
+}
+
+
+.registration-course-title h2 {
+  max-width: 1000px;
+
+  margin: 0;
+
+  font-size:
+    clamp(
+      2rem,
+      4vw,
+      4rem
+    );
+
+  font-weight: 520;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.045em;
+}
+
+
+/* =========================
+   Status
+========================= */
+
+.registration-status {
+  padding:
+    7px 13px;
+
+  border:
+    1px solid
+    #191a2f;
+
+  border-radius: 999px;
+
+  white-space: nowrap;
+
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+
+.registration-status--enrolling {
+  background-color: #d2efc9;
+}
+
+
+.registration-status--ongoing {
+  background-color: #d7e7ff;
+}
+
+
+.registration-status--closed {
+  background-color: #e6e6e6;
+
+  color: #666;
+}
+
+
+/* =========================
+   Tags
+========================= */
+
+.registration-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin:
+    25px 0
+    40px;
+}
+
+
+.registration-tags span {
+  padding:
+    5px 10px;
+
+  border:
+    1px solid
+    rgba(25,26,47,0.65);
+
+  border-radius: 999px;
+
+  font-size: 0.68rem;
+}
+
+
+/* =========================
+   Meta
+========================= */
+
+.registration-meta {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 25px;
+
+  padding:
+    28px 0;
+
+  border-top:
+    1px solid
+    rgba(25,26,47,0.3);
+
+  border-bottom:
+    1px solid
+    rgba(25,26,47,0.3);
+}
+
+
+.registration-meta div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+
+.registration-meta span {
+  font-size: 0.67rem;
+
+  color: #666675;
+}
+
+
+.registration-meta strong {
+  font-size: 0.9rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   Description
+========================= */
+
+.registration-description {
+  display: grid;
+
+  grid-template-columns:
+    180px
+    minmax(0, 1fr);
+
+  gap: 35px;
+
+  margin-top: 38px;
+}
+
+
+.registration-label {
+  margin: 0;
+
+  font-size: 0.67rem;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  color: #666675;
+}
+
+
+.registration-description > p:last-child {
+  max-width: 850px;
+
+  margin: 0;
+
+  line-height: 1.8;
+}
+
+
+/* =========================
+   Notice
+========================= */
+
+.registration-notice {
+  margin-top: 40px;
+
+  padding: 28px 30px;
+
+  border-radius: 16px;
+
+  background-color: #f2ecdf;
+}
+
+
+.registration-notice h3 {
+  margin:
+    0 0
+    15px;
+
+  font-size: 1rem;
+}
+
+
+.registration-notice ol {
+  margin: 0;
+
+  padding-left: 1.4rem;
+}
+
+
+.registration-notice li {
+  margin:
+    8px 0;
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   Course detail
+========================= */
+
+.course-detail-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 30px;
+
+  padding:
+    12px 18px;
+
+  border:
+    1px solid
+    #191a2f;
+
+  border-radius: 999px;
+
+  color: #191a2f;
+
+  text-decoration: none;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+
+/* =========================
+   Forms
+========================= */
+
+.registration-forms {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 28px;
+
+  margin-top: 45px;
+}
+
+
+.registration-form-card {
+  overflow: hidden;
+
+  border:
+    1px solid
+    #191a2f;
+
+  border-radius: 24px;
+
+  background-color: #fffdf8;
+}
+
+
+.form-card-heading {
+  padding:
+    25px 28px;
+
+  border-bottom:
+    1px solid
+    #191a2f;
+}
+
+
+.form-card-heading p {
+  margin:
+    0 0
+    7px;
+
+  font-size: 0.65rem;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  color: #666675;
+}
+
+
+.form-card-heading h3 {
+  margin: 0;
+
+  font-size: 1.5rem;
+}
+
+
+.registration-form-card iframe {
+  display: block;
+
+  width: 100%;
+  height: 720px;
+
+  border: 0;
+
+  background-color: white;
+}
+
+
+.form-external-link {
+  display: block;
+
+  padding:
+    16px 22px;
+
+  border-top:
+    1px solid
+    rgba(25,26,47,0.3);
+
+  color: #191a2f;
+
+  font-size: 0.75rem;
+
+  text-decoration: none;
+}
+
+
+.form-external-link:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================
+   External
+========================= */
+
+.external-registration {
+  max-width: 900px;
+
+  margin:
+    45px auto
+    0;
+
+  padding:
+    55px;
+
+  border:
+    1px solid
+    #191a2f;
+
+  border-radius: 24px;
+
+  background-color: #dfe8ff;
+
+  text-align: center;
+}
+
+
+.external-registration-eyebrow {
+  margin:
+    0 0
+    15px;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+}
+
+
+.external-registration h3 {
+  margin:
+    0 0
+    18px;
+
+  font-size:
+    clamp(
+      1.8rem,
+      3vw,
+      3rem
+    );
+}
+
+
+.external-registration > p:not(.external-registration-eyebrow) {
+  max-width: 600px;
+
+  margin:
+    0 auto;
+
+  line-height: 1.8;
+}
+
+
+.external-registration a {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 30px;
+
+  padding:
+    14px 22px;
+
+  border-radius: 999px;
+
+  background-color: #191a2f;
+
+  color: #fff;
+
+  text-decoration: none;
+
+  font-weight: 700;
+}
+
+/* =========================
+   Closed Registration
+========================= */
+
+.closed-registration {
+  max-width: 900px;
+
+  margin:
+    45px auto
+    0;
+
+  padding:
+    60px;
+
+  border:
+    1px solid
+    #191a2f;
+
+  border-radius: 24px;
+
+  background-color: #eeeeee;
+
+  text-align: center;
+}
+
+
+.closed-registration-eyebrow {
+  margin:
+    0 0
+    16px;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+
+  color: #777784;
+}
+
+
+.closed-registration h3 {
+  margin:
+    0 0
+    20px;
+
+  font-size:
+    clamp(
+      2rem,
+      4vw,
+      3.5rem
+    );
+
+  font-weight: 520;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.04em;
+}
+
+
+.closed-registration > p:not(.closed-registration-eyebrow) {
+  max-width: 630px;
+
+  margin:
+    0 auto;
+
+  font-size: 0.95rem;
+  line-height: 1.8;
+
+  color: #5f5f69;
+}
+
+
+/* =========================
+   Buttons
+========================= */
+
+.closed-registration-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-top: 32px;
+}
+
+
+.closed-registration-actions a {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding:
+    14px 21px;
+
+  border:
+    1px solid
+    #191a2f;
+
+  border-radius: 999px;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+
+.closed-registration-actions a:hover {
+  transform:
+    translateY(-3px);
+}
+
+
+.closed-primary-button {
+  background-color: #191a2f;
+
+  color: #ffffff;
+}
+
+
+.closed-primary-button:hover {
+  background-color: #5b3fa3;
+
+  border-color: #5b3fa3;
+}
+
+
+.closed-secondary-button {
+  background-color: transparent;
+
+  color: #191a2f;
+}
+
+
+.closed-secondary-button:hover {
+  background-color: #ffffff;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 620px) {
+
+  .closed-registration {
+    padding:
+      42px
+      24px;
+
+    border-radius: 18px;
+  }
+
+
+  .closed-registration-actions {
+    display: grid;
+  }
+
+
+  .closed-registration-actions a {
+    justify-content: space-between;
+
+    width: 100%;
+  }
+
+}
+
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 950px) {
+
+  .registration-meta {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .registration-forms {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 620px) {
+
+  .registration-page {
+    padding:
+      75px 24px
+      90px;
+  }
+
+
+  .registration-heading {
+    margin-bottom: 50px;
+
+    text-align: left;
+  }
+
+
+  .registration-course-info {
+    padding:
+      28px 24px;
+
+    border-radius: 18px;
+  }
+
+
+  .registration-course-title {
+    grid-template-columns: 1fr;
+  }
+
+
+  .registration-meta {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+
+  .registration-description {
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+  }
+
+
+  .registration-notice {
+    padding:
+      22px 20px;
+  }
+
+
+  .registration-form-card {
+    border-radius: 18px;
+  }
+
+
+  .registration-form-card iframe {
+    height: 650px;
+  }
+
+
+  .external-registration {
+    padding:
+      40px 24px;
+  }
+
+}

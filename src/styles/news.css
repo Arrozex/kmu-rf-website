@@ -1,0 +1,294 @@
+/* =========================
+   News Section
+========================= */
+
+.news-section {
+  padding: 110px 7vw 130px;
+
+  background-color: #bbedad95;
+
+}
+
+
+.news-container {
+  max-width: 1450px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.news-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+
+  margin-bottom: 70px;
+}
+
+
+.news-eyebrow {
+  margin: 0 0 16px;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+
+.news-title {
+  margin: 0;
+
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+
+.news-view-all {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding-bottom: 6px;
+
+  color: #191a2f;
+
+  border-bottom: 1px solid #191a2f;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+
+/* =========================
+   News List
+========================= */
+
+.news-list {
+  border-top: 1px solid #191a2f;
+}
+
+
+.news-item {
+  display: grid;
+
+  grid-template-columns:
+    minmax(180px, 0.7fr)
+    minmax(0, 2fr)
+    auto;
+
+  align-items: center;
+  gap: 40px;
+
+  min-height: 120px;
+  padding: 0 25px;
+
+  border-bottom: 1px solid #191a2f;
+}
+
+
+/* 日期與類別 */
+
+.news-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  font-size: 0.78rem;
+}
+
+
+.news-meta time {
+  font-weight: 700;
+}
+
+
+.news-category {
+  padding: 5px 10px;
+
+  border: 1px solid #191a2f;
+  border-radius: 999px;
+
+  white-space: nowrap;
+
+  font-size: 0.7rem;
+}
+
+
+/* 標題 */
+
+.news-item-title {
+  margin: 0;
+
+  font-size: clamp(1.15rem, 2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+
+.news-item-title a {
+  color: #191a2f;
+  text-decoration: none;
+}
+
+
+/* 箭頭 */
+
+.news-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 52px;
+  height: 52px;
+
+  color: #191a2f;
+
+  border: 1px solid #191a2f;
+  border-radius: 50%;
+
+  font-size: 1.4rem;
+
+  text-decoration: none;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* =========================
+   Hover
+========================= */
+
+.news-item {
+  transition: background-color 0.2s ease;
+}
+
+
+.news-item:hover {
+  background-color: rgba(91, 63, 163, 0.06);
+}
+
+
+.news-item:hover .news-arrow {
+  background-color: #191a2f;
+  color: white;
+
+  transform: translateX(4px);
+}
+
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 900px) {
+
+  .news-section {
+    padding:
+      90px 40px
+      100px;
+  }
+
+
+  .news-item {
+    grid-template-columns:
+      150px
+      1fr
+      auto;
+
+    gap: 24px;
+  }
+
+
+  .news-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+
+  .news-section {
+    padding:
+      75px 24px
+      85px;
+  }
+
+
+  .news-header {
+    align-items: flex-start;
+    flex-direction: column;
+
+    margin-bottom: 45px;
+  }
+
+
+  .news-title {
+    font-size: clamp(3rem, 15vw, 4.5rem);
+  }
+
+
+  .news-item {
+    position: relative;
+
+    display: block;
+
+    min-height: 0;
+
+    padding:
+      28px
+      55px
+      28px
+      0;
+  }
+
+
+  .news-meta {
+    flex-direction: row;
+    gap: 12px;
+
+    margin-bottom: 18px;
+  }
+
+
+  .news-item-title {
+    font-size: 1.2rem;
+  }
+
+
+  .news-arrow {
+    position: absolute;
+
+    top: 50%;
+    right: 0;
+
+    width: 42px;
+    height: 42px;
+
+    transform: translateY(-50%);
+  }
+
+
+  .news-item:hover .news-arrow {
+    transform:
+      translate(4px, -50%);
+  }
+
+}

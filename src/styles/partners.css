@@ -1,0 +1,190 @@
+/* =========================
+   Partners
+========================= */
+
+.partners-section {
+  padding: 85px 7vw 95px;
+
+  background-color: #fffdf8;
+  color: #191a2f;
+
+  border-bottom: 1px solid #191a2f;
+}
+
+
+.partners-container {
+  max-width: 1350px;
+  margin: 0 auto;
+}
+
+
+/* =========================
+   Heading
+========================= */
+
+.partners-heading {
+  max-width: 850px;
+
+  margin: 0 auto 55px;
+
+  text-align: center;
+}
+
+
+.partners-eyebrow {
+  margin: 0 0 15px;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+
+.partners-title {
+  margin: 0;
+
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+
+
+/* =========================
+   Capsule Layout
+========================= */
+
+.partners-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 24px;
+}
+
+
+/* 每顆 capsule */
+
+.partner-capsule {
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+  gap: 18px;
+
+  width: calc((100% - 48px) / 3);
+
+  min-height: 105px;
+
+  padding: 20px 28px;
+
+  border: 1px solid #191a2f;
+  border-radius: 999px;
+
+  background-color: #f4f1e9;
+  color: #191a2f;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.22s ease,
+    background-color 0.22s ease;
+}
+
+
+.partner-number {
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  color: #5b3fa3;
+}
+
+
+.partner-name {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+
+.partner-arrow {
+  font-size: 1.2rem;
+
+  transition: transform 0.22s ease;
+}
+
+
+/* =========================
+   Hover
+========================= */
+
+.partner-capsule:hover {
+  transform: translateY(-7px);
+
+  background-color: #e7e0f4;
+}
+
+
+.partner-capsule:hover .partner-arrow {
+  transform: translate(3px, -3px);
+}
+
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 950px) {
+
+  .partners-section {
+    padding:
+      75px 40px
+      85px;
+  }
+
+
+  .partner-capsule {
+    width: calc((100% - 20px) / 2);
+  }
+
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+
+  .partners-section {
+    padding:
+      65px 24px
+      75px;
+  }
+
+
+  .partners-heading {
+    margin-bottom: 40px;
+
+    text-align: left;
+  }
+
+
+  .partners-list {
+    gap: 14px;
+  }
+
+
+  .partner-capsule {
+    width: 100%;
+
+    min-height: 85px;
+
+    padding: 18px 23px;
+  }
+
+}

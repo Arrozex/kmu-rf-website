@@ -1,0 +1,537 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { courses } from "../data/courses";
+
+import "../styles/registration.css";
+---
+
+<BaseLayout title="課程報名｜AI × 護理">
+
+  <section class="registration-page">
+
+    <div class="registration-container">
+
+      <!-- =========================
+           Heading
+      ========================== -->
+
+      <header class="registration-heading">
+
+        <p class="registration-eyebrow">
+          REGISTRATION
+        </p>
+
+        <h1>
+          課程報名
+        </h1>
+
+        <p>
+          選擇欲參加的課程，
+          查看報名方式、課程資訊與相關注意事項。
+        </p>
+
+      </header>
+
+
+      <!-- =========================
+           Course Selector
+      ========================== -->
+
+      <div class="registration-selector">
+
+        <label for="course-select">
+          選擇課程
+        </label>
+
+        <select id="course-select">
+
+          {
+            courses.map((course) => (
+              <option value={course.id}>
+                {
+                    course.status === "closed"
+                    ? `【報名截止】${course.title}`
+                    : `【${course.statusLabel}】${course.title}`
+                }
+              </option>
+            ))
+          }
+
+        </select>
+
+      </div>
+
+
+      <!-- =========================
+           Course Panels
+      ========================== -->
+
+      <div class="registration-panels">
+
+        {
+          courses.map((course) => (
+
+            <section
+              class="registration-course"
+              data-registration-course={course.id}
+              hidden
+            >
+
+              <!-- 課程資訊 -->
+
+              <div class="registration-course-info">
+
+                <div class="registration-course-title">
+
+                  <span
+                    class:list={[
+                      "registration-status",
+                      `registration-status--${course.status}`
+                    ]}
+                  >
+                    {course.statusLabel}
+                  </span>
+
+                  <h2>
+                    {course.title}
+                  </h2>
+
+                </div>
+
+
+                <!-- Tags -->
+
+                <div class="registration-tags">
+
+                  <span>
+                    {course.registrationModeLabel}
+                  </span>
+
+                  <span>
+                    {course.levelLabel}
+                  </span>
+
+                  <span>
+                    {course.unitLabel}
+                  </span>
+
+                </div>
+
+
+                <!-- 基本資料 -->
+
+                <div class="registration-meta">
+
+                  <div>
+                    <span>日期</span>
+                    <strong>{course.date}</strong>
+                  </div>
+
+                  <div>
+                    <span>時間</span>
+                    <strong>{course.time}</strong>
+                  </div>
+
+                  <div>
+                    <span>地點</span>
+                    <strong>{course.location}</strong>
+                  </div>
+
+                  <div>
+                    <span>授課教師</span>
+                    <strong>{course.instructors}</strong>
+                  </div>
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="registration-description">
+
+                  <p class="registration-label">
+                    COURSE DESCRIPTION
+                  </p>
+
+                  <p>
+                    {course.description}
+                  </p>
+
+                </div>
+
+
+                <!-- Notices -->
+
+                {
+                  course.notice?.length > 0 && (
+
+                    <div class="registration-notice">
+
+                      <h3>
+                        報名前請注意
+                      </h3>
+
+                      <ol>
+                        {
+                          course.notice.map((item) => (
+                            <li>{item}</li>
+                          ))
+                        }
+                      </ol>
+
+                    </div>
+
+                  )
+                }
+
+
+                {
+                  course.detailUrl && (
+
+                    <a
+                      class="course-detail-button"
+                      href={course.detailUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      查看詳細課程安排
+                      <span aria-hidden="true">↗</span>
+                    </a>
+
+                  )
+                }
+
+              </div>
+
+
+              <!-- =========================
+                   Embed Registration
+              ========================== -->
+
+              {
+                course.status === "closed" ? (
+
+                    <div class="closed-registration">
+
+                    <p class="closed-registration-eyebrow">
+                        REGISTRATION CLOSED
+                    </p>
+
+                    <h3>
+                        本課程已停止報名
+                    </h3>
+
+                    <p>
+                        此課程目前已超過報名期限，
+                        您可以前往近期課程尋找其他開放中的課程。
+                    </p>
+
+                    <div class="closed-registration-actions">
+
+                        <a
+                        class="closed-primary-button"
+                        href="/courses"
+                        >
+                        查看其他開放課程
+                        <span aria-hidden="true">→</span>
+                        </a>
+
+                    </div>
+
+                    </div>
+
+                ) : course.registrationType === "embed" ? (
+
+                    <div class="registration-forms">
+
+                    <!-- STEP 01 -->
+
+                    <section class="registration-form-card">
+
+                        <div class="form-card-heading">
+
+                        <p>
+                            STEP 01
+                        </p>
+
+                        <h3>
+                            課程報名
+                        </h3>
+
+                        </div>
+
+
+                        <iframe
+                        title={`${course.title} 課程報名表`}
+                        data-src={course.registrationUrl}
+                        loading="lazy"
+                        >
+                        </iframe>
+
+
+                        <a
+                        class="form-external-link"
+                        href={course.registrationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >
+                        無法顯示？
+                        在新分頁開啟報名表 ↗
+                        </a>
+
+                    </section>
+
+
+                    <!-- STEP 02 -->
+
+                    {
+                        course.pretestUrl && (
+
+                        <section class="registration-form-card">
+
+                            <div class="form-card-heading">
+
+                            <p>
+                                STEP 02
+                            </p>
+
+                            <h3>
+                                課程前測
+                            </h3>
+
+                            </div>
+
+
+                            <iframe
+                            title={`${course.title} 課程前測`}
+                            data-src={course.pretestUrl}
+                            loading="lazy"
+                            >
+                            </iframe>
+
+
+                            <a
+                            class="form-external-link"
+                            href={course.pretestUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >
+                            無法顯示？
+                            在新分頁填寫前測 ↗
+                            </a>
+
+                        </section>
+
+                        )
+                    }
+
+                    </div>
+
+                ) : course.registrationType === "external" ? (
+
+                    <div class="external-registration">
+
+                    <p class="external-registration-eyebrow">
+                        EXTERNAL REGISTRATION
+                    </p>
+
+                    <h3>
+                        本課程透過校務／WAC 系統選課
+                    </h3>
+
+                    <p>
+                        點擊下方按鈕前往選課系統，
+                        並依校方公告與選課時間完成登記。
+                    </p>
+
+
+                    <a
+                        href={course.registrationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        前往 WAC 選課
+                        <span aria-hidden="true">↗</span>
+                    </a>
+
+                    </div>
+
+                ) : null
+                }
+
+
+              <!-- =========================
+                   External Registration
+              ========================== -->
+
+              
+
+            </section>
+
+          ))
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       Client interaction
+  ========================== -->
+
+  <script>
+
+    const select =
+      document.querySelector<HTMLSelectElement>(
+        "#course-select"
+      );
+
+
+    const panels =
+      document.querySelectorAll<HTMLElement>(
+        "[data-registration-course]"
+      );
+
+
+    function showCourse(courseId: string) {
+
+      panels.forEach((panel) => {
+
+        const active =
+          panel.dataset.registrationCourse === courseId;
+
+
+        panel.hidden = !active;
+
+
+        if (active) {
+
+          /*
+            iframe 一開始只有 data-src，
+            選到該課程才真正載入。
+
+            避免進頁面就一次載入
+            所有 BeClass / Google Form。
+          */
+
+          panel
+            .querySelectorAll<HTMLIFrameElement>(
+              "iframe[data-src]"
+            )
+            .forEach((iframe) => {
+
+              if (!iframe.src) {
+
+                const src =
+                  iframe.dataset.src;
+
+                if (src) {
+                  iframe.src = src;
+                }
+
+              }
+
+            });
+
+        }
+
+      });
+
+    }
+
+
+    function updateURL(courseId: string) {
+
+      const url =
+        new URL(window.location.href);
+
+      url.searchParams.set(
+        "course",
+        courseId
+      );
+
+      history.replaceState(
+        {},
+        "",
+        url
+      );
+
+    }
+
+
+    function initializeCourse() {
+
+      if (!select) {
+        return;
+      }
+
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+
+      const requestedCourse =
+        params.get("course");
+
+
+      const exists =
+        [...select.options]
+          .some(
+            option =>
+              option.value === requestedCourse
+          );
+
+
+      const initialCourse =
+        requestedCourse && exists
+          ? requestedCourse
+          : select.options[0]?.value;
+
+
+      if (!initialCourse) {
+        return;
+      }
+
+
+      select.value =
+        initialCourse;
+
+
+      showCourse(
+        initialCourse
+      );
+
+    }
+
+
+    select?.addEventListener(
+      "change",
+      () => {
+
+        const courseId =
+          select.value;
+
+
+        showCourse(
+          courseId
+        );
+
+
+        updateURL(
+          courseId
+        );
+
+      }
+    );
+
+
+    initializeCourse();
+
+  </script>
+
+</BaseLayout>

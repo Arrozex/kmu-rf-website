@@ -1,0 +1,75 @@
+/* src/styles/tokens.css */
+
+:root {
+  color-scheme: light;
+
+  /* ---------- Colors ---------- */
+
+  /* 暖白背景，避免一般網站的純白感 */
+  --color-background: #f2efe7;
+  --color-surface: #fffdf8;
+
+  /* 主要文字：深綠 */
+  --color-ink: #192f1e;
+  --color-ink-soft: #394d37;
+  --color-muted: #6f786c;
+
+  /* 計畫主色 */
+  --color-primary: #50a33f;
+  --color-primary-dark: #316f25;
+  --color-primary-soft: #e5f5e3;
+
+  /* 少量輔助色，之後可再調整 */
+  --color-accent: #dce69a;
+  --color-border: rgba(25, 26, 47, 0.25);
+  --color-border-strong: #191a2f;
+
+  /* ---------- Typography ---------- */
+
+  --font-sans:
+    "Noto Sans TC",
+    "PingFang TC",
+    "Microsoft JhengHei",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+
+  --font-display:
+    "Noto Sans TC",
+    "PingFang TC",
+    "Microsoft JhengHei",
+    system-ui,
+    sans-serif;
+
+  --font-size-small: 0.875rem;
+  --font-size-body: 1rem;
+  --font-size-body-large: clamp(1.05rem, 1.5vw, 1.25rem);
+
+  --font-size-h3: clamp(1.3rem, 2vw, 1.8rem);
+  --font-size-h2: clamp(2.4rem, 5vw, 5.5rem);
+
+  /* Hero 超大標題 */
+  --font-size-display: clamp(3.3rem, 8vw, 8.8rem);
+
+  /* ---------- Layout ---------- */
+
+  --page-padding: clamp(1.25rem, 4vw, 4rem);
+  --container-width: 1280px;
+
+  --section-space: clamp(5rem, 10vw, 10rem);
+  --content-gap: clamp(2rem, 5vw, 5rem);
+
+  --header-height: 84px;
+
+  /* ---------- Shape ---------- */
+
+  /* 參考 editorial 風格，不使用太圓的卡片 */
+  --radius-small: 0.5rem;
+  --radius-medium: 1rem;
+
+  /* ---------- Animation ---------- */
+
+  --transition-fast: 160ms ease;
+  --transition-normal: 280ms ease;
+}

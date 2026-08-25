@@ -1,0 +1,30 @@
+/* src/styles/global.css */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  background-color: #ffffff;
+  color: #191a2f;
+
+  font-family:
+    "Noto Sans TC",
+    "Microsoft JhengHei",
+    sans-serif;
+
+  line-height: 1.7;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
