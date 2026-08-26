@@ -368,6 +368,26 @@
 
 }
 
+.presentation-empty {
+  min-height: 70vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 80px 24px;
+
+  background-color: #f4f1e9;
+
+  color: #191a2f;
+}
+
+.presentation-empty p {
+  margin: 0;
+
+  font-size: 1.2rem;
+}
+
 
 /* =========================
    Mobile

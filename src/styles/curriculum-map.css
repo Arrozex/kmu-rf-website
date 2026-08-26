@@ -83,12 +83,13 @@
 
 
 .curriculum-image {
+  display: block;
+
   width: 100%;
-  height: 100%;
+  height: auto;
 
-  object-fit: cover;
+  object-fit: contain;
 }
-
 
 /* =========================
    Right Content Box
@@ -253,25 +254,36 @@
 
 
   .curriculum-image-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    min-height: 0;
 
-    margin: 0;
-    padding: 40px;
+    /*
+      幾乎不要留白，
+      讓課程地圖真正佔滿卡片
+    */
+    padding: 8px;
 
-    border: 1px solid #191a2f;
-    border-radius: 22px;
+    /*
+      稍微往 section 外延伸，
+      多爭取一點手機寬度
+    */
+    margin:
+      0
+      -10px;
 
-    background-color: #ffffff;
+    border-radius: 16px;
   }
 
+
   .curriculum-image {
+    display: block;
+
     width: 100%;
     height: auto;
-  
 
-}
+    max-width: none;
+
+    object-fit: contain;
+  }
 
 
   .curriculum-content {

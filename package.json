@@ -12,6 +12,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@sanity/astro": "^3.5.1",
+    "@sanity/client": "^8.2.0",
     "astro": "^7.1.3"
   }
 }

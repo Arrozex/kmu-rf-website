@@ -1,8 +1,134 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { courses } from "../data/courses";
+import { sanityClient } from "../lib/sanity";
 
 import "../styles/registration.css";
+
+
+const rawCourses = await sanityClient.fetch(`
+  *[
+    _type == "course" &&
+    visible == true
+  ]
+  | order(sortDate desc)
+  {
+    _id,
+    title,
+    "slug": slug.current,
+
+    status,
+    registrationMode,
+    level,
+    unit,
+
+    instructors,
+    description,
+    delivery,
+
+    dateText,
+    sortDate,
+    time,
+    location,
+
+    registrationType,
+    registrationUrl,
+    pretestUrl,
+    detailUrl,
+    notice
+  }
+`);
+
+
+const statusLabels: Record<string, string> = {
+  enrolling: "報名中",
+  ongoing: "開課中",
+  closed: "停止報名",
+};
+
+
+const registrationLabels: Record<string, string> = {
+  wac: "WAC 選課",
+  online: "線上報名",
+};
+
+
+const levelLabels: Record<string, string> = {
+  professional: "專業領域",
+  basic: "AI 基礎",
+  advanced: "AI 進階",
+};
+
+
+const unitLabels: Record<string, string> = {
+  nursing: "護理學系",
+  baia: "人工智慧生醫研究院",
+  hami: "醫務管理暨醫療資訊學系",
+  taica: "TAICA",
+};
+
+
+const courses = rawCourses.map((course: any) => ({
+  id: course.slug,
+
+  status: course.status,
+
+  statusLabel:
+    statusLabels[course.status] ?? course.status,
+
+  title: course.title,
+
+  registrationMode:
+    course.registrationMode,
+
+  registrationModeLabel:
+    registrationLabels[course.registrationMode]
+      ?? course.registrationMode,
+
+  level: course.level,
+
+  levelLabel:
+    levelLabels[course.level]
+      ?? course.level,
+
+  unit: course.unit,
+
+  unitLabel:
+    unitLabels[course.unit]
+      ?? course.unit,
+
+  instructors:
+    course.instructors ?? "",
+
+  description:
+    course.description ?? "",
+
+  delivery:
+    course.delivery ?? "",
+
+  date:
+    course.dateText ?? "",
+
+  time:
+    course.time ?? "",
+
+  location:
+    course.location ?? "",
+
+  registrationType:
+    course.registrationType ?? "",
+
+  registrationUrl:
+    course.registrationUrl ?? "",
+
+  pretestUrl:
+    course.pretestUrl ?? "",
+
+  detailUrl:
+    course.detailUrl ?? "",
+
+  notice:
+    course.notice ?? [],
+}));
 ---
 
 <BaseLayout title="課程報名｜AI × 護理">

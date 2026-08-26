@@ -129,54 +129,6 @@
   border-color: #5b3fa3;
 }
 
-/* 平板和手機先使用簡單換行，不做漢堡選單 */
-@media (max-width: 950px) {
-  .header-container {
-    flex-wrap: wrap;
-    gap: 1rem;
-
-    padding: 1rem 1.5rem;
-  }
-
-  .main-navigation {
-    order: 3;
-
-    width: 100%;
-    padding-top: 0.8rem;
-
-    border-top: 1px solid rgba(25, 26, 47, 0.25);
-  }
-}
-
-@media (max-width: 620px) {
-  .header-container {
-    padding: 0.9rem 1.25rem;
-  }
-
-  .site-logo {
-    width: 40px;
-    height: 40px;
-  }
-
-  .brand-zh {
-    display: none;
-  }
-
-  .main-navigation {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0;
-  }
-
-  .main-navigation a {
-    padding: 0.7rem 0;
-  }
-
-  .register-button {
-    padding: 0.65rem 0.9rem;
-  }
-}
-
 /* -----------------------------
    計畫介紹 Dropdown
 ----------------------------- */
@@ -260,4 +212,242 @@
 .nav-dropdown:hover .dropdown-arrow,
 .nav-dropdown:focus-within .dropdown-arrow {
   transform: rotate(180deg);
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 950px) {
+
+  .header-container {
+    flex-wrap: wrap;
+
+    gap: 0.7rem;
+
+    padding:
+      0.8rem
+      1.5rem;
+  }
+
+
+  .header-actions {
+    width: 100%;
+
+    margin-left: 0;
+
+    gap: 1.5rem;
+  }
+
+
+  .main-navigation {
+    flex: 1;
+
+    justify-content: flex-start;
+
+    gap: 1.5rem;
+
+    width: auto;
+
+    padding-top: 0;
+
+    border-top: 0;
+  }
+
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 620px) {
+
+  .header-container {
+    display: flex;
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 0.45rem;
+
+    min-height: 0;
+
+    padding:
+      0.5rem
+      0.9rem
+      0.55rem;
+  }
+
+
+  /* -------------------------
+     Brand
+  ------------------------- */
+
+  .site-brand {
+    width: 100%;
+
+    gap: 0.55rem;
+  }
+
+
+  .site-logo {
+    flex-shrink: 0;
+
+    width: 32px;
+    height: 32px;
+  }
+
+
+  /*
+    手機不顯示英文，
+    改成只顯示中文名稱
+  */
+
+  .brand-en {
+    display: none;
+  }
+
+
+  .brand-zh {
+    display: block;
+
+    margin: 0;
+
+    font-size: 0.74rem;
+    font-weight: 750;
+    line-height: 1.2;
+
+    white-space: nowrap;
+  }
+
+
+  /* -------------------------
+     Navigation row
+  ------------------------- */
+
+  .header-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    width: 100%;
+
+    margin-left: 0;
+
+    gap: 0.7rem;
+  }
+
+
+  .main-navigation {
+    display: flex;
+
+    flex: 1;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 0.8rem;
+
+    width: auto;
+
+    padding: 0;
+
+    border: 0;
+
+    white-space: nowrap;
+  }
+
+
+  .main-navigation a {
+    padding:
+      0.3rem
+      0;
+
+    font-size: 0.72rem;
+
+    white-space: nowrap;
+  }
+
+
+  .dropdown-trigger {
+    gap: 3px;
+  }
+
+
+  .dropdown-arrow {
+    font-size: 0.62rem;
+  }
+
+
+  /* -------------------------
+     Register button
+  ------------------------- */
+
+  .register-button {
+    flex-shrink: 0;
+
+    padding:
+      0.48rem
+      0.65rem;
+
+    font-size: 0.72rem;
+
+    white-space: nowrap;
+  }
+
+}
+
+/* =========================
+   Mobile Dropdown
+   一定放在 dropdown 基本樣式之後
+========================= */
+
+@media (max-width: 620px) {
+
+  .nav-dropdown {
+    position: relative;
+  }
+
+
+  .dropdown-menu {
+    top: calc(100% + 7px);
+
+    /*
+      不再使用置中的 left: 50%
+      改成直接從「計畫介紹」左側開始
+    */
+    left: 0;
+
+    min-width: 145px;
+
+    padding: 7px;
+
+    border-radius: 12px;
+
+    z-index: 300;
+
+    transform:
+      translateY(-5px);
+  }
+
+
+  .dropdown-menu a {
+    padding:
+      8px
+      9px;
+
+    font-size: 0.75rem;
+  }
+
+
+  .nav-dropdown:hover .dropdown-menu,
+  .nav-dropdown:focus-within .dropdown-menu {
+
+    transform:
+      translateY(0);
+  }
+
 }

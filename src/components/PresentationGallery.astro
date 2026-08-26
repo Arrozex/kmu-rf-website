@@ -1,159 +1,188 @@
 ---
-import { events } from "../data/events";
-
+import { sanityClient } from "../lib/sanity";
 import "../styles/presentation.css";
 
+const events = await sanityClient.fetch(`
+  *[
+    _type == "result" &&
+    visible == true
+  ]
+  | order(featured desc, eventDate desc)
+  {
+    _id,
+    title,
+    "id": slug.current,
+    eventDate,
+    category,
+    description,
+
+    "coverImage": coverImage.asset->url,
+
+    "images": gallery[]{
+      "src": asset->url,
+      alt,
+      caption
+    }
+  }
+`);
+
 const firstEvent = events[0];
+
+const categoryLabels: Record<string, string> = {
+  course: "課程",
+  workshop: "工作坊",
+  event: "活動",
+};
 ---
 
-<section class="presentation-section">
+{
+  firstEvent ? (
 
-  <div class="presentation-layout">
+    <div class="presentation-layout">
 
-    <!-- =========================
-         Left
-    ========================== -->
+      <!-- 你原本的左側 -->
 
-    <aside class="presentation-sidebar">
+      <aside class="presentation-sidebar">
 
-      <div class="presentation-sidebar-inner">
+        <div class="presentation-sidebar-inner">
 
-        <p class="presentation-eyebrow">
-          COURSE HIGHLIGHTS
-        </p>
-
-        <h1 class="presentation-title">
-          活動回顧
-        </h1>
-
-
-        <!-- Current Event -->
-
-        <div class="presentation-current">
-
-          <p
-            class="presentation-current-date"
-            data-current-date
-          >
-            {firstEvent.date}
+          <p class="presentation-eyebrow">
+            COURSE HIGHLIGHTS
           </p>
 
-          <h2 data-current-title>
-            {firstEvent.title}
-          </h2>
-
-          <p
-            class="presentation-current-description"
-            data-current-description
-          >
-            {firstEvent.description}
-          </p>
-
-        </div>
+          <h1 class="presentation-title">
+            活動回顧
+          </h1>
 
 
-        <!-- Event Selector -->
+          <div class="presentation-current">
 
-        <div
-          class="event-selector"
-          aria-label="選擇活動"
-        >
+            <p
+              class="presentation-current-date"
+              data-current-date
+            >
+              {firstEvent.eventDate}
+            </p>
 
-          {
-            events.map((event, index) => (
+            <h2 data-current-title>
+              {firstEvent.title}
+            </h2>
 
-              <button
-                class:list={[
-                  "event-selector-button",
-                  {
-                    "is-active":
-                      index === 0
-                  }
-                ]}
-                type="button"
-                data-event-button={event.id}
-              >
+            <p
+              class="presentation-current-description"
+              data-current-description
+            >
+              {firstEvent.description}
+            </p>
 
-                <span class="event-selector-number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+          </div>
 
-                <span class="event-selector-text">
 
-                  <span>
-                    {event.title}
+          <div class="event-selector">
+
+            {
+              events.map((event: any, index: number) => (
+
+                <button
+                  class:list={[
+                    "event-selector-button",
+                    {
+                      "is-active": index === 0
+                    }
+                  ]}
+                  type="button"
+                  data-event-button={event.id}
+                >
+
+                  <span class="event-selector-number">
+                    {String(index + 1).padStart(2, "0")}
                   </span>
 
-                  <small>
-                    {event.date}
-                  </small>
+                  <span class="event-selector-text">
 
-                </span>
+                    <span>
+                      {event.title}
+                    </span>
 
-              </button>
+                    <small>
+                      {event.eventDate}
 
-            ))
-          }
+                      {
+                        event.category &&
+                        ` · ${categoryLabels[event.category]}`
+                      }
+                    </small>
+
+                  </span>
+
+                </button>
+
+              ))
+            }
+
+          </div>
 
         </div>
+
+      </aside>
+
+
+      <!-- 右邊照片 -->
+
+      <div
+        class="presentation-gallery"
+        data-gallery
+      >
+
+        {
+          firstEvent.images?.map(
+            (image: any, index: number) => (
+
+              <article
+                class="presentation-photo-card"
+                style={`--card-index: ${index};`}
+              >
+
+                <figure>
+
+                  <img
+                    src={image.src}
+                    alt={image.alt || firstEvent.title}
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+
+                  <figcaption>
+
+                    <span>
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <p>
+                      {image.caption || ""}
+                    </p>
+
+                  </figcaption>
+
+                </figure>
+
+              </article>
+
+            )
+          )
+        }
 
       </div>
 
-    </aside>
-
-
-    <!-- =========================
-         Right Photo Stack
-    ========================== -->
-
-    <div
-      class="presentation-gallery"
-      data-gallery
-    >
-
-      {
-        firstEvent.images.map((image, index) => (
-
-          <article
-            class="presentation-photo-card"
-            style={`--card-index: ${index};`}
-          >
-
-            <figure>
-
-              <img
-                src={image.src}
-                alt={image.alt}
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-
-              <figcaption>
-
-                <span>
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-
-                <p>
-                  {image.caption}
-                </p>
-
-              </figcaption>
-
-            </figure>
-
-          </article>
-
-        ))
-      }
-
     </div>
 
-  </div>
+  ) : (
 
-</section>
+    <div class="presentation-empty">
+      <p>目前尚無成果資料。</p>
+    </div>
 
-
-<!-- 把 Astro 資料交給瀏覽器 -->
+  )
+}
 
 <script
   define:vars={{
@@ -166,24 +195,20 @@ const firstEvent = events[0];
       "[data-event-button]"
     );
 
-
   const gallery =
     document.querySelector(
       "[data-gallery]"
     );
-
 
   const title =
     document.querySelector(
       "[data-current-title]"
     );
 
-
   const date =
     document.querySelector(
       "[data-current-date]"
     );
-
 
   const description =
     document.querySelector(
@@ -205,8 +230,6 @@ const firstEvent = events[0];
     }
 
 
-    /* 左側文字 */
-
     if (title) {
       title.textContent =
         event.title;
@@ -215,20 +238,18 @@ const firstEvent = events[0];
 
     if (date) {
       date.textContent =
-        event.date;
+        event.eventDate;
     }
 
 
     if (description) {
       description.textContent =
-        event.description;
+        event.description || "";
     }
 
 
-    /* 右側圖片 */
-
     gallery.innerHTML =
-      event.images
+      (event.images || [])
         .map(
           (image, index) => `
             <article
@@ -239,7 +260,7 @@ const firstEvent = events[0];
 
                 <img
                   src="${image.src}"
-                  alt="${image.alt}"
+                  alt="${image.alt || event.title}"
                   loading="lazy"
                 />
 
@@ -251,7 +272,7 @@ const firstEvent = events[0];
                   </span>
 
                   <p>
-                    ${image.caption}
+                    ${image.caption || ""}
                   </p>
 
                 </figcaption>
@@ -263,8 +284,6 @@ const firstEvent = events[0];
         .join("");
 
 
-    /* 按鈕狀態 */
-
     buttons.forEach(button => {
 
       button.classList.toggle(
@@ -274,11 +293,6 @@ const firstEvent = events[0];
 
     });
 
-
-    /*
-      切換活動後回到 gallery 頂部附近，
-      避免使用者留在前一活動的深處
-    */
 
     const top =
       gallery.getBoundingClientRect().top +
@@ -302,7 +316,6 @@ const firstEvent = events[0];
 
         const eventId =
           button.dataset.eventButton;
-
 
         if (eventId) {
           renderEvent(eventId);

@@ -1,5 +1,31 @@
 ---
 import "../styles/news.css";
+import { sanityClient } from "../lib/sanity";
+
+const categoryLabels: Record<string, string> = {
+  course: "課程資訊",
+  event: "活動消息",
+  announcement: "計畫公告",
+};
+
+const newsItems = await sanityClient.fetch(`
+  *[
+    _type == "news" &&
+    visible == true
+  ]
+  | order(pinned desc, date desc)[0...3]
+  {
+    _id,
+    title,
+    date,
+    category,
+    pinned
+  }
+`);
+
+function displayDate(date: string) {
+  return date?.replaceAll("-", ".");
+}
 ---
 
 <section class="news-section" id="news">
@@ -27,61 +53,29 @@ import "../styles/news.css";
     <!-- 消息列表 -->
     <div class="news-list">
 
-      <article class="news-item">
-        <div class="news-meta">
-          <time datetime="2026-08-01">
-            2026.08.01
-          </time>
+      {
+        newsItems.map((item: any) => (
 
-          <span class="news-category">
-            課程資訊
-          </span>
-        </div>
+          <article class="news-item">
 
-        <h3 class="news-item-title">
-          <a href="/registration">
-            2026 秋季課程即將開放報名
-          </a>
-        </h3>
-      </article>
+            <div class="news-meta">
+              <time datetime={item.date}>
+                {displayDate(item.date)}
+              </time>
 
+              <span class="news-category">
+                {categoryLabels[item.category] ?? item.category}
+              </span>
+            </div>
 
-      <article class="news-item">
-        <div class="news-meta">
-          <time datetime="2026-07-20">
-            2026.07.20
-          </time>
+          <h3 class="news-item-title">
+              {item.title}
+          </h3>
 
-          <span class="news-category">
-            活動消息
-          </span>
-        </div>
+          </article>
 
-        <h3 class="news-item-title">
-          <a href="/presentation">
-            AI × VR 工作坊課程成果更新
-          </a>
-        </h3>
-      </article>
-
-
-      <article class="news-item">
-        <div class="news-meta">
-          <time datetime="2026-07-10">
-            2026.07.10
-          </time>
-
-          <span class="news-category">
-            計畫公告
-          </span>
-        </div>
-
-        <h3 class="news-item-title">
-          <a href="#courses">
-            新學期課程行事曆更新
-          </a>
-        </h3>
-      </article>
+        ))
+      }
 
     </div>
 

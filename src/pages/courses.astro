@@ -2,22 +2,129 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CourseCard from "../components/CourseCard.astro";
 
-import { courses } from "../data/courses";
+import { sanityClient } from "../lib/sanity";
 
 import "../styles/courses.css";
+
+
+const rawCourses = await sanityClient.fetch(`
+  *[
+    _type == "course" &&
+    visible == true
+  ]
+  | order(sortDate asc)
+  {
+    _id,
+    title,
+    "slug": slug.current,
+
+    status,
+    registrationMode,
+    level,
+    unit,
+
+    instructors,
+    description,
+    delivery,
+
+    dateText,
+    sortDate,
+    time,
+    location,
+
+    registrationType,
+    registrationUrl,
+    pretestUrl,
+    detailUrl,
+    notice
+  }
+`);
+
+
+const statusLabels: Record<string, string> = {
+  enrolling: "報名中",
+  ongoing: "開課中",
+  closed: "停止報名",
+};
+
+
+const registrationLabels: Record<string, string> = {
+  wac: "WAC 選課",
+  online: "線上報名",
+};
+
+
+const levelLabels: Record<string, string> = {
+  professional: "專業領域",
+  basic: "AI 基礎",
+  advanced: "AI 進階",
+};
+
+
+const unitLabels: Record<string, string> = {
+  nursing: "護理學系",
+  baia: "人工智慧生醫研究院",
+  hami: "醫務管理暨醫療資訊學系",
+  taica: "TAICA",
+};
+
+
+const courses = rawCourses.map((course: any) => ({
+  id: course.slug,
+
+  status: course.status,
+  statusLabel:
+    statusLabels[course.status] ?? course.status,
+
+  title: course.title,
+
+  registrationMode:
+    course.registrationMode,
+
+  registrationModeLabel:
+    registrationLabels[course.registrationMode]
+      ?? course.registrationMode,
+
+  level: course.level,
+
+  levelLabel:
+    levelLabels[course.level]
+      ?? course.level,
+
+  unit: course.unit,
+
+  unitLabel:
+    unitLabels[course.unit]
+      ?? course.unit,
+
+  instructors:
+    course.instructors ?? "",
+
+  description:
+    course.description ?? "",
+
+  delivery:
+    course.delivery ?? "",
+
+  date:
+    course.dateText ?? "",
+
+  time:
+    course.time ?? "",
+
+  location:
+    course.location ?? "",
+
+  href:
+    `/registration?course=${encodeURIComponent(course.slug)}`,
+}));
 ---
 
-<BaseLayout
-  title="近期課程｜AI × 護理"
->
+<BaseLayout title="近期課程｜AI × 護理">
 
   <section class="courses-page">
 
     <div class="courses-page-container">
-
-      <!-- =======================
-           Page Heading
-      ======================== -->
 
       <header class="courses-page-heading">
 
@@ -26,140 +133,73 @@ import "../styles/courses.css";
         </p>
 
         <h1>
-          近期課程
+          探索課程
         </h1>
+
+        <p>
+          從護理專業、AI 基礎到進階實作，
+          依照自己的學習需求探索目前開放的課程與活動。
+        </p>
 
       </header>
 
 
-      <!-- =======================
-           Filters
-      ======================== -->
+      <!-- Filters -->
 
       <section
         class="course-filters"
         aria-label="課程篩選"
       >
 
-        <!-- 1 Status -->
-
         <label class="filter-field">
-
-          <span>
-            報名狀態
-          </span>
+          <span>報名狀態</span>
 
           <select data-filter="status">
-            <option value="all">
-              全部狀態
-            </option>
-
-            <option value="enrolling">
-              報名中
-            </option>
-
-            <option value="ongoing">
-              開課中
-            </option>
-
-            <option value="closed">
-              停止報名
-            </option>
+            <option value="all">全部狀態</option>
+            <option value="enrolling">報名中</option>
+            <option value="ongoing">開課中</option>
+            <option value="closed">停止報名</option>
           </select>
-
         </label>
 
 
-        <!-- 2 Registration -->
-
         <label class="filter-field">
-
-          <span>
-            選課方式
-          </span>
+          <span>選課方式</span>
 
           <select data-filter="registration">
-            <option value="all">
-              全部方式
-            </option>
-
-            <option value="wac">
-              WAC 選課
-            </option>
-
-            <option value="online">
-              線上報名
-            </option>
+            <option value="all">全部方式</option>
+            <option value="wac">WAC 選課</option>
+            <option value="online">線上報名</option>
           </select>
-
         </label>
 
 
-        <!-- 3 Level -->
-
         <label class="filter-field">
-
-          <span>
-            課程類別
-          </span>
+          <span>課程類別</span>
 
           <select data-filter="level">
-            <option value="all">
-              全部類別
-            </option>
-
-            <option value="professional">
-              專業領域
-            </option>
-
-            <option value="basic">
-              AI 基礎
-            </option>
-
-            <option value="advanced">
-              AI 進階
-            </option>
+            <option value="all">全部類別</option>
+            <option value="professional">專業領域</option>
+            <option value="basic">AI 基礎</option>
+            <option value="advanced">AI 進階</option>
           </select>
-
         </label>
 
 
-        <!-- 4 Unit -->
-
         <label class="filter-field">
-
-          <span>
-            開課單位
-          </span>
+          <span>開課單位</span>
 
           <select data-filter="unit">
-            <option value="all">
-              全部單位
-            </option>
-
-            <option value="nursing">
-              護理學系
-            </option>
-
-            <option value="baia">
-              人工智慧生醫研究院
-            </option>
-
-            <option value="hami">
-              醫務管理暨醫療資訊學系
-            </option>
-
-            <option value="cfs">
-              基礎科學教育中心
-            </option>
+            <option value="all">全部單位</option>
+            <option value="nursing">護理學系</option>
+            <option value="baia">人工智慧生醫研究院</option>
+            <option value="hami">醫務管理暨醫療資訊學系</option>
+            <option value="taica">TAICA</option>
           </select>
-
         </label>
 
       </section>
 
-
-      <!-- 顯示筆數 -->
 
       <div class="courses-result-bar">
 
@@ -182,54 +222,16 @@ import "../styles/courses.css";
       </div>
 
 
-      <!-- =======================
-           Course Cards
-      ======================== -->
-
       <div class="courses-grid">
 
         {
-          courses.map((course) => (
+          courses.map((course: any) => (
             <CourseCard course={course} />
           ))
         }
 
       </div>
 
-      <section class="course-calendar" id="calendar">
-
-        <div class="course-calendar-heading">
-
-            <div>
-            <p class="course-calendar-eyebrow">
-                COURSE CALENDAR
-            </p>
-
-            <h2>
-                課程行事曆
-            </h2>
-            </div>
-
-        </div>
-
-
-        <div class="calendar-frame">
-
-            <iframe
-            src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTaipei&showPrint=0&src=YmFpYXJhaW5mb3Jlc3QyMDI1MjZAZ21haWwuY29t&src=MjcwMjIzYmExODk4MzIwYzExMjdjOTJlOTNhYjgxZWM4MTUwYmNjYjNhM2E1ZTgzYWU2Zjc5NTBmODc0NGI2M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23039be5&color=%23e4c441"
-            title="AI × 護理課程行事曆"
-            loading="lazy"
-            frameborder="0"
-            scrolling="no"
-            >
-            </iframe>
-
-        </div>
-
-    　</section>
-
-
-      <!-- 無結果 -->
 
       <div
         class="no-results"
@@ -252,8 +254,6 @@ import "../styles/courses.css";
 
   </section>
 
-
-  <!-- Filters JS -->
 
   <script>
 
@@ -294,8 +294,7 @@ import "../styles/courses.css";
           select.dataset.filter;
 
         if (key) {
-          filters[key] =
-            select.value;
+          filters[key] = select.value;
         }
 
       });
@@ -361,9 +360,10 @@ import "../styles/courses.css";
         "click",
         () => {
 
-          selects.forEach((select) => {
-            select.value = "all";
-          });
+          selects.forEach(
+            select =>
+              select.value = "all"
+          );
 
           filterCourses();
 
