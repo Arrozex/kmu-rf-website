@@ -3,11 +3,10 @@
 ========================= */
 
 .presentation-section {
+  position: relative;
+
   background-color: #f4f1e9;
   color: #191a2f;
-
-  border-bottom:
-    1px solid #191a2f;
 }
 
 
