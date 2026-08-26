@@ -41,8 +41,7 @@ export const course = defineType({
       options: {
         layout: 'radio',
         list: [
-          {title: '報名中', value: 'enrolling'},
-          {title: '開課中', value: 'ongoing'},
+          {title: '報名開放', value: 'enrolling'},
           {title: '停止報名', value: 'closed'},
         ],
       },
@@ -70,7 +69,8 @@ export const course = defineType({
         list: [
           {title: '專業領域', value: 'professional'},
           {title: 'AI 基礎', value: 'basic'},
-          {title: 'AI 進階', value: 'advanced'},
+          {title: 'AI 應用', value: 'advanced'},
+          {title: 'AI 技術實務', value: 'practical'},
         ],
       },
       validation: (Rule) => Rule.required(),
@@ -209,7 +209,6 @@ export const course = defineType({
     prepare({title, status, date}) {
       const statusLabel: Record<string, string> = {
         enrolling: '報名中',
-        ongoing: '開課中',
         closed: '停止報名',
       }
 

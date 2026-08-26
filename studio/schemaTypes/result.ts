@@ -62,25 +62,6 @@ export const result = defineType({
     }),
 
     defineField({
-      name: 'coverImage',
-      title: '封面照片',
-      type: 'image',
-
-      options: {
-        hotspot: true,
-      },
-
-      fields: [
-        defineField({
-          name: 'alt',
-          title: '圖片替代文字',
-          type: 'string',
-          description: '簡單描述照片內容即可。',
-        }),
-      ],
-    }),
-
-    defineField({
       name: 'gallery',
       title: '活動照片',
       type: 'array',

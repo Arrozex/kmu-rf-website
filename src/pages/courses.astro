@@ -43,7 +43,6 @@ const rawCourses = await sanityClient.fetch(`
 
 const statusLabels: Record<string, string> = {
   enrolling: "報名中",
-  ongoing: "開課中",
   closed: "停止報名",
 };
 
@@ -57,7 +56,8 @@ const registrationLabels: Record<string, string> = {
 const levelLabels: Record<string, string> = {
   professional: "專業領域",
   basic: "AI 基礎",
-  advanced: "AI 進階",
+  advanced: "AI 應用",
+  practical: "AI 技術實務",
 };
 
 
@@ -65,6 +65,8 @@ const unitLabels: Record<string, string> = {
   nursing: "護理學系",
   baia: "人工智慧生醫研究院",
   hami: "醫務管理暨醫療資訊學系",
+  physical: "職能治療學系",
+  nursing: "物理治療學系",
   taica: "TAICA",
 };
 
@@ -120,7 +122,7 @@ const courses = rawCourses.map((course: any) => ({
 }));
 ---
 
-<BaseLayout title="近期課程｜AI × 護理">
+<BaseLayout title="近期課程｜AI × 照護">
 
   <section class="courses-page">
 
@@ -156,8 +158,7 @@ const courses = rawCourses.map((course: any) => ({
 
           <select data-filter="status">
             <option value="all">全部狀態</option>
-            <option value="enrolling">報名中</option>
-            <option value="ongoing">開課中</option>
+            <option value="enrolling">報名開放</option>
             <option value="closed">停止報名</option>
           </select>
         </label>
@@ -181,7 +182,8 @@ const courses = rawCourses.map((course: any) => ({
             <option value="all">全部類別</option>
             <option value="professional">專業領域</option>
             <option value="basic">AI 基礎</option>
-            <option value="advanced">AI 進階</option>
+            <option value="advanced">AI 應用</option>
+            <option value="practical">AI 技術實務</option>
           </select>
         </label>
 
@@ -194,6 +196,8 @@ const courses = rawCourses.map((course: any) => ({
             <option value="nursing">護理學系</option>
             <option value="baia">人工智慧生醫研究院</option>
             <option value="hami">醫務管理暨醫療資訊學系</option>
+            <option value="occupational">職能治療學系</option>
+            <option value="physical">物理治療學系</option>
             <option value="taica">TAICA</option>
           </select>
         </label>

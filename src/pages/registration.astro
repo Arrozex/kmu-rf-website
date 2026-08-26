@@ -40,8 +40,7 @@ const rawCourses = await sanityClient.fetch(`
 
 
 const statusLabels: Record<string, string> = {
-  enrolling: "報名中",
-  ongoing: "開課中",
+  enrolling: "報名開放",
   closed: "停止報名",
 };
 
@@ -56,6 +55,7 @@ const levelLabels: Record<string, string> = {
   professional: "專業領域",
   basic: "AI 基礎",
   advanced: "AI 進階",
+  practical: "AI 技術實務",
 };
 
 
@@ -63,6 +63,8 @@ const unitLabels: Record<string, string> = {
   nursing: "護理學系",
   baia: "人工智慧生醫研究院",
   hami: "醫務管理暨醫療資訊學系",
+  physical: "物理治療學系",
+  occupational: "職能治療學系",
   taica: "TAICA",
 };
 
@@ -131,7 +133,7 @@ const courses = rawCourses.map((course: any) => ({
 }));
 ---
 
-<BaseLayout title="課程報名｜AI × 護理">
+<BaseLayout title="課程報名｜AI × 照護">
 
   <section class="registration-page">
 
@@ -294,7 +296,7 @@ const courses = rawCourses.map((course: any) => ({
                     <div class="registration-notice">
 
                       <h3>
-                        報名前請注意
+                        報名前注意事項
                       </h3>
 
                       <ol>
@@ -484,13 +486,6 @@ const courses = rawCourses.map((course: any) => ({
 
                 ) : null
                 }
-
-
-              <!-- =========================
-                   External Registration
-              ========================== -->
-
-              
 
             </section>
 
