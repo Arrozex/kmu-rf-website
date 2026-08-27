@@ -49,19 +49,6 @@ export const course = defineType({
     }),
 
     defineField({
-      name: 'registrationMode',
-      title: '選課／報名方式',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'WAC 選課', value: 'wac'},
-          {title: '線上報名', value: 'online'},
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-
-    defineField({
       name: 'level',
       title: '課程類別',
       type: 'string',
@@ -94,16 +81,22 @@ export const course = defineType({
     }),
 
     defineField({
-      name: 'instructors',
-      title: '授課教師',
+      name: 'registrationMode',
+      title: '選課／報名方式',
       type: 'string',
+      options: {
+        list: [
+          {title: 'WAC 選課', value: 'wac'},
+          {title: '線上報名', value: 'online'},
+        ],
+      },
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
-      name: 'description',
-      title: '課程說明',
-      type: 'text',
-      rows: 5,
+      name: 'instructors',
+      title: '授課教師',
+      type: 'string',
     }),
 
     defineField({
@@ -138,6 +131,13 @@ export const course = defineType({
       name: 'location',
       title: '上課地點',
       type: 'string',
+    }),
+
+    defineField({
+      name: 'description',
+      title: '課程說明',
+      type: 'text',
+      rows: 5,
     }),
 
     defineField({
@@ -208,7 +208,7 @@ export const course = defineType({
 
     prepare({title, status, date}) {
       const statusLabel: Record<string, string> = {
-        enrolling: '報名中',
+        enrolling: '報名開放',
         closed: '停止報名',
       }
 

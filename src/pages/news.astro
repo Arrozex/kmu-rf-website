@@ -21,6 +21,8 @@ const newsItems = await sanityClient.fetch(`
     title,
     date,
     category,
+    content,
+    link,
     pinned
   }
 `);
@@ -68,9 +70,37 @@ function displayDate(date: string) {
 
               </div>
 
-              <h2>
-                {item.title}
-              </h2>
+              <div class="news-page-content">
+
+                <h2>
+                  {item.title}
+                </h2>
+
+                {
+                  item.content && (
+                    <p class="news-page-description">
+                      {item.content}
+                    </p>
+                  )
+                }
+
+
+                {
+                  item.link && (
+
+                    <a
+                      class="news-page-link"
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      查看連結
+                    </a>
+
+                  )
+                }
+
+              </div>
 
             </article>
 

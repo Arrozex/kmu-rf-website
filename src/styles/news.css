@@ -186,6 +186,60 @@
   transform: translateX(4px);
 }
 
+/* =========================
+   News Content
+========================= */
+
+.news-item-content {
+  min-width: 0;
+}
+
+
+.news-item-description {
+  max-width: 720px;
+
+  margin:
+    10px 0
+    0;
+
+  color: #555564;
+
+  font-size: 0.85rem;
+  line-height: 1.65;
+
+  /*
+    首頁只顯示兩行，
+    避免最新消息區塊變太高
+  */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+}
+
+.news-item-link {
+  display: inline-flex;
+
+  color: #191a2f;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.news-item-link:hover {
+  color: #383d95;
+
+  transform:
+    translateY(-2px);
+}
+
 
 /* =========================
    Tablet

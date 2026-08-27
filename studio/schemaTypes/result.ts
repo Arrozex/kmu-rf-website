@@ -78,7 +78,7 @@ export const result = defineType({
           fields: [
             defineField({
               name: 'alt',
-              title: '圖片替代文字',
+              title: '圖片替代文字 (當看不到圖片時顯示)',
               type: 'string',
             }),
 
