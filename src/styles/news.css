@@ -207,10 +207,6 @@
   font-size: 0.85rem;
   line-height: 1.65;
 
-  /*
-    首頁只顯示兩行，
-    避免最新消息區塊變太高
-  */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
