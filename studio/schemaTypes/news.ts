@@ -35,6 +35,19 @@ export const news = defineType({
     }),
 
     defineField({
+      name: 'content',
+      title: '消息內文',
+      type: 'text',
+      rows: 5,
+    }),
+
+    defineField({
+      name: 'link',
+      title: '外部連結',
+      type: 'url',
+    }),
+
+    defineField({
       name: 'visible',
       title: '顯示於網站',
       type: 'boolean',

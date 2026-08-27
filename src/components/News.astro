@@ -70,30 +70,37 @@ function displayDate(date: string) {
               </span>
             </div>
 
-          <h3 class="news-item-title">
-              {item.title}
-          </h3>
+            <div class="news-item-content">
 
-          {
-            item.content && (
-              <p class="news-item-description">
-                {item.content}
-              </p>
-            )
-          }
+                <h3>
+                  {item.title}
+                </h3>
 
-          {
-            item.link && (
-              <a
-                class="news-item-link"
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                查看連結
-              </a>
-            )
-          }
+                {
+                  item.content && (
+                    <p class="news-item-description">
+                      {item.content}
+                    </p>
+                  )
+                }
+
+
+                {
+                  item.link && (
+
+                    <a
+                      class="news-item-link"
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      查看連結
+                    </a>
+
+                  )
+                }
+
+              </div>
 
           </article>
 
