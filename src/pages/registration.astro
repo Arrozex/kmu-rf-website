@@ -65,7 +65,7 @@ const unitLabels: Record<string, string> = {
   hami: "醫務管理暨醫療資訊學系",
   physical: "物理治療學系",
   occupational: "職能治療學系",
-  taica: "TAICA",
+  taica: "TAICA 臺灣大專院校人工智慧學程聯盟",
 };
 
 
@@ -232,15 +232,15 @@ const courses = rawCourses.map((course: any) => ({
                 <div class="registration-tags">
 
                   <span>
-                    {course.registrationModeLabel}
-                  </span>
-
-                  <span>
                     {course.levelLabel}
                   </span>
 
                   <span>
                     {course.unitLabel}
+                  </span>
+
+                  <span>
+                    {course.registrationModeLabel}
                   </span>
 
                 </div>
