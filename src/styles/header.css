@@ -318,7 +318,7 @@
     font-weight: 750;
     line-height: 1.2;
 
-    white-space: nowrap;
+    white-space: wrap;
   }
 
 

@@ -74,7 +74,7 @@ export const course = defineType({
           {title: '物理治療學系', value: 'physical'},
           {title: '人工智慧生醫研究院', value: 'baia'},
           {title: '醫務管理暨醫療資訊學系', value: 'hami'},
-          {title: 'TAICA', value: 'taica'},
+          {title: 'TAICA 臺灣大專院校人工智慧學程聯盟', value: 'taica'},
         ],
       },
       validation: (Rule) => Rule.required(),
