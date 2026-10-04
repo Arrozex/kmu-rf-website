@@ -1,26 +1,37 @@
 .site-footer {
   padding:
-    85px 7vw
-    25px;
+    24px 5vw
+    28px;
 
   background-color: #f4f1e9;
   color: #191a2f;
-  border-top: 1px solid #191a2f;
+
+  /* 原本整個 footer 頂端的線可以拿掉 */
+  border-top: none;
 }
 
+
+/* =========================
+   Main layout
+========================= */
 
 .footer-container {
   display: grid;
 
+  /* 左邊品牌較寬，右邊 contact / explore */
   grid-template-columns:
-    1fr
+    1.4fr
     1fr;
 
-  gap: 60px;
+  gap: 80px;
 
   max-width: 1350px;
-
   margin: 0 auto;
+
+  /* 改成像參考圖一樣，線只跟內容同寬 */
+  padding-top: 30px;
+
+  border-top: 1px solid #8d8a82;
 }
 
 
@@ -29,24 +40,47 @@
 ========================= */
 
 .footer-eyebrow {
-  margin: 0 0 18px;
+  margin: 0 0 12px;
 
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.04em;
+
+  color: #32679a;
 }
 
 
 .footer-brand h2 {
-  max-width: 650px;
+  max-width: 480px;
 
-  margin: 0;
+  margin: 0 0 18px;
 
-  font-size: clamp(2.2rem, 4vw, 4.5rem);
-  font-weight: 500;
-  line-height: 1.08;
+  /* ↓ 這裡是最主要修改 */
+  font-size: clamp(1.45rem, 2vw, 2rem);
 
-  letter-spacing: -0.045em;
+  font-weight: 700;
+  line-height: 1.05;
+
+  letter-spacing: -0.03em;
+}
+
+
+/* 指導 / 主辦 / 協辦 */
+.footer-department {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+
+  font-size: 0.72rem;
+  line-height: 1.55;
+
+  color: #5d6070;
+}
+
+
+.footer-department span {
+  display: block;
 }
 
 
@@ -56,28 +90,38 @@
 
 .footer-info {
   display: grid;
-  grid-template-columns: 1fr 1fr;
 
-  gap: 50px;
+  /* CONTACT 比 EXPLORE 稍寬 */
+  grid-template-columns: 1.25fr 0.75fr;
+
+  gap: 60px;
 }
 
 
 .footer-label {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
 
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 
 
-.footer-info p {
-  line-height: 1.8;
+.footer-info p:not(.footer-label) {
+  margin: 0 0 12px;
+
+  font-size: 0.78rem;
+  line-height: 1.7;
 }
 
 
 .footer-info a {
-  color: #191a2f;
+  display: inline-block;
+
+  color: #4e5870;
+
+  font-size: 0.75rem;
+  line-height: 1.7;
 
   text-decoration: none;
 }
@@ -85,6 +129,15 @@
 
 .footer-info a:hover {
   text-decoration: underline;
+}
+
+
+/* LINE */
+.footer-info a[href*="lin.ee"] {
+  margin-top: 6px;
+
+  color: #16a34a !important;
+  font-weight: 700;
 }
 
 
@@ -96,7 +149,13 @@
   display: flex;
   flex-direction: column;
 
-  gap: 9px;
+  gap: 8px;
+}
+
+
+.footer-nav a {
+  font-size: 0.76rem;
+  color: #4e5870;
 }
 
 
@@ -107,31 +166,69 @@
 .footer-bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
-  gap: 30px;
 
   max-width: 1350px;
 
-  margin: 75px auto 0;
+  margin: 42px auto 0;
 
-  padding-top: 22px;
+  padding-top: 20px;
 
-  border-top: 1px solid #191a2f;
+  border-top: 1px solid #d0cec7;
 
-  font-size: 0.72rem;
+  font-size: 0.68rem;
+  color: #777a84;
 }
 
 
 .footer-bottom p {
   margin: 0;
+
+  /* 把左邊版權資訊留在最左 */
+  margin-right: auto;
 }
 
 
 .footer-bottom a {
-  color: #191a2f;
-
+  color: #777a84;
   text-decoration: none;
+}
+
+
+/* policy 跟回到頂端靠右 */
+.footer-bottom .policy {
+  margin-left: 30px;
+}
+
+
+.footer-bottom a:last-child {
+  margin-left: 8px;
+
+  color: #191a2f;
+  font-weight: 700;
+}
+
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 900px) {
+
+  .footer-container {
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+  }
+
+
+  .footer-info {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .footer-brand h2 {
+    font-size: 1.8rem;
+  }
 }
 
 
@@ -139,26 +236,33 @@
    Mobile
 ========================= */
 
-@media (max-width: 750px) {
+@media (max-width: 600px) {
 
   .site-footer {
     padding:
-      65px 24px
-      25px;
+      20px 24px
+      24px;
   }
 
 
   .footer-container {
+    padding-top: 25px;
+
     grid-template-columns: 1fr;
 
-    gap: 55px;
+    gap: 40px;
   }
 
 
   .footer-info {
     grid-template-columns: 1fr;
 
-    gap: 35px;
+    gap: 30px;
+  }
+
+
+  .footer-brand h2 {
+    font-size: 1.55rem;
   }
 
 
@@ -166,7 +270,20 @@
     flex-direction: column;
     align-items: flex-start;
 
-    margin-top: 55px;
+    gap: 8px;
+
+    margin-top: 35px;
   }
 
+
+  .footer-bottom p {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+
+
+  .footer-bottom .policy,
+  .footer-bottom a:last-child {
+    margin-left: 0;
+  }
 }

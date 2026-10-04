@@ -43,7 +43,7 @@
 .news-title {
   margin: 0;
 
-  font-size: clamp(3rem, 6vw, 6rem);
+  font-size: clamp(2rem, 4vw, 4rem);
   line-height: 1;
   letter-spacing: -0.05em;
 }
