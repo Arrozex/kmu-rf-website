@@ -3,18 +3,15 @@
 ========================= */
 
 .features-section {
-  padding: 120px 7vw 140px;
+  padding: 70px 7vw 85px;
 
-  background-color: #191a2f;
-  color: #fffdf8;
-
-  border-bottom: 1px solid #191a2f;
+  background-color: #fbfcf8;
+  color: #191a2f;
 }
 
 
 .features-container {
   max-width: 1450px;
-
   margin: 0 auto;
 }
 
@@ -24,30 +21,48 @@
 ========================= */
 
 .features-heading {
-  max-width: 900px;
+  max-width: 850px;
 
-  margin: 0 auto 80px;
+  margin: 0 auto 42px;
 
   text-align: center;
 }
 
 
 .features-eyebrow {
-  margin: 0 0 20px;
+  margin: 0 0 12px;
 
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.16em;
+
+  color: #376b4d;
 }
 
 
 .features-title {
   margin: 0;
 
-  font-size: clamp(2.8rem, 5vw, 5.5rem);
-  font-weight: 500;
+  font-size: clamp(2rem, 3.2vw, 3.4rem);
+  font-weight: 700;
   line-height: 1.08;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
+  margin-bottom: 12px;
+
+  color: #191a2f;
+}
+
+
+/* 如果有標題下的小段說明 */
+.features-description {
+  max-width: 780px;
+
+  margin: 16px auto 0;
+
+  font-size: 0.95rem;
+  line-height: 1.75;
+
+  color: #525663;
 }
 
 
@@ -59,77 +74,59 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 
-  gap: 28px;
+  gap: 20px;
 }
 
 
 .feature-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
-  min-height: 430px;
+  min-height: 300px;
 
-  padding: 38px;
+  padding: 26px 28px 22px;
 
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 22px;
+  background: #ffffff;
+
+  border: 1px solid rgba(25, 26, 47, 0.08);
+  border-radius: 18px;
+
+  box-shadow:
+    0 8px 25px rgba(25, 26, 47, 0.06);
 
   color: #191a2f;
 }
 
 
-/* 三張稍微不同顏色 */
-
-.feature-card-primary {
-  background-color: #6850b8;
-  color: #ffffff;
-}
-
-
-.feature-card-light {
-  background-color: #f4f1e9;
-}
-
-
-.feature-card-secondary {
-  background-color: #b8a7e6;
-}
-
-
 /* =========================
-   Top
+   Icon
 ========================= */
 
-.feature-top {
+.feature-icon-wrap {
+  width: 78px;
+  height: 78px;
+
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 22px;
+
+  border-radius: 50%;
+
+  background-color: #eef5e8;
+
+  color: #236342;
 }
 
-
-.feature-number {
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-
-/* Icon */
 
 .feature-icon {
-  width: 70px;
-  height: 70px;
-}
-
-
-.feature-icon svg {
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  height: 50px;
 
   fill: none;
-
   stroke: currentColor;
-  stroke-width: 1.7;
+  stroke-width: 1.6;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -140,26 +137,57 @@
 ========================= */
 
 .feature-content {
-  margin-top: 80px;
+  margin-top: 0;
 }
 
 
 .feature-content h3 {
-  margin: 0 0 18px;
+  margin: 0 0 12px;
 
-  font-size: clamp(1.5rem, 2.2vw, 2rem);
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.25;
+
+  letter-spacing: -0.02em;
+
+  color: #245d3e;
 }
 
 
 .feature-content p {
-  max-width: 420px;
-
   margin: 0;
 
-  font-size: 1rem;
-  line-height: 1.75;
+  font-size: 0.9rem;
+  line-height: 1.7;
+
+  color: #363a45;
+}
+
+
+/* =========================
+   Number
+========================= */
+
+.feature-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  align-self: flex-start;
+
+  min-width: 38px;
+  height: 25px;
+
+  margin-top: auto;
+  padding: 0 10px;
+
+  border-radius: 999px;
+
+  background-color: #edf4e7;
+  color: #336a47;
+
+  font-size: 0.72rem;
+  font-weight: 700;
 }
 
 

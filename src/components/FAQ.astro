@@ -1,11 +1,97 @@
+
 ---
 import "../styles/faq.css";
+import { sanityClient } from "../lib/sanity";
+
+interface Props {
+  showAll?: boolean;
+}
+
+const { showAll = false } = Astro.props;
+
+interface FAQItem {
+  _id: string;
+  question: string;
+  answer: string;
+  answerLinkLabel?: string;
+  answerLinkUrl?: string;
+}
+
+// =====================================
+// Sanity 資料
+// =====================================
+
+const sanityFAQs = await sanityClient.fetch<FAQItem[]>(`
+  *[
+    _type == "faq" &&
+    visible == true
+  ]
+  | order(sortOrder asc, _createdAt asc)
+  {
+    _id,
+    question,
+    answer,
+    answerLinkLabel,
+    answerLinkUrl
+  }
+`);
+
+// =====================================
+// 舊版四題保留為暫時內容
+// Sanity 尚無 FAQ 時使用
+// =====================================
+
+const fallbackFAQs: FAQItem[] = [
+  {
+    _id: "fallback-1",
+    question: "需要具備程式設計或 AI 基礎嗎？",
+    answer:
+      "不一定。課程包含從 AI 概念與程式設計基礎開始的內容，也有較進階的實作課程。可以依照自己的程度與課程說明，選擇適合的學習路徑。",
+  },
+  {
+    _id: "fallback-2",
+    question: "校務選課與計畫活動報名有什麼不同？",
+    answer:
+      "部分課程為正式校務系統選課課程，另有工作坊、講座或自主學習活動使用外部表單報名。網站的課程報名頁會標示每堂課應使用的報名方式。",
+  },
+  {
+    _id: "fallback-3",
+    question: "參加課程需要準備什麼？",
+    answer:
+      "依課程內容可能需要自備筆記型電腦或安裝指定軟體。每堂課的日期、地點與準備事項都會在課程頁面個別標示，報名前請先確認課程說明。",
+  },
+  {
+    _id: "fallback-4",
+    question: "還有更多問題？",
+    answer:
+      "可以透過連結加入計畫的 LINE 官方帳號，我們將會盡快解答您的疑問！",
+    answerLinkLabel: "加入 LINE 官方帳號",
+    answerLinkUrl:
+      "https://line.me/R/ti/p/@480ouhvu?oat_content=url&ts=08261126",
+  },
+];
+
+// Sanity 有內容就使用 Sanity，沒有才用原本四題
+const faqItems =
+  sanityFAQs && sanityFAQs.length > 0
+    ? sanityFAQs
+    : fallbackFAQs;
 ---
 
-<section class="faq-section" id="faq">
+<section
+  class="faq-section"
+  id="faq"
+  data-faq-section
+  data-faq-preview={showAll ? "false" : "true"}
+>
   <div class="faq-container">
 
+    <!-- =========================
+         Heading
+    ========================= -->
+
     <div class="faq-heading">
+
       <p class="faq-eyebrow">
         FREQUENTLY ASKED QUESTIONS
       </p>
@@ -13,97 +99,275 @@ import "../styles/faq.css";
       <h2 class="faq-title">
         常見問題
       </h2>
+
+    </div>
+
+
+    <!-- =========================
+         FAQ List
+    ========================= -->
+
+    <div
+      class="faq-list"
+      id="faq-list"
+      data-faq-list
+    >
+
+      {faqItems.map((item, index) => (
+
+        <details
+          class="faq-item"
+          open={index === 0}
+        >
+
+          <summary>
+
+            <span>
+              {item.question}
+            </span>
+
+            <span
+              class="faq-icon"
+              aria-hidden="true"
+            ></span>
+
+          </summary>
+
+
+          <div class="faq-answer">
+
+            <p>{item.answer}</p>
+
+            {item.answerLinkUrl && (
+
+              <p class="faq-answer-link">
+
+                <a
+                  href={item.answerLinkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.answerLinkLabel || "查看相關連結"}
+                  <span aria-hidden="true">↗</span>
+                </a>
+
+              </p>
+
+            )}
+
+          </div>
+
+        </details>
+
+      ))}
+
     </div>
 
 
-    <div class="faq-list">
+    <!-- =========================
+         查看更多
+         完整 FAQ 頁不需要顯示
+    ========================= -->
 
-      <!-- 01 -->
-      <details class="faq-item" open>
+    {!showAll && (
 
-        <summary>
-          <span>
-            需要具備程式設計或 AI 基礎嗎？
+      <div class="faq-more-wrap">
+
+        <button
+          type="button"
+          class="faq-more-button"
+          data-faq-more
+          aria-controls="faq-list"
+          aria-expanded="false"
+          hidden
+        >
+
+          <span data-faq-more-text>
+            查看更多
           </span>
 
-          <span class="faq-icon" aria-hidden="true"></span>
-        </summary>
-
-        <div class="faq-answer">
-          <p>
-            不一定。課程包含從 AI 概念與程式設計基礎開始的內容，
-            也有較進階的實作課程。可以依照自己的程度與課程說明，
-            選擇適合的學習路徑。
-          </p>
-        </div>
-
-      </details>
-
-
-      <!-- 02 -->
-      <details class="faq-item">
-
-        <summary>
-          <span>
-            校務選課與計畫活動報名有什麼不同？
+          <span
+            class="faq-more-arrow"
+            aria-hidden="true"
+          >
+            ↓
           </span>
 
-          <span class="faq-icon" aria-hidden="true"></span>
-        </summary>
+        </button>
 
-        <div class="faq-answer">
-          <p>
-            部分課程為正式校務系統選課課程，
-            另有工作坊、講座或自主學習活動使用外部表單報名。
-            網站的課程報名頁會標示每堂課應使用的報名方式。
-          </p>
-        </div>
+      </div>
 
-      </details>
-
-
-      <!-- 03 -->
-      <details class="faq-item">
-
-        <summary>
-          <span>
-            參加課程需要準備什麼？
-          </span>
-
-          <span class="faq-icon" aria-hidden="true"></span>
-        </summary>
-
-        <div class="faq-answer">
-          <p>
-            依課程內容可能需要自備筆記型電腦或安裝指定軟體。
-            每堂課的日期、地點與準備事項都會在課程頁面個別標示，
-            報名前請先確認課程說明。
-          </p>
-        </div>
-
-      </details>
-
-      <!-- 04 -->
-      <details class="faq-item">
-
-        <summary>
-          <span>
-            還有更多問題？
-          </span>
-
-          <span class="faq-icon" aria-hidden="true"></span>
-        </summary>
-
-        <div class="faq-answer">
-          <p>
-            可以透過連結掃描QR code加入計畫的LINE官方帳號，我們將會盡快解答您的疑問！<br />
-            <a href="https://line.me/R/ti/p/@480ouhvu?oat_content=url&ts=08261126" style="color: black"> 加入LINE官方帳號 </a>
-          </p>
-        </div>
-
-      </details>
-
-    </div>
+    )}
 
   </div>
 </section>
+
+
+<script>
+  // =====================================
+  // FAQ 查看更多 / 收起
+  // 不限制 FAQ 總數
+  // =====================================
+
+  const faqSections =
+    document.querySelectorAll<HTMLElement>(
+      "[data-faq-section]"
+    );
+
+  faqSections.forEach((section) => {
+
+    // 獨立完整 FAQ 頁顯示全部
+    if (section.dataset.faqPreview !== "true") {
+      return;
+    }
+
+    const list =
+      section.querySelector<HTMLElement>(
+        "[data-faq-list]"
+      );
+
+    const moreButton =
+      section.querySelector<HTMLButtonElement>(
+        "[data-faq-more]"
+      );
+
+    const moreText =
+      section.querySelector<HTMLElement>(
+        "[data-faq-more-text]"
+      );
+
+    if (!list || !moreButton || !moreText) {
+      return;
+    }
+
+    const cards = Array.from(
+      list.querySelectorAll<HTMLDetailsElement>(
+        ".faq-item"
+      )
+    );
+
+    let expanded = false;
+
+    // =====================================
+    // 依畫面高度計算初始顯示範圍
+    // 保證不裁切卡片
+    // =====================================
+
+    function updatePreview() {
+
+      if (expanded) {
+        return;
+      }
+
+      // 先顯示全部才能測量高度
+      cards.forEach((card) => {
+        card.hidden = false;
+      });
+
+      const isMobile =
+        window.matchMedia(
+          "(max-width: 650px)"
+        ).matches;
+
+      const maxHeight = isMobile ? 320 : 420;
+
+      const listStyle =
+        window.getComputedStyle(list);
+
+      const gap =
+        parseFloat(listStyle.rowGap) || 0;
+
+      let totalHeight = 0;
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+
+        const cardHeight =
+          card.getBoundingClientRect().height;
+
+        const extraGap =
+          visibleCount > 0 ? gap : 0;
+
+        const nextHeight =
+          totalHeight + extraGap + cardHeight;
+
+        // 至少保留第一張卡片
+        if (
+          visibleCount > 0 &&
+          nextHeight > maxHeight
+        ) {
+          card.hidden = true;
+        } else {
+          card.hidden = false;
+          totalHeight = nextHeight;
+          visibleCount++;
+        }
+
+      });
+
+      // 所有卡片都放得下時隱藏按鈕
+      moreButton.hidden =
+        visibleCount >= cards.length;
+
+    }
+
+
+    // =====================================
+    // 點擊查看更多
+    // =====================================
+
+    moreButton.addEventListener("click", () => {
+
+      expanded = !expanded;
+
+      if (expanded) {
+
+        // 顯示所有 FAQ
+        cards.forEach((card) => {
+          card.hidden = false;
+        });
+
+        moreText.textContent = "收起內容";
+
+      } else {
+
+        // 收起時還原第一題展開狀態
+        cards.forEach((card, index) => {
+          card.open = index === 0;
+        });
+
+        moreText.textContent = "查看更多";
+
+        updatePreview();
+
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+
+      }
+
+      moreButton.setAttribute(
+        "aria-expanded",
+        String(expanded)
+      );
+
+      moreButton.classList.toggle(
+        "is-expanded",
+        expanded
+      );
+
+    });
+
+
+    // 初次載入
+    updatePreview();
+
+    // 螢幕寬度變化時重新計算
+    window.addEventListener(
+      "resize",
+      updatePreview
+    );
+
+  });
+</script>

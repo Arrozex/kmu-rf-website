@@ -1,0 +1,818 @@
+
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/course-page.css";
+
+const courseAreas = [
+  {
+    code: "A",
+    english: "HEALTHCARE INNOVATION",
+    title: "醫療照護創新專業",
+    description:
+      "從護理、復健、健康照護、跨域溝通、專案管理與產業應用等專業基礎出發，培養學生辨識醫療照護需求與進行創新思考的能力。",
+    tags: ["醫療照護", "跨域溝通", "臨床創新"],
+  },
+  {
+    code: "B",
+    english: "AI FOUNDATIONS",
+    title: "AI 概念",
+    description:
+      "學習人工智慧導論、Python、生成式 AI、資料庫、智慧物聯網、人工智慧倫理與相關基礎知識，建立理解與應用 AI 的共同語言。",
+    tags: ["Python", "生成式 AI", "AI 倫理"],
+  },
+  {
+    code: "C",
+    english: "AI APPLICATIONS",
+    title: "AI 應用",
+    description:
+      "透過智慧人機互動、虛實整合與 AI 協作、對話式 AI 及人因等課程，學習如何將 AI 與數位科技連結至醫療照護情境。",
+    tags: ["人機互動", "對話式 AI", "虛實整合"],
+  },
+  {
+    code: "D",
+    english: "AI PRACTICE",
+    title: "AI 技術實務",
+    description:
+      "透過跨域臨床創新專題、產學共創與成果展演，整合前階段所學，發展具有場域應用價值的成果。",
+    tags: ["跨域專題", "產學共創", "成果展演"],
+  },
+];
+
+const pathways = [
+  {
+    number: "01",
+    title: "建立專業與 AI 基礎",
+    description:
+      "從醫療照護創新專業與 AI 概念出發，理解真實需求並建立科技素養。",
+  },
+  {
+    number: "02",
+    title: "發展跨域應用能力",
+    description:
+      "結合 AI 應用、智慧科技與跨專業協作，探索問題的解決方式。",
+  },
+  {
+    number: "03",
+    title: "走向場域與實作",
+    description:
+      "透過技術實務與 Capstone 統整性專題，逐步發展並驗證創新方案。",
+  },
+];
+
+
+/* =====================================
+   課程學習起點推薦
+===================================== */
+
+const courseGuides = [
+  {
+    number: "01",
+    icon: "book",
+    theme: "green",
+    title: "沒接觸過 AI",
+    subtitle: "適合初學者",
+    description:
+      "從 AI 概念、人工智慧導論與生成式 AI 基礎開始，循序建立理解科技的能力。",
+    benefits: [
+      "建立 AI 基礎語言",
+      "從基礎開始探索應用",
+    ],
+  },
+  {
+    number: "02",
+    icon: "chip",
+    theme: "blue",
+    title: "對 AI 有基本認識",
+    subtitle: "進階應用",
+    description:
+      "進一步探索 AI 應用、人機互動、虛實整合與對話式 AI 等跨域課程。",
+    benefits: [
+      "連結醫療照護情境",
+      "培養跨域整合能力",
+    ],
+  },
+  {
+    number: "03",
+    icon: "project",
+    theme: "purple",
+    title: "已有構想或想做專題",
+    subtitle: "實作導向",
+    description:
+      "探索 AI 技術實務、場域見習及 Capstone 專題，將想法逐步轉化為成果。",
+    benefits: [
+      "從問題走向方案",
+      "累積成果與作品",
+    ],
+  },
+];
+
+
+
+/* =====================================
+   Capstone 八步驟
+===================================== */
+
+const capstoneSteps = [
+  {
+    number: "01",
+    icon: "search",
+    title: "場域探索",
+    description: "進入場域觀察流程與需求",
+  },
+  {
+    number: "02",
+    icon: "target",
+    title: "問題定義",
+    description: "聚焦值得解決的核心問題",
+  },
+  {
+    number: "03",
+    icon: "clipboard",
+    title: "需求分析",
+    description: "整理使用者與情境需求",
+  },
+  {
+    number: "04",
+    icon: "pencil",
+    title: "方案設計",
+    description: "規劃 AI 或數位科技解方",
+  },
+  {
+    number: "05",
+    icon: "code",
+    title: "原型開發",
+    description: "將想法轉化為可測試原型",
+  },
+  {
+    number: "06",
+    icon: "users",
+    title: "使用者測試",
+    description: "蒐集回饋並持續修正",
+  },
+  {
+    number: "07",
+    icon: "shield",
+    title: "場域驗證",
+    description: "評估實際導入可行性",
+  },
+  {
+    number: "08",
+    icon: "trophy",
+    title: "成果展演",
+    description: "發表專題成果與應用價值",
+  },
+];
+
+
+/* =====================================
+   課程與 Capstone SVG Icons
+===================================== */
+
+const courseIcons: Record<string, string[]> = {
+  book: [
+    "M3 5.5c3-1.5 6-1 9 1.5v13c-3-2.5-6-3-9-1.5z",
+    "M21 5.5c-3-1.5-6-1-9 1.5v13c3-2.5 6-3 9-1.5z",
+  ],
+
+  chip: [
+    "M8 4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4z",
+    "M9 9h6v6H9z",
+    "M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3",
+  ],
+
+  project: [
+    "M9 4h6l1 3H8z",
+    "M7 6H5v15h14V6h-2",
+    "M8 13l2 2 5-5",
+    "M8 18h8",
+  ],
+
+  search: [
+    "M10.5 17a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13z",
+    "M15.5 15.5 21 21",
+  ],
+
+  target: [
+    "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z",
+    "M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z",
+    "M12 10v4M10 12h4",
+  ],
+
+  clipboard: [
+    "M9 4h6l1 3H8z",
+    "M7 6H5v15h14V6h-2",
+    "M8 12h8M8 16h8",
+  ],
+
+  pencil: [
+    "M4 20l4.5-1 11-11-3.5-3.5L5 15.5 4 20z",
+    "M14 6l3.5 3.5",
+    "M11 20h9",
+  ],
+
+  code: [
+    "M8 8 4 12l4 4",
+    "M16 8l4 4-4 4",
+    "M13 6l-2 12",
+    "M3 21h18",
+  ],
+
+  users: [
+    "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+    "M3 20v-2a6 6 0 0 1 12 0v2",
+    "M17 5a3 3 0 0 1 0 6",
+    "M17 14a5 5 0 0 1 4 5v1",
+  ],
+
+  shield: [
+    "M12 2 4 6v6c0 5 3 8 8 10 5-2 8-5 8-10V6z",
+    "M8.5 12l2.5 2.5 4.5-5",
+  ],
+
+  trophy: [
+    "M7 3h10v7a5 5 0 0 1-10 0V3z",
+    "M7 5H4v3a4 4 0 0 0 4 4",
+    "M17 5h3v3a4 4 0 0 1-4 4",
+    "M12 15v4M8 21h8M9 19h6",
+  ],
+};
+
+
+const practiceFields = [
+  "臨床醫療",
+  "長期照護",
+  "基層醫療",
+];
+
+const registrationSteps = [
+  "完成課程報名",
+  "完成課前問卷",
+  "參與課程",
+  "完成課後回饋",
+];
+---
+
+<BaseLayout title="課程專區｜醫療照護創新與人工智慧應用人才培育計畫">
+  <main class="course-page">
+
+    <!-- =====================================
+         HERO
+    ===================================== -->
+    <section class="course-hero">
+      <div class="course-shell course-hero__inner">
+
+        <p class="course-eyebrow">
+          LEARNING PROGRAM
+        </p>
+
+        <h1>課程專區</h1>
+
+        <p class="course-hero__lead">
+          從醫療照護專業與 AI 基礎，
+          走向跨域應用與真實場域實作。
+        </p>
+
+        <p class="course-hero__description">
+          本計畫採循序漸進的主題式課群設計，
+          讓不同專業與不同 AI 基礎的學生，
+          都能找到適合自己的學習起點。
+        </p>
+
+        <div class="course-hero__actions">
+          <a
+            class="course-button course-button--primary"
+            href="/courses"
+          >
+            探索近期課程
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <a
+            class="course-button course-button--outline"
+            href="#features"
+          >
+            繼續了解課群特色
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================
+         01 四大課群
+    ===================================== -->
+    <section
+      class="course-section"
+      id="features"
+      aria-labelledby="course-features-title"
+    >
+      <div class="course-shell">
+
+        <div class="course-section__heading">
+          <span class="course-section__number" aria-hidden="true">
+            01
+          </span>
+
+          <div>
+            <p class="course-eyebrow">COURSE AREAS</p>
+            <h2 id="course-features-title">
+              四大課群面向
+            </h2>
+            <p class="course-section__subtitle">
+              由醫療照護專業出發，循序建立 AI 應用與實作能力。
+            </p>
+          </div>
+        </div>
+
+        <div class="course-area-grid">
+          {courseAreas.map((area) => (
+            <article class="course-area-card">
+
+              <div class="course-area-card__top">
+                <span class="course-area-card__code">
+                  {area.code}
+                </span>
+
+                <span class="course-area-card__english">
+                  {area.english}
+                </span>
+              </div>
+
+              <h3>{area.title}</h3>
+
+              <p class="course-area-card__description">
+                {area.description}
+              </p>
+
+              <div
+                class="course-area-card__tags"
+                aria-label={`${area.title}的學習主題`}
+              >
+                {area.tags.map((tag) => (
+                  <span>{tag}</span>
+                ))}
+              </div>
+
+            </article>
+          ))}
+        </div>
+
+        <div class="course-section__footer">
+          <a class="course-text-link" href="/courses">
+            查看實際開設課程
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================
+         02 課程地圖
+    ===================================== -->
+    <section
+      class="course-section course-section--tinted"
+      id="curriculum"
+      aria-labelledby="course-map-title"
+    >
+      <div class="course-shell">
+
+        <div class="course-section__heading">
+          <span class="course-section__number" aria-hidden="true">
+            02
+          </span>
+
+          <div>
+            <p class="course-eyebrow">LEARNING PATHWAY</p>
+            <h2 id="course-map-title">
+              課程地圖
+            </h2>
+
+            <p class="course-section__subtitle">
+              從基礎學習，走向跨域應用與實務成果。
+            </p>
+          </div>
+        </div>
+
+        <div class="course-map">
+
+          <div class="course-map__intro">
+            <h3>循序漸進的主題式課群</h3>
+
+            <p>
+              本計畫結合醫療照護創新專業、
+              AI 概念、AI 應用及 AI 技術實務，
+              協助學生依照專業背景與學習需求，
+              逐步探索跨域學習方向。
+            </p>
+          </div>
+
+          <div class="course-pathway">
+            {pathways.map((pathway) => (
+              <article class="course-pathway__step">
+
+                <span class="course-pathway__number">
+                  STEP {pathway.number}
+                </span>
+
+                <h4>{pathway.title}</h4>
+
+                <p>{pathway.description}</p>
+
+              </article>
+            ))}
+          </div>
+
+          <p class="course-map__notice">
+            本圖為課群學習方向示意，
+            並非正式開課順序或必修規定。
+            115 年度各課程安排及實際開課資訊，
+            以計畫公布的課程地圖與公告為準。
+          </p>
+
+        </div>
+
+        <div class="course-section__footer">
+          <a class="course-text-link" href="/courses">
+            查看近期開課資訊
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================
+        03 WHICH COURSE IS RIGHT FOR ME?
+    ===================================== -->
+    <section
+    class="course-section course-guide-section"
+    id="starting-point"
+    aria-labelledby="course-guide-title"
+    >
+    <div class="course-shell">
+
+        <div class="course-section__heading">
+        <span class="course-section__number" aria-hidden="true">
+            03
+        </span>
+
+        <div>
+            <p class="course-eyebrow">
+            WHICH COURSE IS RIGHT FOR ME?
+            </p>
+
+            <h2 id="course-guide-title">
+            我適合從哪裡開始？
+            </h2>
+
+            <p class="course-section__subtitle">
+            依照自己的 AI 基礎與學習目標，
+            找到適合的學習起點。
+            </p>
+        </div>
+        </div>
+
+        <!-- 三種學習起點 -->
+        <div class="course-guide-grid">
+
+        {courseGuides.map((guide) => (
+            <article
+            class={`course-guide-card course-guide-card--${guide.theme}`}
+            >
+
+            <div
+                class="course-guide-card__icon"
+                aria-hidden="true"
+            >
+                <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                >
+                {courseIcons[guide.icon].map((path) => (
+                    <path d={path} />
+                ))}
+                </svg>
+            </div>
+
+            <span class="course-guide-card__number">
+                {guide.number}
+            </span>
+
+            <h3>{guide.title}</h3>
+
+            <span class="course-guide-card__level">
+                {guide.subtitle}
+            </span>
+
+            <p class="course-guide-card__description">
+                {guide.description}
+            </p>
+
+            <ul class="course-guide-card__benefits">
+                {guide.benefits.map((benefit) => (
+                <li>
+                    {benefit}
+                </li>
+                ))}
+            </ul>
+
+            </article>
+        ))}
+
+        </div>
+
+        <!-- 底部引導 -->
+        <div class="course-guide-note">
+
+        <div class="course-guide-note__content">
+            <span class="course-guide-note__star" aria-hidden="true">
+            ✷
+            </span>
+
+            <p>
+            先從適合自己的課程開始，
+            再逐步走向應用與實作。
+            <small>
+                以上為建議學習方向，實際參與條件以各課程公告為準。
+            </small>
+            </p>
+        </div>
+
+        <a
+            class="course-button course-button--primary"
+            href="/courses"
+        >
+            查看近期課程
+            <span aria-hidden="true">→</span>
+        </a>
+
+        </div>
+
+    </div>
+    </section>
+
+
+
+    <!-- =====================================
+         03 CAPSTONE
+    ===================================== -->
+    <section
+      class="course-section"
+      id="capstone"
+      aria-labelledby="course-capstone-title"
+    >
+      <div class="course-shell">
+
+        <div class="course-section__heading">
+          <span class="course-section__number" aria-hidden="true">
+            04
+          </span>
+
+          <div>
+            <p class="course-eyebrow">
+              FROM LEARNING TO IMPACT
+            </p>
+
+            <h2 id="course-capstone-title">
+              Capstone 統整性實作
+            </h2>
+
+            <p class="course-section__subtitle">
+              從真實問題出發，讓跨域學習走進實務場域。
+            </p>
+          </div>
+        </div>
+
+        <div class="course-capstone__intro">
+
+          <p>
+            Capstone 統整性實作專題，
+            是本計畫串連課程與真實場域的重要學習階段。
+          </p>
+
+          <p>
+            學生將組成跨領域團隊，
+            進入臨床照護、長期照護或基層醫療等場域，
+            透過觀察、訪談與需求分析發現問題，
+            再進一步評估 AI 或數位科技導入的適切性與可行性。
+          </p>
+
+        </div>
+
+        <div class="course-capstone__fields">
+          <h3>三大實作場域</h3>
+
+          <div class="course-field-list">
+            {practiceFields.map((field) => (
+              <span class="course-field">
+                <span
+                  class="course-field__dot"
+                  aria-hidden="true"
+                ></span>
+                {field}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        
+        <!-- Capstone 八步驟流程 -->
+        <div class="course-capstone__flow">
+
+        <div class="course-subheading">
+            <p class="course-eyebrow">
+            CAPSTONE PROCESS
+            </p>
+
+            <h3>從問題發現到成果展演</h3>
+
+            <p class="course-process-description">
+            從場域需求出發，
+            經歷問題定義、方案設計、原型開發與測試驗證，
+            逐步完成具備實務應用價值的跨域專題。
+            </p>
+        </div>
+
+        <ol class="course-process-grid">
+
+            {capstoneSteps.map((step) => (
+            <li class="course-process-card">
+
+                <!-- 步驟編號 -->
+                <span class="course-process-card__number">
+                {step.number}
+                </span>
+
+                <!-- Icon -->
+                <span
+                class="course-process-card__icon"
+                aria-hidden="true"
+                >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    {courseIcons[step.icon].map((path) => (
+                    <path d={path} />
+                    ))}
+                </svg>
+                </span>
+
+                <!-- 標題 -->
+                <span class="course-process-card__title">
+                {step.title}
+                </span>
+
+                <!-- 詳細說明 -->
+                <p class="course-process-card__description">
+                {step.description}
+                </p>
+
+            </li>
+            ))}
+
+        </ol>
+
+        </div>
+
+
+      </div>
+    </section>
+
+
+    <!-- =====================================
+         04 近期課程
+    ===================================== -->
+    <section
+      class="course-section course-section--tinted"
+      id="upcoming"
+      aria-labelledby="course-upcoming-title"
+    >
+      <div class="course-shell">
+
+        <div class="course-section__heading">
+          <span class="course-section__number" aria-hidden="true">
+            04
+          </span>
+
+          <div>
+            <p class="course-eyebrow">EXPLORE COURSES</p>
+            <h2 id="course-upcoming-title">
+              探索近期課程
+            </h2>
+
+            <p class="course-section__subtitle">
+              從感興趣的主題開始，找到適合自己的學習起點。
+            </p>
+          </div>
+        </div>
+
+        <div class="course-discovery-card">
+
+          <div class="course-discovery-card__content">
+            <h3>看看目前有哪些課程與活動</h3>
+
+            <p>
+              近期開課資訊將持續更新，
+              可以依照課程主題、開課時間與先備條件，
+              選擇符合自己學習需求的課程。
+            </p>
+          </div>
+
+          <a
+            class="course-button course-button--primary"
+            href="/courses"
+          >
+            前往近期課程
+            <span aria-hidden="true">→</span>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================
+         05 如何參與
+    ===================================== -->
+    <section
+      class="course-section"
+      id="join"
+      aria-labelledby="course-join-title"
+    >
+      <div class="course-shell">
+
+        <div class="course-section__heading">
+          <span class="course-section__number" aria-hidden="true">
+            05
+          </span>
+
+          <div>
+            <p class="course-eyebrow">HOW TO JOIN</p>
+            <h2 id="course-join-title">
+              如何參與課程？
+            </h2>
+
+            <p class="course-section__subtitle">
+              從完成報名到課後回饋，四步驟開始學習。
+            </p>
+          </div>
+        </div>
+
+        <ol class="course-registration-grid">
+          {registrationSteps.map((step, index) => (
+            <li class="course-registration-step">
+
+              <span class="course-registration-step__number">
+                STEP {String(index + 1).padStart(2, "0")}
+              </span>
+
+              <h3>{step}</h3>
+
+            </li>
+          ))}
+        </ol>
+
+        <p class="course-join__notice">
+          實際報名方式、名額、學分認列及前後測需求，
+          以各課程公告為準。
+          校務選課與活動報名的適用方式可能不同。
+        </p>
+
+        <div class="course-join__actions">
+          <a
+            class="course-button course-button--primary"
+            href="/registration"
+          >
+            前往報名
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <a
+            class="course-button course-button--outline"
+            href="/courses"
+          >
+            查看近期課程
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>

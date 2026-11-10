@@ -1,860 +1,1030 @@
-/* =========================
-   Registration Page
-========================= */
+
+/* =====================================
+   REGISTRATION PAGE
+   src/styles/registration.css
+===================================== */
 
 .registration-page {
-  padding:
-    105px 5vw
-    130px;
+  --reg-ink: #191a2f;
+  --reg-green: #315c42;
+  --reg-orange: #b85c22;
+  --reg-outline: rgba(25, 26, 47, 0.25);
 
-  background-color: #eef1f8;
-  color: #191a2f;
+  padding: 62px 5vw 90px;
+
+  background: #eef1f8;
+  color: var(--reg-ink);
 }
 
+.registration-page *,
+.registration-page *::before,
+.registration-page *::after {
+  box-sizing: border-box;
+}
 
 .registration-container {
-  max-width: 1450px;
-
+  max-width: 1160px;
   margin: 0 auto;
 }
 
 
-/* =========================
-   Heading
-========================= */
+/* =====================================
+   HEADING
+===================================== */
 
 .registration-heading {
-  max-width: 850px;
-
-  margin:
-    0 auto
-    70px;
-
+  max-width: 800px;
+  margin: 0 auto 42px;
   text-align: center;
 }
 
-
 .registration-eyebrow {
-  margin:
-    0 0
-    18px;
+  margin: 0 0 12px;
 
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 0.72rem;
+  font-weight: 750;
   letter-spacing: 0.16em;
 }
-
 
 .registration-heading h1 {
   margin: 0;
 
-  font-size:
-    clamp(
-      4rem,
-      8vw,
-      8rem
-    );
-
-  font-weight: 500;
-
-  line-height: 0.95;
-
-  letter-spacing: -0.06em;
+  font-size: clamp(2.7rem, 5vw, 4.2rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.15;
 }
-
 
 .registration-heading > p:last-child {
   max-width: 650px;
-
-  margin:
-    32px auto
-    0;
-
-  line-height: 1.8;
+  margin: 18px auto 0;
 
   color: #555564;
+  font-size: 0.94rem;
+  line-height: 1.7;
 }
 
 
-/* =========================
-   Selector
-========================= */
+/* =====================================
+   COURSE SELECTOR
+===================================== */
 
 .registration-selector {
-  max-width: 900px;
-
-  margin:
-    0 auto
-    50px;
+  max-width: 850px;
+  margin: 0 auto 30px;
 }
-
 
 .registration-selector label {
   display: block;
+  margin-bottom: 8px;
 
-  margin-bottom: 10px;
-
-  font-size: 0.72rem;
-  font-weight: 700;
-
-  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 750;
 }
-
 
 .registration-selector select {
   width: 100%;
+  min-height: 48px;
 
-  min-height: 40px;
+  padding: 0 38px 0 15px;
 
-  padding:
-    0
-    20px
-    0
-    12px;
+  border: 1px solid var(--reg-ink);
+  border-radius: 12px;
 
-  border:
-    1px solid
-    #191a2f;
+  background: #fffdf8;
+  color: var(--reg-ink);
 
-  border-radius: 999px;
-
-  background-color: #fffdf8;
-
-  color: #191a2f;
-
-  font-size: 1rem;
+  font-family: inherit;
+  font-size: 0.9rem;
 
   cursor: pointer;
 }
 
 
-/* =========================
-   Course
-========================= */
+/* =====================================
+   COURSE PANEL
+===================================== */
 
 .registration-course[hidden] {
-  display: none;
+  display: none !important;
 }
-
 
 .registration-course-info {
-  padding: 45px;
+  padding: 28px 32px;
 
-  border:
-    1px solid
-    #191a2f;
-
-  border-radius: 24px;
-
-  background-color: #fffdf8;
+  background: #fffdf8;
+  border: 1px solid var(--reg-ink);
+  border-radius: 19px;
 }
 
-
-/* =========================
-   Course title
-========================= */
+/* 課程標題 */
 
 .registration-course-title {
   display: grid;
-
-  grid-template-columns:
-    auto
-    minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
 
   align-items: start;
-
-  gap: 25px;
+  gap: 16px;
 }
-
 
 .registration-course-title h2 {
-  max-width: 1000px;
-
+  min-width: 0;
   margin: 0;
 
-  font-size:
-    clamp(
-      2rem,
-      4vw,
-      4rem
-    );
+  font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+  font-weight: 650;
+  line-height: 1.35;
 
-  font-weight: 520;
-
-  line-height: 1.15;
-
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
 }
 
 
-/* =========================
-   Status
-========================= */
+/* =====================================
+   STATUS
+===================================== */
 
 .registration-status {
-  padding:
-    7px 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  border:
-    1px solid
-    #191a2f;
+  padding: 5px 11px;
 
+  border: 1px solid var(--reg-ink);
   border-radius: 999px;
 
+  font-size: 0.68rem;
+  font-weight: 750;
+
   white-space: nowrap;
-
-  font-size: 0.7rem;
-  font-weight: 700;
 }
-
 
 .registration-status--enrolling {
-  background-color: #d2efc9;
+  background: #d2efc9;
 }
-
 
 .registration-status--ongoing {
-  background-color: #d7e7ff;
+  background: #d7e7ff;
 }
 
-
 .registration-status--closed {
-  background-color: #e6e6e6;
-
+  background: #e6e6e6;
   color: #666;
 }
 
 
-/* =========================
-   Tags
-========================= */
+/* =====================================
+   TAGS
+===================================== */
 
 .registration-tags {
   display: flex;
-
   flex-wrap: wrap;
 
-  gap: 8px;
-
-  margin:
-    25px 0
-    40px;
+  gap: 7px;
+  margin: 17px 0 24px;
 }
-
 
 .registration-tags span {
-  padding:
-    5px 10px;
+  padding: 4px 9px;
 
-  border:
-    1px solid
-    rgba(25,26,47,0.65);
-
+  border: 1px solid rgba(25, 26, 47, 0.6);
   border-radius: 999px;
 
-  font-size: 0.68rem;
-}
-
-
-/* =========================
-   Meta
-========================= */
-
-.registration-meta {
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, 1fr);
-
-  gap: 25px;
-
-  padding:
-    28px 0;
-
-  border-top:
-    1px solid
-    rgba(25,26,47,0.3);
-
-  border-bottom:
-    1px solid
-    rgba(25,26,47,0.3);
-}
-
-
-.registration-meta div {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 7px;
-}
-
-
-.registration-meta span {
   font-size: 0.67rem;
-
-  color: #666675;
-}
-
-
-.registration-meta strong {
-  font-size: 0.9rem;
-
   line-height: 1.5;
 }
 
 
-/* =========================
-   Description
-========================= */
+/* =====================================
+   COURSE META
+===================================== */
+
+.registration-meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 17px;
+  padding: 18px 0;
+
+  border-top: 1px solid var(--reg-outline);
+  border-bottom: 1px solid var(--reg-outline);
+}
+
+.registration-meta div {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  gap: 5px;
+}
+
+.registration-meta span {
+  color: #666675;
+  font-size: 0.68rem;
+}
+
+.registration-meta strong {
+  font-size: 0.86rem;
+  font-weight: 650;
+  line-height: 1.55;
+
+  overflow-wrap: anywhere;
+}
+
+/* 上課方式 */
+
+.registration-delivery {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+
+  gap: 8px 16px;
+  margin-top: 16px;
+}
+
+.registration-delivery span {
+  color: #666675;
+  font-size: 0.69rem;
+}
+
+.registration-delivery strong {
+  color: var(--reg-ink);
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+
+
+/* =====================================
+   COURSE DESCRIPTION
+===================================== */
 
 .registration-description {
   display: grid;
+  grid-template-columns: 145px minmax(0, 1fr);
 
-  grid-template-columns:
-    180px
-    minmax(0, 1fr);
-
-  gap: 35px;
-
-  margin-top: 38px;
+  gap: 20px;
+  margin-top: 24px;
 }
-
 
 .registration-label {
   margin: 0;
 
-  font-size: 0.67rem;
-  font-weight: 700;
-
-  letter-spacing: 0.1em;
-
   color: #666675;
+  font-size: 0.69rem;
+  font-weight: 750;
+  letter-spacing: 0.07em;
 }
-
 
 .registration-description > p:last-child {
-  max-width: 850px;
-
   margin: 0;
 
+  font-size: 0.9rem;
   line-height: 1.8;
+  white-space: pre-line;
+
+  overflow-wrap: anywhere;
 }
 
 
-/* =========================
-   Notice
-========================= */
+/* =====================================
+   NOTICE
+===================================== */
 
 .registration-notice {
-  margin-top: 40px;
+  margin-top: 23px;
+  padding: 17px 22px;
 
-  padding: 28px 30px;
-
-  border-radius: 16px;
-
-  background-color: #f2ecdf;
+  background: #f5eee3;
+  border-radius: 13px;
 }
-
 
 .registration-notice h3 {
-  margin:
-    0 0
-    15px;
+  margin: 0 0 9px;
 
-  font-size: 1rem;
+  color: #75451f;
+  font-size: 0.97rem;
 }
-
 
 .registration-notice ol {
   margin: 0;
-
   padding-left: 1.4rem;
 }
 
-
 .registration-notice li {
-  margin:
-    8px 0;
+  margin: 5px 0;
 
+  font-size: 0.86rem;
   line-height: 1.7;
 }
 
 
-/* =========================
-   Course detail
-========================= */
+/* =====================================
+   MAIN COURSE DETAIL BUTTON
+   白底、大型按鈕
+===================================== */
 
-.course-detail-button {
-  display: inline-flex;
+.registration-detail-actions {
+  display: flex;
+  margin-top: 25px;
+}
 
+.registration-page .course-detail-button {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
 
-  gap: 12px;
+  gap: 15px;
 
-  margin-top: 30px;
+  width: min(100%, 520px);
+  min-height: 58px;
 
-  padding:
-    12px 18px;
+  padding: 13px 22px;
 
-  border:
-    1px solid
-    #191a2f;
+  background: #ffffff;
+  color: var(--reg-ink);
 
-  border-radius: 999px;
+  border: 1.5px solid var(--reg-ink);
+  border-radius: 12px;
 
-  color: #191a2f;
-
+  font-size: 1.05rem;
+  font-weight: 800;
   text-decoration: none;
 
-  font-size: 0.85rem;
-  font-weight: 700;
+  box-shadow: none;
+
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.registration-page .course-detail-button:hover {
+  background: #edf3e9;
+  color: var(--reg-ink);
+
+  border-color: var(--reg-green);
+  transform: translateY(-2px);
+}
+
+.course-detail-button span:last-child {
+  font-size: 1.25rem;
+  flex-shrink: 0;
 }
 
 
-/* =========================
-   Forms
-========================= */
+/* =====================================
+   ADDITIONAL RESOURCE LINKS
+===================================== */
 
-.registration-forms {
+.registration-resources {
+  margin-top: 24px;
+  padding-top: 18px;
+
+  border-top: 1px solid var(--reg-outline);
+}
+
+.registration-resources h3 {
+  margin: 0 0 12px;
+
+  color: var(--reg-ink);
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+.registration-resource-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.registration-resource-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding: 10px 14px;
+
+  background: #ffffff;
+  color: var(--reg-green);
+
+  border: 1px solid #a7b9ab;
+  border-radius: 10px;
+
+  font-size: 0.86rem;
+  font-weight: 750;
+  text-decoration: none;
+
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.registration-resource-links a:hover {
+  background: #eaf2e6;
+  border-color: var(--reg-green);
+}
+
+
+/* =====================================
+   REGISTRATION STEPS
+===================================== */
+
+.registration-steps {
   display: grid;
 
   grid-template-columns:
-    repeat(2, minmax(0, 1fr));
+    repeat(
+      auto-fit,
+      minmax(min(100%, 390px), 1fr)
+    );
 
-  gap: 28px;
-
-  margin-top: 45px;
+  align-items: stretch;
+  gap: 18px;
+  margin-top: 26px;
 }
 
+.registration-step-card {
+  display: flex;
+  flex-direction: column;
 
-.registration-form-card {
+  min-width: 0;
   overflow: hidden;
 
-  border:
-    1px solid
-    #191a2f;
-
-  border-radius: 24px;
-
-  background-color: #fffdf8;
+  background: #fffdf8;
+  border: 1px solid var(--reg-ink);
+  border-radius: 17px;
 }
 
+/* 步驟卡標題 */
 
 .form-card-heading {
-  padding:
-    25px 28px;
+  padding: 17px 20px;
 
-  border-bottom:
-    1px solid
-    #191a2f;
+  border-bottom: 1px solid var(--reg-outline);
 }
-
 
 .form-card-heading p {
-  margin:
-    0 0
-    7px;
+  margin: 0 0 5px;
 
-  font-size: 0.65rem;
-  font-weight: 700;
-
-  letter-spacing: 0.12em;
-
-  color: #666675;
+  color: var(--reg-green);
+  font-size: 0.69rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
 }
-
 
 .form-card-heading h3 {
   margin: 0;
 
-  font-size: 1.5rem;
+  font-size: 1.12rem;
+  font-weight: 750;
+  line-height: 1.45;
 }
 
 
-.registration-form-card iframe {
+/* =====================================
+   BeClass / WAC SWITCH
+===================================== */
+
+.registration-method-switch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+  margin: 16px 20px;
+  padding: 5px;
+
+  background: #eef1f8;
+  border-radius: 12px;
+}
+
+.registration-method-tab {
+  min-width: 0;
+  min-height: 44px;
+
+  padding: 10px 12px;
+
+  background: transparent;
+  color: #555564;
+
+  border: 1px solid transparent;
+  border-radius: 9px;
+
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
+}
+
+.registration-method-tab.is-active {
+  background: #ffffff;
+  color: var(--reg-ink);
+
+  border-color: #cbd3df;
+  box-shadow: 0 2px 6px rgba(25, 26, 47, 0.06);
+}
+
+.registration-method-tab:hover {
+  color: var(--reg-ink);
+}
+
+
+/* =====================================
+   METHOD PANELS
+===================================== */
+
+.registration-method-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.registration-method-panel[hidden] {
+  display: none !important;
+}
+
+.registration-method-panel h4 {
+  margin: 0;
+
+  color: var(--reg-ink);
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+
+.registration-method-panel[data-reg-method-view="wac"]
+.registration-step-content {
+  padding: 24px;
+  gap: 14px;
+}
+
+
+/* =====================================
+   STEP CONTENT
+===================================== */
+
+.registration-step-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 14px;
+  padding: 20px;
+}
+
+.registration-step-content p {
+  margin: 0;
+
+  font-size: 0.87rem;
+  line-height: 1.75;
+}
+
+.registration-step-hint {
+  color: #75451f;
+}
+
+
+/* =====================================
+   IFRAME
+===================================== */
+
+.registration-step-card iframe {
   display: block;
 
   width: 100%;
-  height: 720px;
+  height: 450px;
 
   border: 0;
-
-  background-color: white;
+  background: #ffffff;
 }
 
 
-.form-external-link {
-  display: block;
+/* =====================================
+   REGISTRATION ACTION BUTTONS
+   白色背景
+===================================== */
 
-  padding:
-    16px 22px;
-
-  border-top:
-    1px solid
-    rgba(25,26,47,0.3);
-
-  color: #191a2f;
-
-  font-size: 0.75rem;
-
-  text-decoration: none;
-}
-
-
-.form-external-link:hover {
-  text-decoration: underline;
-}
-
-
-/* =========================
-   External
-========================= */
-
-.external-registration {
-  max-width: 900px;
-
-  margin:
-    45px auto
-    0;
-
-  padding:
-    55px;
-
-  border:
-    1px solid
-    #191a2f;
-
-  border-radius: 24px;
-
-  background-color: #dfe8ff;
-
-  text-align: center;
-}
-
-
-.external-registration-eyebrow {
-  margin:
-    0 0
-    15px;
-
-  font-size: 0.68rem;
-  font-weight: 700;
-
-  letter-spacing: 0.13em;
-}
-
-
-.external-registration h3 {
-  margin:
-    0 0
-    18px;
-
-  font-size:
-    clamp(
-      1.8rem,
-      3vw,
-      3rem
-    );
-}
-
-
-.external-registration > p:not(.external-registration-eyebrow) {
-  max-width: 600px;
-
-  margin:
-    0 auto;
-
-  line-height: 1.8;
-}
-
-
-.external-registration a {
+.registration-page .registration-action-button {
   display: inline-flex;
-
   align-items: center;
+  justify-content: space-between;
 
-  gap: 12px;
+  gap: 13px;
 
-  margin-top: 30px;
+  min-height: 45px;
+  padding: 10px 16px;
 
-  padding:
-    14px 22px;
+  background: #ffffff;
+  color: var(--reg-ink);
 
-  border-radius: 999px;
-
-  background-color: #191a2f;
-
-  color: #fff;
-
-  text-decoration: none;
-
-  font-weight: 700;
-}
-
-/* =========================
-   Closed Registration
-========================= */
-
-.closed-registration {
-  max-width: 900px;
-
-  margin:
-    45px auto
-    0;
-
-  padding:
-    60px;
-
-  border:
-    1px solid
-    #191a2f;
-
-  border-radius: 24px;
-
-  background-color: #eeeeee;
-
-  text-align: center;
-}
-
-
-.closed-registration-eyebrow {
-  margin:
-    0 0
-    16px;
-
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-
-  color: #777784;
-}
-
-
-.closed-registration h3 {
-  margin:
-    0 0
-    20px;
-
-  font-size:
-    clamp(
-      2rem,
-      4vw,
-      3.5rem
-    );
-
-  font-weight: 520;
-
-  line-height: 1.15;
-
-  letter-spacing: -0.04em;
-}
-
-
-.closed-registration > p:not(.closed-registration-eyebrow) {
-  max-width: 630px;
-
-  margin:
-    0 auto;
-
-  font-size: 0.95rem;
-  line-height: 1.8;
-
-  color: #5f5f69;
-}
-
-
-/* =========================
-   Buttons
-========================= */
-
-.closed-registration-actions {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  justify-content: center;
-
-  gap: 12px;
-
-  margin-top: 32px;
-}
-
-
-.closed-registration-actions a {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  padding:
-    14px 21px;
-
-  border:
-    1px solid
-    #191a2f;
-
-  border-radius: 999px;
+  border: 1px solid var(--reg-ink);
+  border-radius: 10px;
 
   font-size: 0.85rem;
-  font-weight: 700;
-
+  font-weight: 750;
   text-decoration: none;
 
   transition:
-    transform 0.2s ease,
-    background-color 0.2s ease,
-    color 0.2s ease;
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.registration-page .registration-action-button:hover {
+  background: #edf3e9;
+  color: var(--reg-ink);
+  border-color: var(--reg-green);
+}
+
+.registration-page .registration-action-button--outline {
+  background: #ffffff;
+  color: var(--reg-ink);
 }
 
 
-.closed-registration-actions a:hover {
-  transform:
-    translateY(-3px);
+/* =====================================
+   CLOSED REGISTRATION
+===================================== */
+
+.closed-registration {
+  max-width: 850px;
+  margin: 26px auto 0;
+
+  padding: 32px;
+
+  background: #eeeeee;
+  border: 1px solid var(--reg-ink);
+  border-radius: 17px;
+
+  text-align: center;
 }
 
+.closed-registration-eyebrow {
+  margin: 0 0 10px;
+
+  color: #777784;
+  font-size: 0.69rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.closed-registration h3 {
+  margin: 0 0 12px;
+
+  font-size: clamp(1.35rem, 2.3vw, 1.8rem);
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.closed-registration > p:not(
+  .closed-registration-eyebrow
+) {
+  margin: 0 auto;
+  max-width: 550px;
+
+  color: #555564;
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
+
+.closed-registration-actions {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 22px;
+}
+
+.closed-registration-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 11px 18px;
+
+  border: 1px solid var(--reg-ink);
+  border-radius: 10px;
+
+  font-size: 0.86rem;
+  font-weight: 750;
+  text-decoration: none;
+}
 
 .closed-primary-button {
-  background-color: #191a2f;
+  background: var(--reg-ink);
+  color: #ffffff;
+}
 
+.closed-primary-button:hover {
+  background: #5b3fa3;
   color: #ffffff;
 }
 
 
-.closed-primary-button:hover {
-  background-color: #5b3fa3;
+/* =====================================
+   EMPTY STATE
+===================================== */
 
-  border-color: #5b3fa3;
+.registration-empty {
+  grid-column: 1 / -1;
+
+  padding: 26px;
+
+  border: 1px solid var(--reg-outline);
+  border-radius: 15px;
+
+  background: #fffdf8;
+}
+
+.registration-empty h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.registration-empty p {
+  margin: 0;
+  font-size: 0.88rem;
 }
 
 
-.closed-secondary-button {
-  background-color: transparent;
+/* =====================================
+   FOCUS
+===================================== */
 
-  color: #191a2f;
+.registration-page a:focus-visible,
+.registration-page button:focus-visible,
+.registration-selector select:focus-visible {
+  outline: 3px solid var(--reg-green);
+  outline-offset: 3px;
 }
 
 
-.closed-secondary-button:hover {
-  background-color: #ffffff;
-}
-
-
-/* =========================
-   Mobile
-========================= */
-
-@media (max-width: 620px) {
-
-  .closed-registration {
-    padding:
-      42px
-      24px;
-
-    border-radius: 18px;
-  }
-
-
-  .closed-registration-actions {
-    display: grid;
-  }
-
-
-  .closed-registration-actions a {
-    justify-content: space-between;
-
-    width: 100%;
-  }
-
-}
-
-
-/* =========================
-   Tablet
-========================= */
+/* =====================================
+   TABLET
+===================================== */
 
 @media (max-width: 950px) {
 
   .registration-meta {
-    grid-template-columns:
-      repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .registration-course-info {
+    padding: 25px;
+  }
 
-  .registration-forms {
-    grid-template-columns: 1fr;
+  .registration-description {
+    grid-template-columns: 125px minmax(0, 1fr);
   }
 
 }
 
 
-/* =========================
-   Mobile
-========================= */
+/* =====================================
+   MOBILE - COMPACT
+===================================== */
 
 @media (max-width: 620px) {
 
   .registration-page {
-    padding:
-      75px 24px
-      90px;
+    padding: 38px 16px 65px;
   }
 
+  /* Heading */
 
   .registration-heading {
-    margin-bottom: 50px;
-
-    text-align: left;
+    margin-bottom: 27px;
+    text-align: center;
   }
 
+  .registration-heading h1 {
+    font-size: clamp(2rem, 8vw, 2.7rem);
+  }
+
+  .registration-heading > p:last-child {
+    margin-top: 12px;
+
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  /* Selector */
+
+  .registration-selector {
+    margin-bottom: 20px;
+  }
+
+  .registration-selector select {
+    min-height: 44px;
+    font-size: 0.82rem;
+  }
+
+  /* Course Panel */
 
   .registration-course-info {
-    padding:
-      28px 24px;
-
-    border-radius: 18px;
+    padding: 18px 16px;
+    border-radius: 14px;
   }
-
 
   .registration-course-title {
     grid-template-columns: 1fr;
-  }
-
-
-  .registration-meta {
-    grid-template-columns: 1fr;
-
-    gap: 18px;
-  }
-
-
-  .registration-description {
-    grid-template-columns: 1fr;
-
     gap: 10px;
   }
 
+  .registration-status {
+    width: fit-content;
+    padding: 4px 9px;
+
+    font-size: 0.63rem;
+  }
+
+  .registration-course-title h2 {
+    font-size: 1.22rem;
+    line-height: 1.35;
+  }
+
+  .registration-tags {
+    gap: 5px;
+    margin: 13px 0 18px;
+  }
+
+  .registration-tags span {
+    font-size: 0.63rem;
+    padding: 3px 7px;
+  }
+
+  /* Meta：手機兩欄 */
+
+  .registration-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 14px 0;
+  }
+
+  .registration-meta div {
+    gap: 3px;
+  }
+
+  .registration-meta span {
+    font-size: 0.63rem;
+  }
+
+  .registration-meta strong {
+    font-size: 0.79rem;
+  }
+
+  /* Delivery */
+
+  .registration-delivery {
+    margin-top: 12px;
+  }
+
+  /* Description */
+
+  .registration-description {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    margin-top: 18px;
+  }
+
+  .registration-description > p:last-child {
+    font-size: 0.83rem;
+    line-height: 1.7;
+  }
+
+  /* Notice */
 
   .registration-notice {
-    padding:
-      22px 20px;
+    margin-top: 18px;
+    padding: 14px 15px;
   }
 
-
-  .registration-form-card {
-    border-radius: 18px;
+  .registration-notice li {
+    font-size: 0.8rem;
   }
 
+  /* Detail CTA */
 
-  .registration-form-card iframe {
-    height: 650px;
+  .registration-detail-actions {
+    margin-top: 19px;
   }
 
+  .registration-page .course-detail-button {
+    width: 100%;
+    min-height: 52px;
 
-  .external-registration {
-    padding:
-      40px 24px;
+    padding: 11px 15px;
+
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+
+  /* Resource Links */
+
+  .registration-resources {
+    margin-top: 19px;
+  }
+
+  .registration-resource-links {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .registration-resource-links a {
+    min-width: 0;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+  }
+
+  /* Steps */
+
+  .registration-steps {
+    grid-template-columns: 1fr;
+    gap: 13px;
+    margin-top: 18px;
+  }
+
+  .registration-step-card {
+    border-radius: 14px;
+  }
+
+  .form-card-heading {
+    padding: 13px 16px;
+  }
+
+  .form-card-heading h3 {
+    font-size: 1rem;
+  }
+
+  /* BeClass / WAC Switch */
+
+  .registration-method-switch {
+    gap: 5px;
+    margin: 12px;
+    padding: 4px;
+  }
+
+  .registration-method-tab {
+    min-height: 40px;
+    padding: 8px 6px;
+
+    font-size: 0.77rem;
+    line-height: 1.4;
+  }
+
+  /* Step Content */
+
+  .registration-step-content {
+    gap: 12px;
+    padding: 15px 16px;
+  }
+
+  .registration-step-content p {
+    font-size: 0.83rem;
+  }
+
+  .registration-method-panel[data-reg-method-view="wac"]
+  .registration-step-content {
+    padding: 16px;
+  }
+
+  /* Forms */
+
+  .registration-step-card iframe {
+    height: 420px;
+  }
+
+  /* Buttons */
+
+  .registration-page .registration-action-button {
+    width: 100%;
+    min-height: 43px;
+
+    padding: 9px 13px;
+    font-size: 0.82rem;
+  }
+
+  /* Closed */
+
+  .closed-registration {
+    margin-top: 18px;
+    padding: 23px 17px;
+    border-radius: 14px;
+  }
+
+  .closed-registration h3 {
+    font-size: 1.3rem;
+  }
+
+  .closed-registration-actions a {
+    font-size: 0.82rem;
   }
 
 }

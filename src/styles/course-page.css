@@ -1,0 +1,1501 @@
+
+/* =====================================
+   COURSE PROGRAM PAGE
+   src/styles/course-page.css
+===================================== */
+
+.course-page {
+  --course-ink: #191a2f;
+  --course-green: #315c42;
+  --course-green-dark: #254731;
+  --course-orange: #b85c22;
+  --course-cream: #f7f8f3;
+  --course-outline: #e1e7df;
+  --course-muted: #526158;
+
+  color: var(--course-ink);
+  background: #ffffff;
+  font-family: inherit;
+  line-height: 1.8;
+  overflow: clip;
+}
+
+.course-page *,
+.course-page *::before,
+.course-page *::after {
+  box-sizing: border-box;
+}
+
+.course-page h1,
+.course-page h2,
+.course-page h3,
+.course-page h4,
+.course-page p {
+  margin: 0;
+}
+
+.course-shell {
+  width: min(100% - 3rem, 1120px);
+  margin-inline: auto;
+}
+
+.course-eyebrow {
+  color: var(--course-green);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+}
+
+
+/* =====================================
+   HERO
+===================================== */
+
+.course-hero {
+  background:
+    radial-gradient(
+      ellipse at 90% 15%,
+      rgba(125, 167, 138, 0.2),
+      transparent 42%
+    ),
+    linear-gradient(
+      115deg,
+      #ffffff 20%,
+      #f5f8f3 100%
+    );
+
+  border-bottom: 1px solid var(--course-outline);
+}
+
+.course-hero__inner {
+  padding-block: 4.5rem;
+}
+
+.course-hero h1 {
+  margin-top: 0.55rem;
+
+  color: var(--course-green-dark);
+  font-size: clamp(2.7rem, 5.3vw, 4.4rem);
+  font-weight: 850;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+}
+
+.course-hero__lead {
+  margin-top: 1.15rem !important;
+  max-width: 800px;
+
+  color: var(--course-green-dark);
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  font-weight: 750;
+  line-height: 1.65;
+}
+
+.course-hero__description {
+  margin-top: 0.85rem !important;
+  max-width: 760px;
+
+  color: #3b4d44;
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.course-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+
+
+/* =====================================
+   SECTION STRUCTURE
+===================================== */
+
+.course-section {
+  padding: 5rem 0;
+  scroll-margin-top: 115px;
+}
+
+.course-section--tinted {
+  background: var(--course-cream);
+}
+
+.course-section__heading {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 1.35rem;
+  margin-bottom: 2.3rem;
+}
+
+.course-section__number {
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 58px;
+  width: 58px;
+  height: 58px;
+
+  color: #ffffff;
+  background: var(--course-green);
+  border-radius: 11px;
+
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.course-section__heading h2 {
+  margin-top: 0.25rem;
+
+  color: var(--course-green-dark);
+  font-size: clamp(1.65rem, 3.1vw, 2.35rem);
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.course-section__subtitle {
+  margin-top: 0.25rem !important;
+
+  color: var(--course-muted);
+  font-size: 1rem;
+}
+
+.course-section__footer {
+  margin-top: 1.8rem;
+}
+
+.course-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  color: var(--course-green-dark);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.course-text-link:hover {
+  color: var(--course-orange);
+}
+
+
+/* =====================================
+   01 四大課群
+===================================== */
+
+.course-area-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.3rem;
+}
+
+.course-area-card {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  padding: 1.8rem 2rem;
+
+  background: #ffffff;
+  border: 1px solid var(--course-outline);
+  border-radius: 20px;
+
+  box-shadow: 0 8px 24px rgba(31, 61, 42, 0.035);
+}
+
+.course-area-card__top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.course-area-card__code {
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+  width: 55px;
+  height: 55px;
+
+  background: #eaf2e6;
+  color: var(--course-green);
+  border-radius: 14px;
+
+  font-size: 1.65rem;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.course-area-card__english {
+  color: #708477;
+  font-size: 0.71rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.course-area-card h3 {
+  margin-bottom: 0.75rem;
+
+  color: var(--course-green-dark);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.course-area-card__description {
+  color: #3b4d44;
+  font-size: 0.96rem;
+  line-height: 1.9;
+}
+
+.course-area-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  margin-top: auto;
+  padding-top: 1.45rem;
+}
+
+.course-area-card__tags span {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 0.3rem 0.65rem;
+
+  color: var(--course-green-dark);
+  background: #edf3e9;
+  border-radius: 8px;
+
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+
+/* =====================================
+   02 課程地圖
+===================================== */
+
+.course-map {
+  padding: 2.5rem;
+
+  background: #ffffff;
+  border: 1px solid var(--course-outline);
+  border-radius: 22px;
+}
+
+.course-map__intro {
+  max-width: 760px;
+}
+
+.course-map__intro h3 {
+  margin-bottom: 0.55rem;
+
+  color: var(--course-green-dark);
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+
+.course-map__intro p {
+  color: #3b4d44;
+  font-size: 0.97rem;
+  line-height: 1.9;
+}
+
+.course-pathway {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.course-pathway__step {
+  position: relative;
+  min-width: 0;
+
+  padding: 1.45rem;
+
+  background: #f4f8f1;
+  border: 1px solid #dfe9dc;
+  border-radius: 15px;
+}
+
+.course-pathway__number {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+
+  color: var(--course-green);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+}
+
+.course-pathway__step h4 {
+  margin-bottom: 0.65rem;
+
+  color: var(--course-green-dark);
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.course-pathway__step p {
+  color: #3b4d44;
+  font-size: 0.91rem;
+  line-height: 1.8;
+}
+
+.course-map__notice {
+  margin-top: 1.6rem !important;
+
+  color: var(--course-muted);
+  font-size: 0.84rem;
+  line-height: 1.8;
+}
+
+
+/* =====================================
+   03 我適合從哪裡開始？
+===================================== */
+
+.course-guide-section {
+  background: #fffaf4;
+}
+
+/* 三張卡片同一排 */
+
+.course-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.course-guide-card {
+  --guide-accent: #315c42;
+  --guide-soft: #eaf2e6;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-width: 0;
+  padding: 2rem 1.65rem 1.7rem;
+
+  background: #ffffff;
+  border: 1px solid var(--course-outline);
+  border-radius: 20px;
+
+  box-shadow: 0 8px 24px rgba(31, 61, 42, 0.05);
+  text-align: center;
+}
+
+/* 三種卡片配色 */
+
+.course-guide-card--green {
+  --guide-accent: #315c42;
+  --guide-soft: #eaf2e6;
+}
+
+.course-guide-card--blue {
+  --guide-accent: #28728b;
+  --guide-soft: #e7f3f6;
+}
+
+.course-guide-card--purple {
+  --guide-accent: #76548d;
+  --guide-soft: #f1eaf5;
+}
+
+/* Icon */
+
+.course-guide-card__icon {
+  display: grid;
+  place-items: center;
+
+  width: 74px;
+  height: 74px;
+
+  margin-bottom: 1.2rem;
+
+  background: var(--guide-soft);
+  color: var(--guide-accent);
+  border-radius: 50%;
+}
+
+.course-guide-card__icon svg {
+  display: block;
+  width: 38px;
+  height: 38px;
+}
+
+/* 編號 */
+
+.course-guide-card__number {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.3rem;
+
+  color: var(--guide-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+/* 標題 */
+
+.course-guide-card h3 {
+  margin-bottom: 0.65rem;
+
+  color: var(--guide-accent);
+  font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+/* 學習程度標籤 */
+
+.course-guide-card__level {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.28rem 0.9rem;
+
+  background: var(--guide-soft);
+  color: var(--guide-accent);
+  border-radius: 999px;
+
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+/* 說明文字 */
+
+.course-guide-card__description {
+  margin-top: 1.1rem !important;
+
+  color: #3b4d44;
+  font-size: 0.94rem;
+  line-height: 1.85;
+}
+
+/* 學習收穫清單 */
+
+.course-guide-card__benefits {
+  display: grid;
+  gap: 0.45rem;
+
+  width: 100%;
+  margin: auto 0 0;
+  padding: 1.35rem 0 0;
+
+  list-style: none;
+  text-align: left;
+}
+
+.course-guide-card__benefits li {
+  position: relative;
+  padding-left: 1.5rem;
+
+  color: #3b4d44;
+  font-size: 0.89rem;
+  line-height: 1.6;
+}
+
+.course-guide-card__benefits li::before {
+  content: "✓";
+
+  position: absolute;
+  left: 0;
+
+  display: grid;
+  place-items: center;
+
+  width: 17px;
+  height: 17px;
+
+  background: var(--guide-accent);
+  color: #ffffff;
+  border-radius: 50%;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+/* 底部引導卡 */
+
+.course-guide-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 1.3rem 1.6rem;
+
+  background: #ffffff;
+  border: 1px solid #efdfcd;
+  border-radius: 16px;
+}
+
+.course-guide-note__content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+
+.course-guide-note__star {
+  color: var(--course-orange);
+  font-size: 1.7rem;
+  line-height: 1.2;
+}
+
+.course-guide-note__content p {
+  color: var(--course-green-dark);
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.course-guide-note__content small {
+  display: block;
+  margin-top: 0.3rem;
+
+  color: var(--course-muted);
+  font-size: 0.83rem;
+  font-weight: 400;
+}
+
+.course-guide-note .course-button {
+  flex-shrink: 0;
+}
+
+
+/* =====================================
+   04 CAPSTONE 統整性實作
+===================================== */
+
+.course-capstone__intro {
+  max-width: 900px;
+}
+
+.course-capstone__intro p {
+  color: #33463c;
+  font-size: 1rem;
+  line-height: 2;
+}
+
+.course-capstone__intro p + p {
+  margin-top: 0.85rem;
+}
+
+/* 三大場域 */
+
+.course-capstone__fields {
+  margin-top: 2.2rem;
+}
+
+.course-capstone__fields h3 {
+  margin-bottom: 1rem;
+
+  color: var(--course-green-dark);
+  font-size: 1.3rem;
+}
+
+.course-field-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.course-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+
+  padding: 0.7rem 1.2rem;
+
+  background: #fff5eb;
+  border: 1px solid #f1d5bc;
+  border-radius: 12px;
+
+  color: #87461c;
+  font-size: 0.96rem;
+  font-weight: 750;
+}
+
+.course-field__dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+
+  background: var(--course-orange);
+  border-radius: 50%;
+}
+
+/* 八步驟流程 */
+
+.course-capstone__flow {
+  margin-top: 3rem;
+}
+
+.course-subheading {
+  margin-bottom: 1.4rem;
+}
+
+.course-subheading h3 {
+  margin-top: 0.3rem;
+
+  color: var(--course-green-dark);
+  font-size: 1.5rem;
+}
+
+.course-process-description {
+  max-width: 850px;
+  margin-top: 0.65rem !important;
+
+  color: var(--course-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* 四欄兩排 */
+
+.course-process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.15rem;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.course-process-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  min-width: 0;
+  min-height: 215px;
+
+  padding: 1.5rem 1rem 1.3rem;
+
+  background: #ffffff;
+  border: 1px solid #d9e4d7;
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-shadow: 0 5px 16px rgba(31, 61, 42, 0.035);
+}
+
+/* 編號 */
+
+.course-process-card__number {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.75rem;
+
+  display: grid;
+  place-items: center;
+
+  width: 32px;
+  height: 32px;
+
+  background: var(--course-green);
+  color: #ffffff;
+  border-radius: 50%;
+
+  font-size: 0.79rem;
+  font-weight: 850;
+}
+
+/* Icon */
+
+.course-process-card__icon {
+  display: grid;
+  place-items: center;
+
+  width: 64px;
+  height: 64px;
+
+  margin-top: 1.4rem;
+  margin-bottom: 0.9rem;
+
+  background: #edf4ea;
+  color: var(--course-green);
+  border-radius: 50%;
+}
+
+.course-process-card__icon svg {
+  display: block;
+  width: 35px;
+  height: 35px;
+}
+
+/* 步驟標題 */
+
+.course-process-card__title {
+  display: block;
+  margin-bottom: 0.4rem;
+
+  color: var(--course-green-dark);
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+/* 步驟描述 */
+
+.course-process-card__description {
+  color: #4c5d53;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+
+/* =====================================
+   05 探索近期課程
+===================================== */
+
+.course-discovery-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+  padding: 2.3rem 2.5rem;
+
+  background: #ffffff;
+  border: 1px solid var(--course-outline);
+  border-radius: 20px;
+}
+
+.course-discovery-card__content {
+  max-width: 680px;
+  min-width: 0;
+}
+
+.course-discovery-card h3 {
+  margin-bottom: 0.65rem;
+
+  color: var(--course-green-dark);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.course-discovery-card p {
+  color: #3b4d44;
+  font-size: 0.97rem;
+  line-height: 1.85;
+}
+
+
+/* =====================================
+   06 如何參與課程
+===================================== */
+
+/* 四張卡片同一排 */
+
+.course-registration-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.course-registration-step {
+  min-width: 0;
+  padding: 1.5rem;
+
+  background: #f7f8f3;
+  border: 1px solid var(--course-outline);
+  border-radius: 16px;
+}
+
+.course-registration-step__number {
+  display: block;
+  margin-bottom: 0.9rem;
+
+  color: var(--course-green);
+  font-size: 0.79rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+}
+
+.course-registration-step h3 {
+  color: var(--course-green-dark);
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.course-join__notice {
+  margin-top: 1.5rem !important;
+
+  color: var(--course-muted);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.course-join__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+
+  margin-top: 1.8rem;
+}
+
+
+/* =====================================
+   BUTTONS
+===================================== */
+
+.course-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.7rem;
+  min-height: 46px;
+
+  padding: 0.7rem 1.2rem;
+
+  border: 1px solid var(--course-ink);
+  border-radius: 12px;
+
+  font-size: 0.92rem;
+  font-weight: 750;
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.course-button:hover {
+  transform: translateY(-2px);
+}
+
+.course-button--primary {
+  color: #ffffff !important;
+  background: var(--course-ink);
+}
+
+.course-button--primary:hover {
+  background: #5b3fa3;
+  border-color: #5b3fa3;
+}
+
+.course-button--outline {
+  color: var(--course-ink) !important;
+  background: transparent;
+}
+
+.course-button--outline:hover {
+  background: #edf3e9;
+}
+
+.course-page a:focus-visible {
+  outline: 3px solid var(--course-green);
+  outline-offset: 3px;
+}
+
+
+/* =====================================
+   DESKTOP FLOW ARROWS
+===================================== */
+
+@media (min-width: 901px) {
+
+  .course-process-card:not(:nth-child(4n))::after {
+    content: "→";
+
+    position: absolute;
+    top: 50%;
+    right: -1.04rem;
+
+    z-index: 2;
+
+    color: var(--course-green);
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1;
+
+    transform: translateY(-50%);
+  }
+
+}
+
+
+/* =====================================
+   HEADER SCROLL OFFSET
+===================================== */
+
+@media (max-width: 1250px) {
+
+  .course-section {
+    scroll-margin-top: 165px;
+  }
+
+}
+
+
+/* =====================================
+   TABLET
+   621px - 900px
+===================================== */
+
+@media (min-width: 621px) and (max-width: 900px) {
+
+  /* 四大課群 */
+  .course-area-grid {
+    gap: 1rem;
+  }
+
+  .course-area-card {
+    padding: 1.5rem;
+  }
+
+  /* 課程地圖：維持三欄 */
+  .course-map {
+    padding: 1.8rem;
+  }
+
+  .course-pathway {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+
+  .course-pathway__step {
+    padding: 1rem;
+  }
+
+  /* 03 學習推薦：維持三欄 */
+  .course-guide-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .course-guide-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .course-guide-card__icon {
+    width: 58px;
+    height: 58px;
+  }
+
+  .course-guide-card__icon svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  /* Capstone：兩欄 */
+  .course-process-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* 05 近期課程 */
+  .course-discovery-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* 06 報名流程：維持四欄 */
+  .course-registration-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .course-registration-step {
+    padding: 1rem;
+  }
+
+  .course-registration-step h3 {
+    font-size: 0.98rem;
+  }
+
+}
+
+
+/* =====================================
+   MOBILE
+   620px 以下
+===================================== */
+
+@media (max-width: 620px) {
+
+  /* ---------------------------------
+     基本版面
+  --------------------------------- */
+
+  .course-shell {
+    width: min(100% - 2rem, 1120px);
+  }
+
+  .course-hero__inner {
+    padding-block: 3rem;
+  }
+
+  .course-section {
+    padding: 3.4rem 0;
+    scroll-margin-top: 155px;
+  }
+
+  .course-section__heading {
+    gap: 0.85rem;
+    margin-bottom: 1.7rem;
+  }
+
+  .course-section__number {
+    flex: 0 0 45px;
+    width: 45px;
+    height: 45px;
+
+    font-size: 1.1rem;
+  }
+
+  .course-section__subtitle {
+    font-size: 0.9rem;
+  }
+
+
+  /* ---------------------------------
+     01 四大課群
+     兩欄兩排
+  --------------------------------- */
+
+  .course-area-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+  }
+
+  .course-area-card {
+    padding: 1rem 0.85rem;
+    border-radius: 14px;
+  }
+
+  .course-area-card__top {
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .course-area-card__code {
+    width: 38px;
+    height: 38px;
+
+    font-size: 1.15rem;
+    border-radius: 10px;
+  }
+
+  .course-area-card__english {
+    font-size: 0.59rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+
+  .course-area-card h3 {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .course-area-card__description {
+    font-size: 0.79rem;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+  }
+
+  .course-area-card__tags {
+    gap: 0.35rem;
+    padding-top: 1rem;
+  }
+
+  .course-area-card__tags span {
+    padding: 0.2rem 0.45rem;
+    font-size: 0.7rem;
+  }
+
+
+  /* ---------------------------------
+     02 課程地圖
+     三欄同排
+  --------------------------------- */
+
+  .course-map {
+    padding: 1.1rem;
+    border-radius: 16px;
+  }
+
+  .course-map__intro h3 {
+    font-size: 1.2rem;
+  }
+
+  .course-map__intro p {
+    font-size: 0.88rem;
+  }
+
+  .course-pathway {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin-top: 1.3rem;
+  }
+
+  .course-pathway__step {
+    padding: 0.75rem 0.55rem;
+    border-radius: 10px;
+  }
+
+  .course-pathway__number {
+    font-size: 0.65rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .course-pathway__step h4 {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
+  .course-pathway__step p {
+    font-size: 0.72rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+
+
+  /* ---------------------------------
+     03 我適合從哪裡開始？
+     1 | 2 | 3
+  --------------------------------- */
+
+  .course-guide-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .course-guide-card {
+    min-width: 0;
+    padding: 0.85rem 0.45rem 0.95rem;
+
+    border-radius: 12px;
+  }
+
+  /* Icon 縮小 */
+
+  .course-guide-card__icon {
+    width: 40px;
+    height: 40px;
+
+    margin-bottom: 0.75rem;
+  }
+
+  .course-guide-card__icon svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  /* 編號 */
+
+  .course-guide-card__number {
+    top: 0.35rem;
+    right: 0.4rem;
+
+    font-size: 0.61rem;
+  }
+
+  /* 標題 */
+
+  .course-guide-card h3 {
+    margin-bottom: 0.45rem;
+
+    font-size: 0.83rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  /* 程度標籤 */
+
+  .course-guide-card__level {
+    max-width: 100%;
+
+    padding: 0.2rem 0.35rem;
+    border-radius: 8px;
+
+    font-size: 0.68rem;
+    line-height: 1.4;
+    white-space: normal;
+  }
+
+  /* 說明文字 */
+
+  .course-guide-card__description {
+    margin-top: 0.75rem !important;
+
+    font-size: 0.73rem;
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+  }
+
+  /* 收穫清單 */
+
+  .course-guide-card__benefits {
+    gap: 0.45rem;
+    padding-top: 0.85rem;
+  }
+
+  .course-guide-card__benefits li {
+    padding-left: 0.95rem;
+
+    font-size: 0.7rem;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+  }
+
+  .course-guide-card__benefits li::before {
+    width: 12px;
+    height: 12px;
+
+    top: 0.13rem;
+    font-size: 0.5rem;
+  }
+
+  /* 推薦區底部 CTA */
+
+  .course-guide-note {
+    flex-direction: column;
+    align-items: stretch;
+
+    padding: 1.15rem;
+    gap: 1rem;
+    margin-top: 1.3rem;
+  }
+
+  .course-guide-note__content {
+    gap: 0.6rem;
+  }
+
+  .course-guide-note__content p {
+    font-size: 0.86rem;
+  }
+
+  .course-guide-note__content small {
+    font-size: 0.77rem;
+  }
+
+  .course-guide-note .course-button {
+    width: 100%;
+  }
+
+
+  /* ---------------------------------
+     04 CAPSTONE
+     八步驟：兩欄四排
+  --------------------------------- */
+
+  .course-process-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .course-process-card {
+    min-height: 190px;
+    padding: 1.2rem 0.65rem 1rem;
+
+    border-radius: 13px;
+  }
+
+  .course-process-card__number {
+    width: 27px;
+    height: 27px;
+
+    top: 0.55rem;
+    left: 0.55rem;
+
+    font-size: 0.71rem;
+  }
+
+  .course-process-card__icon {
+    width: 48px;
+    height: 48px;
+
+    margin-top: 1.2rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .course-process-card__icon svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .course-process-card__title {
+    font-size: 0.96rem;
+  }
+
+  .course-process-card__description {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  .course-field {
+    padding: 0.6rem 0.85rem;
+    font-size: 0.87rem;
+  }
+
+
+  /* ---------------------------------
+     05 探索近期課程
+     單張導流卡
+  --------------------------------- */
+
+  .course-discovery-card {
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 1.5rem;
+    border-radius: 16px;
+    gap: 1.5rem;
+  }
+
+  .course-discovery-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .course-discovery-card p {
+    font-size: 0.88rem;
+  }
+
+
+  /* ---------------------------------
+     06 如何參與課程
+     1 | 2 | 3 | 4
+  --------------------------------- */
+
+  .course-registration-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+
+  .course-registration-step {
+    min-width: 0;
+    min-height: 115px;
+
+    padding: 0.75rem 0.45rem;
+
+    border-radius: 11px;
+  }
+
+  .course-registration-step__number {
+    margin-bottom: 0.65rem;
+
+    font-size: 0.65rem;
+    line-height: 1.4;
+    letter-spacing: 0;
+  }
+
+  .course-registration-step h3 {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    font-weight: 800;
+
+    overflow-wrap: anywhere;
+  }
+
+  .course-join__notice {
+    font-size: 0.83rem;
+  }
+
+
+  /* ---------------------------------
+     按鈕
+  --------------------------------- */
+
+  .course-hero__actions,
+  .course-join__actions {
+    gap: 0.65rem;
+  }
+
+  .course-button {
+    padding: 0.65rem 0.85rem;
+
+    font-size: 0.84rem;
+    border-radius: 11px;
+  }
+
+}
+
+
+/* =====================================
+   EXTRA SMALL MOBILE
+   360px 以下
+===================================== */
+
+@media (max-width: 360px) {
+
+  /* 保留三欄與四欄，不改成直排 */
+
+  .course-shell {
+    width: min(100% - 1.5rem, 1120px);
+  }
+
+  .course-guide-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+
+  .course-guide-card {
+    padding: 0.7rem 0.3rem;
+  }
+
+  .course-guide-card h3 {
+    font-size: 0.76rem;
+  }
+
+  .course-guide-card__description {
+    font-size: 0.69rem;
+  }
+
+  .course-guide-card__benefits li {
+    font-size: 0.67rem;
+  }
+
+  .course-registration-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.3rem;
+  }
+
+  .course-registration-step {
+    padding: 0.65rem 0.3rem;
+  }
+
+  .course-registration-step h3 {
+    font-size: 0.76rem;
+  }
+
+  .course-registration-step__number {
+    font-size: 0.61rem;
+  }
+
+}

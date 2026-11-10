@@ -1,23 +1,754 @@
+
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 import Hero from "../components/Hero.astro";
-import News from "../components/News.astro";
 import Features from "../components/Features.astro";
-import CurriculumMap from "../components/CurriculumMap.astro";
+import News from "../components/News.astro";
 import Partners from "../components/Partners.astro";
 import FAQ from "../components/FAQ.astro";
+
+import { sanityClient } from "../lib/sanity";
+import "../styles/homep.css";
+
+// =====================================
+// 03 從學習到實踐
+// =====================================
+
+const learningSteps = [
+  {
+    number: "01",
+    title: "建立基礎",
+    subtitle: "醫療照護專業 × AI 概念",
+    description:
+      "從醫療照護需求出發，建立人工智慧、生成式 AI、Python、資料應用與科技倫理等基礎能力。",
+  },
+  {
+    number: "02",
+    title: "發展應用",
+    subtitle: "AI 應用 × 跨域協作",
+    description:
+      "進一步接觸人機互動、虛實整合、對話式 AI 與數位工具，學習將科技連結至實際醫療照護情境。",
+  },
+  {
+    number: "03",
+    title: "走進場域",
+    subtitle: "臨床 × 長照 × 基層醫療",
+    description:
+      "透過場域見習與需求探索，從真實工作流程中發現問題、了解使用者需求並分析改善機會。",
+  },
+  {
+    number: "04",
+    title: "Capstone 統整實作",
+    subtitle: "從問題發現到測試驗證",
+    description:
+      "跨專業學生組隊，在教師、業師與場域導師協作下，將想法逐步轉化為具有實務應用價值的創新方案。",
+  },
+];
+
+// =====================================
+// 04 五大核心能力
+// =====================================
+
+const competencies = [
+  {
+    number: "01",
+    title: "智慧科技素養",
+    description: "理解 AI 與智慧科技的應用、限制及倫理議題。",
+    paths: [
+      "M12 3v3",
+      "M12 18v3",
+      "M3 12h3",
+      "M18 12h3",
+      "M7 7l2 2",
+      "M15 15l2 2",
+      "M17 7l-2 2",
+      "M9 15l-2 2",
+      "M12 8a4 4 0 1 0 0 8a4 4 0 0 0 0-8z",
+    ],
+  },
+  {
+    number: "02",
+    title: "臨床決策與 AI 應用",
+    description: "辨識照護需求，評估科技輔助決策的適切性。",
+    paths: [
+      "M4 4h16v16H4z",
+      "M7 12h3l2-4 2 8 2-4h2",
+    ],
+  },
+  {
+    number: "03",
+    title: "虛實整合與 AI 協作",
+    description: "探索智慧人機互動、虛實整合與數位協作。",
+    paths: [
+      "M4 5h16v12H4z",
+      "M9 21h6",
+      "M12 17v4",
+      "M8 11l3 3 5-6",
+    ],
+  },
+  {
+    number: "04",
+    title: "跨域溝通與專案管理",
+    description: "與不同專業共同合作，規劃並推進實作專案。",
+    paths: [
+      "M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+      "M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+      "M2 20v-2a6 6 0 0 1 12 0v2",
+      "M14 14a6 6 0 0 1 8 6",
+    ],
+  },
+  {
+    number: "05",
+    title: "產業鏈結與成果轉譯",
+    description: "讓學習成果連結產業需求與實際應用場域。",
+    paths: [
+      "M4 20V5h11v15",
+      "M15 10h5v10",
+      "M2 20h20",
+      "M7 9h4",
+      "M7 13h4",
+      "M7 17h4",
+      "M17 14h1",
+    ],
+  },
+];
+
+// =====================================
+// 05 主要培育對象
+// =====================================
+
+const audiences = [
+  "護理學院",
+  "物理治療學系",
+  "職能治療學系",
+  "醫務管理暨醫療資訊學系",
+];
+
+// =====================================
+// 05 三種學習起點
+// =====================================
+
+const courseGuides = [
+  {
+    number: "01",
+    theme: "green",
+    title: "沒接觸過 AI",
+    level: "適合初學者",
+    description:
+      "從 AI 概念、人工智慧導論、生成式 AI 基礎開始。",
+    benefit: "建立 AI 基礎語言與科技素養",
+  },
+  {
+    number: "02",
+    theme: "blue",
+    title: "對 AI 有基本認識",
+    level: "進階應用",
+    description:
+      "探索 AI 應用、人機互動與跨域協作課程。",
+    benefit: "連結醫療照護情境與實務需求",
+  },
+  {
+    number: "03",
+    theme: "purple",
+    title: "已有構想或想做專題",
+    level: "實作導向",
+    description:
+      "探索技術實務、場域合作與 Capstone 專題。",
+    benefit: "累積實作經驗與具體成果",
+  },
+];
+
+// =====================================
+// 06 近期課程
+// 由 Sanity 取得開放報名的課程
+// =====================================
+
+type HomeCourse = {
+  _id: string;
+  title: string;
+  slug?: string;
+  dateText?: string;
+  level?: string;
+  unit?: string;
+};
+
+const recentCourses = await sanityClient.fetch<HomeCourse[]>(`
+  *[
+    _type == "course" &&
+    visible == true &&
+    status == "enrolling"
+  ]
+  | order(sortDate asc)[0...3]
+  {
+    _id,
+    title,
+    "slug": slug.current,
+    dateText,
+    level,
+    unit
+  }
+`);
+
+const levelLabels: Record<string, string> = {
+  professional: "醫療照護創新專業",
+  basic: "AI 概念",
+  advanced: "AI 應用",
+  practical: "AI 技術實務",
+};
+
+// =====================================
+// 08 場域與合作
+// 首頁只呈現四大類別
+// =====================================
+
+const partnerGroups = [
+  {
+    number: "01",
+    title: "校內整合",
+    description:
+      "整合校內跨領域師資與教學資源，建立共同培育智慧照護人才的學習環境。",
+    detail: "學院 × 系所 × 研究單位",
+  },
+  {
+    number: "02",
+    title: "跨校合作",
+    description:
+      "透過跨校教學與交流，促進不同專業間的知識分享及合作。",
+    detail: "合作學校 × 跨校交流",
+  },
+  {
+    number: "03",
+    title: "產業合作",
+    description:
+      "連結智慧醫療、AI 技術、教育科技與健康產業資源。",
+    detail: "智慧科技 × 產業應用",
+  },
+  {
+    number: "04",
+    title: "實作場域",
+    description:
+      "從真實醫療與照護情境中探索需求，培養問題解決與創新能力。",
+    detail: "臨床醫療 × 長期照護 × 基層醫療",
+  },
+];
+
+// =====================================
+// 09 114 年度成果
+// =====================================
+
+const results = [
+  {
+    value: "371",
+    label: "年度修課總人次",
+    note: "114 年度",
+  },
+  {
+    value: "4.9 / 5",
+    label: "課程與科技素養滿意度",
+    note: "114 年度",
+  },
+  {
+    value: "約 60%",
+    label: "AI 應用能力顯著提升",
+    note: "114 年度",
+  },
+];
 ---
 
 <BaseLayout
-  title="AI × 照護｜智慧照護創新與人工智慧人才培育計畫"
+  title="AI × HEALTHCARE｜醫療照護創新與人工智慧應用人才培育計畫"
 >
+  <main class="home-page">
 
-<Hero />
-<News />
-<Features />
-<CurriculumMap />
-<Partners />
-<FAQ />
-  
+    <!-- =================================
+         01 HERO
+    ================================== -->
+
+    <Hero />
+
+    <!-- =================================
+         07 LATEST NEWS
+    ================================== -->
+
+    <News />
+
+
+    <!-- =================================
+         02 WHY THIS PROGRAM
+    ================================== -->
+
+    <Features />
+
+
+    <!-- =================================
+         03 FROM LEARNING TO IMPACT
+    ================================== -->
+
+    <section
+      class="home-section home-section--soft"
+      id="learning"
+      aria-labelledby="home-learning-title"
+    >
+      <div class="home-container">
+
+        <div class="home-heading">
+          <p class="home-eyebrow">
+            FROM LEARNING TO IMPACT
+          </p>
+
+          <h2 id="home-learning-title">
+            從學習到實踐
+          </h2>
+
+          <p>
+            從基礎能力出發，逐步走向跨域應用與
+            真實醫療照護場域。
+          </p>
+        </div>
+
+        <div class="home-learning-grid">
+
+          {learningSteps.map((step) => (
+            <article class="home-learning-card">
+
+              <span class="home-learning-card__number">
+                {step.number}
+              </span>
+
+              <h3>{step.title}</h3>
+
+              <p class="home-learning-card__subtitle">
+                {step.subtitle}
+              </p>
+
+              <p class="home-learning-card__description">
+                {step.description}
+              </p>
+
+            </article>
+          ))}
+
+        </div>
+
+        <div class="home-section-link">
+          <a href="/course#curriculum">
+            查看完整課程地圖
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =================================
+         04 FIVE CORE COMPETENCIES
+    ================================== -->
+
+    <section
+      class="home-section"
+      id="competencies"
+      aria-labelledby="home-competencies-title"
+    >
+      <div class="home-container">
+
+        <div class="home-heading">
+          <p class="home-eyebrow">
+            CORE COMPETENCIES
+          </p>
+
+          <h2 id="home-competencies-title">
+            不只學 AI，更培養解決未來問題的能力
+          </h2>
+
+          <p>
+            透過專業學習、科技應用與跨域協作，
+            逐步建立五大核心能力。
+          </p>
+        </div>
+
+        <div class="home-competency-grid">
+
+          {competencies.map((item) => (
+            <article class="home-competency-card">
+
+              <div
+                class="home-competency-card__icon"
+                aria-hidden="true"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  {item.paths.map((path) => (
+                    <path d={path} />
+                  ))}
+                </svg>
+              </div>
+
+              <span class="home-competency-card__number">
+                {item.number}
+              </span>
+
+              <h3>{item.title}</h3>
+
+              <p>{item.description}</p>
+
+            </article>
+          ))}
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =================================
+         05 WHO CAN JOIN / COURSE GUIDE
+    ================================== -->
+
+    <section
+      class="home-section home-section--soft"
+      id="who-can-join"
+      aria-labelledby="home-who-title"
+    >
+      <div class="home-container">
+
+        <div class="home-heading">
+          <p class="home-eyebrow">
+            WHO CAN JOIN?
+          </p>
+
+          <h2 id="home-who-title">
+            誰適合參加？
+          </h2>
+
+          <p>
+            不需要先具備程式設計背景。
+            從醫療照護專業出發，也能開始學習 AI。
+          </p>
+        </div>
+
+        <div class="home-audience">
+
+          <p>
+            本計畫以高雄醫學大學醫療照護相關系所學生
+            為主要培育對象，目前涵蓋：
+          </p>
+
+          <div
+            class="home-audience__tags"
+            aria-label="主要培育對象"
+          >
+            {audiences.map((audience) => (
+              <span>{audience}</span>
+            ))}
+          </div>
+
+          <p>
+            不論是否具備程式設計背景，只要對人工智慧、
+            智慧醫療、數位健康、臨床創新或跨域合作有興趣，
+            都可以依照自己的程度與學習需求，
+            從適合的課程開始。
+          </p>
+
+        </div>
+
+
+        <div
+          class="home-guide-heading"
+          id="starting-point"
+        >
+          <p class="home-eyebrow">
+            WHICH COURSE IS RIGHT FOR ME?
+          </p>
+
+          <h3>
+            不知道怎麼開始？
+          </h3>
+
+          <p>
+            依照自己的基礎與學習目標，
+            找到最適合的學習起點。
+          </p>
+        </div>
+
+
+        <div class="home-guide-grid">
+
+          {courseGuides.map((guide) => (
+
+            <article
+              class={`home-guide-card home-guide-card--${guide.theme}`}
+            >
+
+              <div class="home-guide-card__number">
+                {guide.number}
+              </div>
+
+              <h4>{guide.title}</h4>
+
+              <span class="home-guide-card__level">
+                {guide.level}
+              </span>
+
+              <p>{guide.description}</p>
+
+              <div class="home-guide-card__benefit">
+                {guide.benefit}
+              </div>
+
+            </article>
+
+          ))}
+
+        </div>
+
+        <div class="home-section-link">
+          <a href="/course#starting-point">
+            看看我適合哪些課程
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =================================
+         06 RECENT COURSES
+    ================================== -->
+
+    <section
+      class="home-section"
+      id="recent-courses"
+      aria-labelledby="home-courses-title"
+    >
+      <div class="home-container">
+
+        <div class="home-heading home-heading--split">
+
+          <div>
+            <p class="home-eyebrow">
+              EXPLORE COURSES
+            </p>
+
+            <h2 id="home-courses-title">
+              近期課程
+            </h2>
+
+            <p>
+              從一堂課開始，
+              累積醫療照護 × AI 跨域學習經驗。
+            </p>
+          </div>
+
+          <a class="home-heading__link" href="/courses">
+            查看全部課程
+            <span aria-hidden="true">→</span>
+          </a>
+
+        </div>
+
+
+        {recentCourses.length > 0 ? (
+
+          <div class="home-course-grid">
+
+            {recentCourses.map((course) => (
+
+              <article class="home-course-card">
+
+                <span class="home-course-card__status">
+                  報名開放
+                </span>
+
+                <h3>{course.title}</h3>
+
+                <p class="home-course-card__level">
+                  {levelLabels[course.level ?? ""] ??
+                    "跨域課程"}
+                </p>
+
+                <div class="home-course-card__bottom">
+
+                  <span>
+                    {course.dateText || "時間依公告為準"}
+                  </span>
+
+                  <a
+                    href={
+                      course.slug
+                        ? `/registration?course=${encodeURIComponent(course.slug)}`
+                        : "/courses"
+                    }
+                  >
+                    查看課程
+                    <span aria-hidden="true">→</span>
+                  </a>
+
+                </div>
+
+              </article>
+
+            ))}
+
+          </div>
+
+        ) : (
+
+          <div class="home-course-empty">
+
+            <p>
+              目前尚無標示為開放報名的課程，
+              歡迎查看完整課程資訊與後續公告。
+            </p>
+
+            <a href="/courses">
+              查看課程列表 →
+            </a>
+
+          </div>
+
+        )}
+
+      </div>
+    </section>
+
+
+
+    <!-- =================================
+         08 PARTNERS & FIELD
+    ================================== -->
+
+    <section
+      class="home-section home-section--soft"
+      id="partners"
+      aria-labelledby="home-partners-title"
+    >
+      <div class="home-container">
+
+        <div class="home-heading">
+
+          <p class="home-eyebrow">
+            PARTNERS & PRACTICE FIELDS
+          </p>
+
+          <h2 id="home-partners-title">
+            場域與合作
+          </h2>
+
+          <p>
+            跨越校園、醫療、產業與照護現場，
+            讓學習真正連結需求。
+          </p>
+
+        </div>
+
+
+        <div class="home-partners-grid">
+
+          {partnerGroups.map((group) => (
+
+            <article class="home-partner-card">
+
+              <span class="home-partner-card__number">
+                {group.number}
+              </span>
+
+              <h3>{group.title}</h3>
+
+              <p>{group.description}</p>
+
+              <span class="home-partner-card__detail">
+                {group.detail}
+              </span>
+
+            </article>
+
+          ))}
+
+        </div>
+
+      </div>
+    </section>
+
+    <Partners />
+
+
+    <!-- =================================
+         09 ACHIEVEMENTS
+    ================================== -->
+
+    <section
+      class="home-section"
+      id="results"
+      aria-labelledby="home-results-title"
+    >
+      <div class="home-container">
+
+        <div class="home-heading">
+
+          <p class="home-eyebrow">
+            OUR IMPACT
+          </p>
+
+          <h2 id="home-results-title">
+            成果與亮點
+          </h2>
+
+          <p>
+            從學習到實踐，看見跨域教育的改變。
+            透過課程與實作，持續累積智慧照護人才培育成果。
+          </p>
+
+        </div>
+
+
+        <div class="home-results-grid">
+
+          {results.map((result) => (
+
+            <article class="home-result-card">
+
+              <span class="home-result-card__year">
+                {result.note}
+              </span>
+
+              <strong class="home-result-card__value">
+                {result.value}
+              </strong>
+
+              <p>{result.label}</p>
+
+            </article>
+
+          ))}
+
+        </div>
+
+        <div class="home-section-link">
+          <a href="/presentation">
+            查看更多成果
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =================================
+         10 FAQ
+    ================================== -->
+
+    <FAQ />
+
+
+  </main>
 </BaseLayout>

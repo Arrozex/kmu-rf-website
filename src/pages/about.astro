@@ -1,0 +1,668 @@
+
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/about.css";
+
+const goals = [
+  {
+    number: "01",
+    icon: "book",
+    title: "建立跨域學習體系",
+    description:
+      "整合醫療照護專業與人工智慧課程，建立循序漸進的跨域學習路徑。",
+  },
+  {
+    number: "02",
+    icon: "people",
+    title: "培育智慧照護人才",
+    description:
+      "培養能將 AI 應用於臨床創新、智慧照護與健康促進的醫療照護人才。",
+  },
+  {
+    number: "03",
+    icon: "handshake",
+    title: "推動學用合一",
+    description:
+      "導入產業與真實場域協作，讓學生在學習階段即能接觸實務問題、發展創新方案並進行驗證。",
+  },
+];
+
+const audiences = [
+  "護理學院",
+  "物理治療學系",
+  "職能治療學系",
+  "醫務管理暨醫療資訊學系",
+];
+
+
+const gains = [
+  {
+    number: "01",
+    icon: "brain",
+    title: "建立 AI 素養",
+    description: "不只學會使用一套工具，更理解 AI 的應用方式與限制。",
+  },
+  {
+    number: "02",
+    icon: "search",
+    title: "辨識真實問題",
+    description: "從醫療照護現場發現真正值得解決的需求。",
+  },
+  {
+    number: "03",
+    icon: "users",
+    title: "累積跨域合作經驗",
+    description: "練習與不同專業的人溝通、協作及共同解題。",
+  },
+  {
+    number: "04",
+    icon: "lightbulb",
+    title: "把想法變成成果",
+    description: "逐步發展創新方案、作品或原型。",
+  },
+  {
+    number: "05",
+    icon: "building",
+    title: "接觸真實場域",
+    description: "連結醫療、長照、產業與實務環境。",
+  },
+  {
+    number: "06",
+    icon: "folder",
+    title: "建立跨域學習歷程",
+    description: "整理學習成果與實作經驗，累積個人作品及歷程。",
+  },
+];
+
+
+const careers = [
+  "與 AI／資訊團隊溝通臨床需求",
+  "參與智慧醫療系統及數位健康服務設計",
+  "參與臨床流程改善與科技導入",
+  "協助健康科技產品評估與場域驗證",
+  "發展醫療教育科技與數位學習內容",
+  "參與跨域研究與創新專案",
+];
+---
+
+<BaseLayout title="關於計畫｜醫療照護創新與人工智慧應用人才培育計畫">
+  <main class="about-page">
+
+    <!-- =========================
+         ABOUT HERO
+    ========================= -->
+    <section class="about-hero" aria-labelledby="about-title">
+      <div class="about-shell about-hero__inner">
+        <div class="about-hero__content">
+          <p class="about-eyebrow">ABOUT THE PROGRAM</p>
+
+          <h1 id="about-title">關於計畫</h1>
+
+          <p class="about-hero__lead">
+            從醫療照護問題出發，培養理解專業、善用科技、
+            能跨域合作的未來人才。
+          </p>
+
+          <p class="about-hero__sub">
+            Why / Who / How / Value / Career
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         01 計畫緣起
+    ========================= -->
+    <section
+      class="about-section"
+      id="origin"
+      aria-labelledby="origin-title"
+    >
+      <div class="about-shell">
+
+        <div class="about-section__heading">
+          <span class="about-section__number" aria-hidden="true">
+            01
+          </span>
+
+          <div>
+            <p class="about-eyebrow">WHY THIS PROGRAM</p>
+            <h2 id="origin-title">計畫緣起</h2>
+            <p class="about-section__subtitle">
+              為什麼要展開這項計畫？
+            </p>
+          </div>
+        </div>
+
+        <div class="about-prose">
+          <p>
+            人工智慧與數位科技正在快速改變醫療與健康照護的樣貌。
+          </p>
+
+          <p>
+            在高齡化、慢性病照護需求增加與醫療照護人力不足的環境下，
+            臨床與照護現場不僅需要更有效率的工作方式，
+            也需要能真正理解使用者需求並協助科技落地的人才。<br>
+            然而，傳統醫療照護教育多著重專業知識與臨床技能，
+            學生接觸 AI、數位工具、跨專業合作及科技導入實務的機會
+            仍有強化空間。
+          </p>
+
+          <p>
+            因此，高雄醫學大學透過教育部
+            「智慧雨林產業創生人才育成計畫」，
+            整合醫療照護、人工智慧、醫療資訊、復健專業、
+            產業與實務場域，建立一套從專業學習、AI 應用、
+            跨域合作到場域實作的培育模式。
+          </p>
+
+          <p>
+            我們希望學生不只是「學會使用 AI」，
+            而是進一步成為能夠看見問題、理解需求、
+            選擇適切科技，並與不同專業共同發展解決方案的人才。
+          </p>
+        </div>
+
+        <blockquote class="about-quote">
+          不是把每一位醫療照護學生培養成 AI 工程師，<br />
+          而是培養
+          <strong>懂專業、懂科技、能溝通、能解題</strong>
+          的跨域人才。
+        </blockquote>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         02 計畫目的與三大培育目標
+    ========================= -->
+    <section
+      class="about-section about-section--tinted"
+      id="purpose"
+      aria-labelledby="purpose-title"
+    >
+      <div class="about-shell">
+
+        <div class="about-section__heading">
+          <span class="about-section__number" aria-hidden="true">
+            02
+          </span>
+
+          <div>
+            <p class="about-eyebrow">PROGRAM GOALS</p>
+            <h2 id="purpose-title">
+              計畫目的與三大培育目標
+            </h2>
+            <p class="about-section__subtitle">
+              建立跨域學習路徑，讓學習與實務相互連結。
+            </p>
+          </div>
+        </div>
+
+        <div class="about-intro">
+
+          <p>
+            本計畫透過系統性的課程、跨域學習與場域實作，
+            培養學生具備 AI 素養、科技應用、跨專業合作與創新實踐能力。
+            學生將學習如何從臨床、長照與健康照護情境中辨識問題，
+            理解 AI 與數位科技可以扮演的角色，
+            並與資訊、產業及不同醫療專業共同合作，
+            發展可回應真實需求的智慧照護解方。
+          </p>
+        </div>
+
+        <div class="about-subheading">
+          <p class="about-eyebrow">THREE GOALS</p>
+          <h3>三大培育目標</h3>
+        </div>
+
+        <div class="about-goal-cards">
+          {goals.map((goal) => (
+            <article class="goal-feature-card">
+
+              <div
+                class="goal-feature-card__icon"
+                aria-hidden="true"
+              >
+                {goal.icon === "book" && (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 7v14" />
+                    <path d="M3 18V5a2 2 0 0 1 2-2h2a5 5 0 0 1 5 5v13a5 5 0 0 0-5-5H5a2 2 0 0 0-2 2Z" />
+                    <path d="M21 18V5a2 2 0 0 0-2-2h-2a5 5 0 0 0-5 5v13a5 5 0 0 1 5-5h2a2 2 0 0 1 2 2Z" />
+                  </svg>
+                )}
+
+                {goal.icon === "people" && (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="9" cy="8" r="3" />
+                    <path d="M3 20v-2a6 6 0 0 1 12 0v2" />
+                    <path d="M16 5a3 3 0 0 1 0 6" />
+                    <path d="M18 14a5 5 0 0 1 3 4.6V20" />
+                  </svg>
+                )}
+
+                {goal.icon === "handshake" && (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m2 12 4-5 4 2 2-1.5a3 3 0 0 1 3.6.1L18 9l4-2v8l-3 2" />
+                    <path d="m6 7 3-2 4 1 2.6 1.6" />
+                    <path d="m8 13 6 6a2 2 0 0 0 3-1l-5-5" />
+                    <path d="m10 11 6.5 6.5a2 2 0 0 0 2.5-.5" />
+                    <path d="m2 12 5 6 2-1" />
+                  </svg>
+                )}
+              </div>
+
+              <h4>{goal.title}</h4>
+              <p>{goal.description}</p>
+
+              <span class="goal-feature-card__number">
+                {goal.number}
+              </span>
+
+            </article>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         03 培育對象與參與資格
+    ========================= -->
+    <section
+      class="about-section"
+      id="targets"
+      aria-labelledby="targets-title"
+    >
+      <div class="about-shell">
+
+        <div class="about-section__heading">
+          <span class="about-section__number" aria-hidden="true">
+            03
+          </span>
+
+          <div>
+            <p class="about-eyebrow">WHO CAN JOIN</p>
+            <h2 id="targets-title">
+              培育對象與參與資格
+            </h2>
+            <p class="about-section__subtitle">
+              不需要先具備程式設計背景，也能開始學習。
+            </p>
+          </div>
+        </div>
+
+        <div class="about-audience-layout">
+
+          <div>
+            <h3>誰適合參加？</h3>
+
+            <p class="about-body-copy">
+              本計畫以高雄醫學大學醫療照護相關系所學生
+              為主要培育對象，目前涵蓋：
+            </p>
+
+            <div
+              class="about-tags"
+              aria-label="主要培育系所"
+            >
+              {audiences.map((audience) => (
+                <span class="about-tag">
+                  {audience}
+                </span>
+              ))}
+            </div>
+
+            <p class="about-body-copy">
+              不論是否具備程式設計背景，
+              只要對人工智慧、智慧醫療、數位健康、
+              臨床創新或跨域合作有興趣，
+              都可以依照自己的程度與學習需求，
+              從適合的課程開始。
+            </p>
+          </div>
+
+          <aside class="about-audience-note">
+            <span
+              class="about-audience-note__icon"
+              aria-hidden="true"
+            >
+              ✦
+            </span>
+
+            <h3>沒有 AI 基礎，也可以開始</h3>
+
+            <p>
+              從專業問題出發，循序建立 AI 概念、
+              科技應用及跨域合作能力。
+            </p>
+
+            <a
+              class="about-text-link"
+              href="/courses"
+            >
+              探索適合的課程
+              <span aria-hidden="true">→</span>
+            </a>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         04 學生收穫
+    ========================= -->
+    <section
+      class="about-section about-section--tinted"
+      id="gain"
+      aria-labelledby="gain-title"
+    >
+      <div class="about-shell">
+
+        <div class="about-section__heading">
+          <span class="about-section__number" aria-hidden="true">
+            04
+          </span>
+
+          <div>
+            <p class="about-eyebrow">WHY JOIN US</p>
+            <h2 id="gain-title">課程收穫</h2>
+            <p class="about-section__subtitle">
+              參與計畫，你可以獲得什麼？
+            </p>
+          </div>
+        </div>
+
+        
+        <div class="about-grid about-grid--three">
+          {gains.map((gain) => (
+            <article class="about-card about-benefit">
+
+              <div class="about-benefit__header">
+                <span class="about-benefit__icon" aria-hidden="true">
+                  {gain.icon === "brain" && (
+                    <svg viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 18V5a3 3 0 0 0-5.8-1.1A4 4 0 0 0 4 10a4 4 0 0 0 1 7.4A3.5 3.5 0 0 0 12 18Z" />
+                      <path d="M12 18V5a3 3 0 0 1 5.8-1.1A4 4 0 0 1 20 10a4 4 0 0 1-1 7.4A3.5 3.5 0 0 1 12 18Z" />
+                      <path d="M8 9c2 0 4 1 4 3M16 9c-2 0-4 1-4 3" />
+                    </svg>
+                  )}
+
+                  {gain.icon === "search" && (
+                    <svg viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="10.5" cy="10.5" r="6.5" />
+                      <path d="m16 16 5 5" />
+                    </svg>
+                  )}
+
+                  {gain.icon === "users" && (
+                    <svg viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="9" cy="8" r="3" />
+                      <path d="M3 20v-2a6 6 0 0 1 12 0v2" />
+                      <path d="M16 5a3 3 0 0 1 0 6" />
+                      <path d="M18 14a5 5 0 0 1 3 4.6V20" />
+                    </svg>
+                  )}
+
+                  {gain.icon === "lightbulb" && (
+                    <svg viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 18h6M10 22h4" />
+                      <path d="M8.5 14.5A7 7 0 1 1 15.5 14.5L15 18H9l-.5-3.5Z" />
+                    </svg>
+                  )}
+
+                  {gain.icon === "building" && (
+                    <svg viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="4" y="3" width="16" height="18" rx="2" />
+                      <path d="M12 6v8M8 10h8M9 21v-4h6v4" />
+                    </svg>
+                  )}
+
+                  {gain.icon === "folder" && (
+                    <svg viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3V7Z" />
+                      <path d="m9 13 2 2 4-4" />
+                    </svg>
+                  )}
+                </span>
+
+                <span class="about-benefit__number">
+                  {gain.number}
+                </span>
+              </div>
+
+              <h3>{gain.title}</h3>
+              <p>{gain.description}</p>
+
+            </article>
+          ))}
+        </div>
+
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         05 職涯價值
+    ========================= -->
+    <section
+      class="about-section"
+      id="career"
+      aria-labelledby="career-title"
+    >
+      <div class="about-shell">
+
+        <div class="about-section__heading">
+          <span class="about-section__number" aria-hidden="true">
+            05
+          </span>
+
+          <div>
+            <p class="about-eyebrow">
+              FROM CAMPUS TO CAREER
+            </p>
+
+            <h2 id="career-title">職涯價值</h2>
+            <p class="about-section__subtitle">
+              讓跨域能力延伸到未來
+            </p>
+          </div>
+        </div>
+
+        <div class="about-career">
+
+          <div class="about-career__intro">
+            <p>
+              人工智慧未來不只屬於資訊工程領域。
+              當智慧醫療、數位健康、AI 輔助決策與智慧照護持續發展，
+              醫療產業愈來愈需要能夠同時理解專業場域
+              與科技語言的人才。
+            </p>
+
+            <p>
+              透過本計畫所培養的跨域能力，
+              學生未來在臨床、研究、升學或產業發展中，
+              可以更有能力參與以下方向：
+            </p>
+          </div>
+
+          <ul class="about-career__list">
+            {careers.map((career) => (
+              <li>{career}</li>
+            ))}
+          </ul>
+
+        </div>
+
+        <blockquote class="about-quote about-quote--compact">
+          讓你的專業不只會使用科技，<br />
+          更有能力成為
+          <strong>
+            「醫療照護」與「科技創新」之間的橋梁。
+          </strong>
+        </blockquote>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         06 計畫時程
+    ========================= -->
+    <section
+      class="about-section about-section--tinted"
+      id="arrangement"
+      aria-labelledby="arrangement-title"
+    >
+      <div class="about-shell">
+
+        <div class="about-section__heading">
+          <span class="about-section__number" aria-hidden="true">
+            06
+          </span>
+
+          <div>
+            <p class="about-eyebrow">PROJECT PERIOD</p>
+            <h2 id="arrangement-title">計畫時程</h2>
+            <p class="about-section__subtitle">
+              跨學期循序漸進的主題式課群
+            </p>
+          </div>
+        </div>
+
+        <div class="about-period">
+
+          <div class="about-period__dates">
+            <span class="about-period__label">
+              全程期程
+            </span>
+
+            <strong>
+              115 年 6 月 — 117 年 1 月
+            </strong>
+
+            <span class="about-period__hint">
+              以下為整體培育方向，
+              實際開課時間以各課程公告為準。
+            </span>
+          </div>
+
+          <div class="about-period__steps">
+
+            <article class="about-period__step">
+              <span>PHASE 01</span>
+              <h3>奠定基礎</h3>
+              <p>
+                以基礎課群、課程規劃、教材設計、
+                教師共備與基礎能力培育為主。
+              </p>
+            </article>
+
+            <article class="about-period__step">
+              <span>PHASE 02</span>
+              <h3>走向跨域實作</h3>
+              <p>
+                逐步進入 AI 應用、技術實務、
+                場域合作及 Capstone 統整性專題。
+              </p>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    
+    <!-- =========================
+        FINAL CTA
+    ========================= -->
+    <section
+      class="about-cta"
+      aria-labelledby="about-cta-title"
+    >
+      <div class="about-shell">
+
+        <div class="about-cta__card">
+
+          <div class="about-cta__content">
+            <p class="about-eyebrow">
+              START YOUR JOURNEY
+            </p>
+
+            <h2 id="about-cta-title">
+              從一堂課開始，走向跨域實踐。
+            </h2>
+
+            <p class="about-cta__description">
+              探索符合自己專業背景與學習需求的課程，
+              逐步累積醫療照護 × AI 的跨域能力。
+            </p>
+          </div>
+
+          <div class="about-cta__actions">
+            <a
+              class="about-button about-button--primary"
+              href="/courses"
+            >
+              探索近期課程
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <a
+              class="about-button about-button--outline"
+              href="/registration"
+            >
+              課程報名
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+  </main>
+</BaseLayout>

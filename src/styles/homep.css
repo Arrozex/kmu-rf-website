@@ -1,0 +1,1100 @@
+
+/* =====================================
+   HOME PAGE
+   src/styles/home.css
+===================================== */
+
+.home-page {
+  --home-ink: #191a2f;
+  --home-green: #315c42;
+  --home-green-dark: #254731;
+  --home-orange: #bb702b;
+  --home-cream: #f7f8f3;
+  --home-outline: #e0e8dd;
+  --home-muted: #53645a;
+
+  color: var(--home-ink);
+  background: #ffffff;
+}
+
+.home-page *,
+.home-page *::before,
+.home-page *::after {
+  box-sizing: border-box;
+}
+
+.home-container {
+  width: min(100% - 3rem, 1180px);
+  margin-inline: auto;
+}
+
+.home-section {
+  padding: 4.5rem 0;
+  scroll-margin-top: 120px;
+}
+
+.home-section--soft {
+  background: var(--home-cream);
+}
+
+
+/* =====================================
+   COMMON HEADINGS
+===================================== */
+
+.home-heading {
+  max-width: 850px;
+  margin: 0 auto 2.2rem;
+
+  text-align: center;
+}
+
+.home-eyebrow {
+  margin: 0 0 0.55rem;
+
+  color: var(--home-green);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+}
+
+.home-heading h2 {
+  margin: 0 0 0.75rem;
+
+  color: var(--home-green-dark);
+
+  font-size: clamp(
+    1.7rem,
+    3.1vw,
+    2.65rem
+  );
+
+  font-weight: 850;
+  line-height: 1.4;
+}
+
+.home-heading > p:last-child,
+.home-heading > div > p:last-child {
+  margin: 0;
+
+  color: var(--home-muted);
+  font-size: 0.96rem;
+  line-height: 1.85;
+}
+
+.home-heading--split {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+
+  gap: 2rem;
+  max-width: none;
+  text-align: left;
+}
+
+.home-heading__link,
+.home-section-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+
+  color: var(--home-green-dark);
+  font-size: 0.91rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.home-heading__link {
+  flex-shrink: 0;
+}
+
+.home-heading__link:hover,
+.home-section-link a:hover {
+  color: var(--home-orange);
+}
+
+.home-section-link {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.7rem;
+}
+
+
+/* =====================================
+   03 FROM LEARNING TO IMPACT
+===================================== */
+
+.home-learning-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.home-learning-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  padding: 1.55rem 1.3rem;
+
+  background: #ffffff;
+  border: 1px solid var(--home-outline);
+  border-radius: 16px;
+
+  box-shadow:
+    0 5px 18px rgba(31, 61, 42, 0.03);
+}
+
+.home-learning-card__number {
+  display: inline-grid;
+  place-items: center;
+
+  width: 39px;
+  height: 39px;
+
+  margin-bottom: 1rem;
+
+  border-radius: 50%;
+  background: var(--home-green);
+  color: #ffffff;
+
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.home-learning-card h3 {
+  margin: 0 0 0.25rem;
+
+  color: var(--home-green-dark);
+  font-size: 1.2rem;
+  font-weight: 850;
+}
+
+.home-learning-card__subtitle {
+  margin: 0 0 0.8rem;
+
+  color: var(--home-orange);
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.home-learning-card__description {
+  margin: 0;
+
+  color: #44574b;
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+
+
+/* =====================================
+   04 FIVE CORE COMPETENCIES
+===================================== */
+
+.home-competency-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.home-competency-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-width: 0;
+  padding: 1.55rem 1rem;
+
+  background: #ffffff;
+  border: 1px solid var(--home-outline);
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-shadow:
+    0 7px 18px rgba(31, 61, 42, 0.035);
+}
+
+.home-competency-card__icon {
+  display: grid;
+  place-items: center;
+
+  width: 64px;
+  height: 64px;
+
+  margin-bottom: 1rem;
+
+  border-radius: 50%;
+  background: #eaf2e6;
+  color: var(--home-green);
+}
+
+.home-competency-card__icon svg {
+  display: block;
+  width: 33px;
+  height: 33px;
+}
+
+.home-competency-card__number {
+  color: var(--home-orange);
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-bottom: 0.45rem;
+}
+
+.home-competency-card h3 {
+  margin: 0 0 0.7rem;
+
+  color: var(--home-green-dark);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.home-competency-card p {
+  margin: 0;
+
+  color: #526158;
+  font-size: 0.82rem;
+  line-height: 1.75;
+}
+
+
+/* =====================================
+   05 WHO CAN JOIN
+===================================== */
+
+.home-audience {
+  max-width: 990px;
+  margin: 0 auto 3.5rem;
+
+  text-align: center;
+}
+
+.home-audience > p {
+  margin: 0;
+
+  color: #405247;
+  font-size: 0.96rem;
+  line-height: 1.9;
+}
+
+.home-audience__tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 0.75rem;
+  margin: 1.4rem 0;
+}
+
+.home-audience__tags span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.7rem 1rem;
+
+  background: #ffffff;
+  border: 1px solid #b5c9b7;
+  border-radius: 12px;
+
+  color: var(--home-green-dark);
+  font-size: 0.93rem;
+  font-weight: 800;
+}
+
+
+/* =====================================
+   05 COURSE GUIDE
+===================================== */
+
+.home-guide-heading {
+  margin: 0 0 1.4rem;
+  text-align: center;
+  scroll-margin-top: 120px;
+}
+
+.home-guide-heading h3 {
+  margin: 0 0 0.45rem;
+
+  color: var(--home-green-dark);
+  font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+  font-weight: 850;
+}
+
+.home-guide-heading > p:last-child {
+  margin: 0;
+
+  color: var(--home-muted);
+  font-size: 0.93rem;
+  line-height: 1.75;
+}
+
+.home-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+
+  max-width: 1050px;
+  margin-inline: auto;
+}
+
+.home-guide-card {
+  --guide-color: #315c42;
+  --guide-bg: #eaf2e6;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-width: 0;
+  padding: 1.65rem 1.3rem;
+
+  background: #ffffff;
+  border: 1px solid var(--home-outline);
+  border-radius: 17px;
+
+  text-align: center;
+}
+
+.home-guide-card--blue {
+  --guide-color: #28728b;
+  --guide-bg: #e7f3f6;
+}
+
+.home-guide-card--purple {
+  --guide-color: #76548d;
+  --guide-bg: #f1eaf5;
+}
+
+.home-guide-card__number {
+  display: grid;
+  place-items: center;
+
+  width: 54px;
+  height: 54px;
+
+  margin-bottom: 1rem;
+
+  background: var(--guide-bg);
+  color: var(--guide-color);
+  border-radius: 50%;
+
+  font-size: 1.25rem;
+  font-weight: 850;
+}
+
+.home-guide-card h4 {
+  margin: 0 0 0.55rem;
+
+  color: var(--guide-color);
+  font-size: 1.1rem;
+  font-weight: 850;
+  line-height: 1.5;
+}
+
+.home-guide-card__level {
+  padding: 0.28rem 0.75rem;
+
+  background: var(--guide-bg);
+  color: var(--guide-color);
+  border-radius: 999px;
+
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.home-guide-card > p {
+  margin: 1rem 0;
+
+  color: #43544a;
+  font-size: 0.87rem;
+  line-height: 1.8;
+}
+
+.home-guide-card__benefit {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 0.8rem;
+
+  border-top: 1px solid var(--home-outline);
+
+  color: var(--guide-color);
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+
+/* =====================================
+   06 RECENT COURSES
+===================================== */
+
+.home-course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.home-course-card {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  padding: 1.6rem;
+
+  background: #ffffff;
+  border: 1px solid var(--home-outline);
+  border-radius: 16px;
+}
+
+.home-course-card__status {
+  align-self: flex-start;
+
+  padding: 0.3rem 0.65rem;
+
+  background: #eaf2e6;
+  color: var(--home-green-dark);
+  border-radius: 8px;
+
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.home-course-card h3 {
+  margin: 1rem 0 0.6rem;
+
+  color: var(--home-green-dark);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.6;
+
+  overflow-wrap: anywhere;
+}
+
+.home-course-card__level {
+  margin: 0 0 1.5rem;
+
+  color: var(--home-muted);
+  font-size: 0.85rem;
+}
+
+.home-course-card__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  gap: 0.65rem;
+
+  margin-top: auto;
+  padding-top: 1rem;
+
+  border-top: 1px solid var(--home-outline);
+}
+
+.home-course-card__bottom > span {
+  color: var(--home-muted);
+  font-size: 0.8rem;
+}
+
+.home-course-card__bottom a {
+  color: var(--home-green-dark);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.home-course-card__bottom a:hover {
+  color: var(--home-orange);
+}
+
+.home-course-empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  gap: 1rem;
+  padding: 1.5rem;
+
+  border: 1px solid var(--home-outline);
+  border-radius: 16px;
+  background: var(--home-cream);
+}
+
+.home-course-empty p {
+  margin: 0;
+  color: var(--home-muted);
+  font-size: 0.93rem;
+}
+
+.home-course-empty a {
+  color: var(--home-green-dark);
+  font-weight: 800;
+}
+
+
+/* =====================================
+   08 PARTNERS
+===================================== */
+
+.home-partners-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.home-partner-card {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  padding: 1.55rem;
+
+  border: 1px solid var(--home-outline);
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.home-partner-card__number {
+  color: var(--home-orange);
+  font-size: 0.91rem;
+  font-weight: 850;
+}
+
+.home-partner-card h3 {
+  margin: 0.6rem 0 0.7rem;
+
+  color: var(--home-green-dark);
+  font-size: 1.25rem;
+  font-weight: 850;
+}
+
+.home-partner-card p {
+  margin: 0 0 1rem;
+
+  color: #435449;
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+
+.home-partner-card__detail {
+  margin-top: auto;
+  padding-top: 0.9rem;
+
+  border-top: 1px solid var(--home-outline);
+
+  color: var(--home-green);
+  font-size: 0.79rem;
+  font-weight: 750;
+  line-height: 1.6;
+}
+
+
+/* =====================================
+   09 RESULTS
+===================================== */
+
+.home-results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.home-result-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-width: 0;
+  padding: 1.9rem 1rem;
+
+  background: #f2f7ee;
+  border: 1px solid #dfe9dc;
+  border-radius: 17px;
+
+  text-align: center;
+}
+
+.home-result-card__year {
+  color: var(--home-green);
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.home-result-card__value {
+  margin: 0.5rem 0;
+
+  color: var(--home-green-dark);
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  font-weight: 850;
+  line-height: 1.2;
+}
+
+.home-result-card p {
+  margin: 0;
+
+  color: #425549;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+
+/* =====================================
+   11 FINAL CTA
+===================================== */
+
+.home-final {
+  padding: 3rem 0 5rem;
+  background: #ffffff;
+}
+
+.home-final__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+  padding: 2.2rem 2.5rem;
+
+  background: #eef4ec;
+  border: 1px solid #dce7d9;
+  border-radius: 21px;
+}
+
+.home-final__content {
+  min-width: 0;
+  max-width: 720px;
+}
+
+.home-final__content h2 {
+  margin: 0 0 0.6rem;
+
+  color: var(--home-green-dark);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 850;
+  line-height: 1.4;
+}
+
+.home-final__content > p:last-child {
+  margin: 0;
+
+  color: #42564a;
+  font-size: 0.92rem;
+  line-height: 1.85;
+}
+
+.home-final__actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  gap: 0.7rem;
+}
+
+.home-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.65rem;
+  min-height: 46px;
+  padding: 0.7rem 1rem;
+
+  border: 1px solid var(--home-ink);
+  border-radius: 11px;
+
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.home-button--primary {
+  background: var(--home-ink);
+  color: #ffffff;
+}
+
+.home-button--primary:hover {
+  background: #5b3fa3;
+  border-color: #5b3fa3;
+}
+
+.home-button--outline {
+  background: transparent;
+  color: var(--home-ink);
+}
+
+.home-button--outline:hover {
+  background: #ffffff;
+}
+
+
+/* =====================================
+   TABLET
+===================================== */
+
+@media (max-width: 1000px) {
+
+  .home-learning-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-competency-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .home-partners-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-final__card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.4rem;
+  }
+
+  .home-final__actions {
+    flex-wrap: wrap;
+  }
+
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 620px) {
+
+  .home-container {
+    width: min(100% - 2rem, 1180px);
+  }
+
+  .home-section {
+    padding: 3.1rem 0;
+    scroll-margin-top: 155px;
+  }
+
+  .home-heading {
+    margin-bottom: 1.5rem;
+  }
+
+  .home-heading h2 {
+    font-size: 1.55rem;
+  }
+
+  .home-heading > p:last-child,
+  .home-heading > div > p:last-child {
+    font-size: 0.84rem;
+    line-height: 1.7;
+  }
+
+  .home-heading--split {
+    display: block;
+  }
+
+  .home-heading__link {
+    margin-top: 0.9rem;
+    font-size: 0.82rem;
+  }
+
+
+  /* 03 四步驟：兩欄兩排 */
+
+  .home-learning-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .home-learning-card {
+    padding: 1rem 0.8rem;
+    border-radius: 13px;
+  }
+
+  .home-learning-card__number {
+    width: 31px;
+    height: 31px;
+    margin-bottom: 0.7rem;
+    font-size: 0.73rem;
+  }
+
+  .home-learning-card h3 {
+    font-size: 1rem;
+  }
+
+  .home-learning-card__subtitle {
+    font-size: 0.72rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .home-learning-card__description {
+    font-size: 0.76rem;
+    line-height: 1.65;
+  }
+
+
+  /* 04 五大核心能力 */
+
+  .home-competency-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .home-competency-card {
+    padding: 1rem 0.75rem;
+    border-radius: 13px;
+  }
+
+  .home-competency-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .home-competency-card__icon {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 0.6rem;
+  }
+
+  .home-competency-card__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .home-competency-card h3 {
+    font-size: 0.91rem;
+  }
+
+  .home-competency-card p {
+    font-size: 0.76rem;
+    line-height: 1.6;
+  }
+
+
+  /* 05 培育對象 */
+
+  .home-audience {
+    margin-bottom: 2.5rem;
+  }
+
+  .home-audience > p {
+    font-size: 0.83rem;
+    line-height: 1.75;
+  }
+
+  .home-audience__tags {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 0.55rem;
+    margin: 1rem 0;
+  }
+
+  .home-audience__tags span {
+    padding: 0.65rem 0.45rem;
+
+    border-radius: 10px;
+
+    font-size: 0.79rem;
+    line-height: 1.5;
+  }
+
+
+  /* 05 選課引導：三張同排 */
+
+  .home-guide-heading h3 {
+    font-size: 1.35rem;
+  }
+
+  .home-guide-heading > p:last-child {
+    font-size: 0.83rem;
+  }
+
+  .home-guide-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .home-guide-card {
+    padding: 0.9rem 0.45rem;
+
+    border-radius: 12px;
+  }
+
+  .home-guide-card__number {
+    width: 35px;
+    height: 35px;
+
+    margin-bottom: 0.7rem;
+    font-size: 0.83rem;
+  }
+
+  .home-guide-card h4 {
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .home-guide-card__level {
+    padding: 0.2rem 0.35rem;
+    font-size: 0.67rem;
+  }
+
+  .home-guide-card > p {
+    margin: 0.75rem 0;
+
+    font-size: 0.71rem;
+    line-height: 1.6;
+  }
+
+  .home-guide-card__benefit {
+    font-size: 0.69rem;
+    line-height: 1.55;
+  }
+
+
+  /* 06 近期課程 */
+
+  .home-course-grid {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .home-course-card {
+    padding: 1.1rem;
+  }
+
+  .home-course-card h3 {
+    margin-top: 0.7rem;
+    font-size: 1rem;
+  }
+
+  .home-course-card__level {
+    margin-bottom: 0.9rem;
+  }
+
+
+  /* 08 合作分類 */
+
+  .home-partners-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .home-partner-card {
+    padding: 1rem 0.8rem;
+    border-radius: 13px;
+  }
+
+  .home-partner-card h3 {
+    font-size: 1.05rem;
+  }
+
+  .home-partner-card p {
+    font-size: 0.78rem;
+    line-height: 1.65;
+  }
+
+  .home-partner-card__detail {
+    font-size: 0.72rem;
+  }
+
+
+  /* 09 成果：三張同排 */
+
+  .home-results-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .home-result-card {
+    padding: 1rem 0.35rem;
+    border-radius: 12px;
+  }
+
+  .home-result-card__year {
+    font-size: 0.65rem;
+  }
+
+  .home-result-card__value {
+    font-size: clamp(1rem, 4.8vw, 1.6rem);
+  }
+
+  .home-result-card p {
+    font-size: 0.72rem;
+    line-height: 1.5;
+  }
+
+
+  /* 11 最終 CTA */
+
+  .home-final {
+    padding: 2rem 0 3.5rem;
+  }
+
+  .home-final__card {
+    padding: 1.35rem;
+
+    border-radius: 15px;
+    gap: 1.2rem;
+  }
+
+  .home-final__content h2 {
+    font-size: 1.3rem;
+  }
+
+  .home-final__content > p:last-child {
+    font-size: 0.82rem;
+  }
+
+  .home-final__actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    width: 100%;
+    gap: 0.55rem;
+  }
+
+  .home-button {
+    min-width: 0;
+    padding: 0.7rem 0.4rem;
+    font-size: 0.78rem;
+    border-radius: 10px;
+  }
+
+}
+
+
+/* =====================================
+   EXTRA SMALL MOBILE
+===================================== */
+
+@media (max-width: 360px) {
+
+  .home-container {
+    width: min(100% - 1.4rem, 1180px);
+  }
+
+  .home-guide-grid {
+    gap: 0.35rem;
+  }
+
+  .home-guide-card {
+    padding: 0.75rem 0.3rem;
+  }
+
+  .home-guide-card h4 {
+    font-size: 0.75rem;
+  }
+
+  .home-guide-card > p,
+  .home-guide-card__benefit {
+    font-size: 0.67rem;
+  }
+
+}

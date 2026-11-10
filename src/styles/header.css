@@ -218,7 +218,7 @@
    Tablet
 ========================= */
 
-@media (max-width: 950px) {
+@media (max-width: 1290px) {
 
   .header-container {
     flex-wrap: wrap;
@@ -451,3 +451,4 @@
   }
 
 }
+

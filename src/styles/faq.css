@@ -1,3 +1,4 @@
+
 /* =========================
    FAQ
 ========================= */
@@ -7,12 +8,12 @@
 
   background-color: #eef1f8;
   color: #191a2f;
-}
 
+  scroll-margin-top: 110px;
+}
 
 .faq-container {
   max-width: 1050px;
-
   margin: 0 auto;
 }
 
@@ -23,10 +24,8 @@
 
 .faq-heading {
   margin-bottom: 65px;
-
   text-align: center;
 }
-
 
 .faq-eyebrow {
   margin: 0 0 18px;
@@ -36,14 +35,12 @@
   letter-spacing: 0.14em;
 }
 
-
 .faq-title {
   margin: 0;
 
   font-size: clamp(3rem, 5vw, 5rem);
   font-weight: 500;
   line-height: 1.08;
-
   letter-spacing: -0.05em;
 }
 
@@ -55,10 +52,8 @@
 .faq-list {
   display: flex;
   flex-direction: column;
-
   gap: 20px;
 }
-
 
 .faq-item {
   overflow: hidden;
@@ -69,16 +64,26 @@
   background-color: #fffdf8;
 }
 
+/* 隱藏收起的問題 */
+.faq-item[hidden] {
+  display: none !important;
+}
 
-/* 移除瀏覽器預設三角形 */
+
+/* =========================
+   移除預設三角形
+========================= */
 
 .faq-item summary {
   list-style: none;
 }
 
-
 .faq-item summary::-webkit-details-marker {
   display: none;
+}
+
+.faq-item summary::marker {
+  content: "";
 }
 
 
@@ -92,13 +97,23 @@
   justify-content: space-between;
 
   gap: 30px;
-
   padding: 28px 32px;
 
   cursor: pointer;
 
   font-size: 1.1rem;
   font-weight: 650;
+  line-height: 1.6;
+}
+
+.faq-item summary > span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.faq-item summary:focus-visible {
+  outline: 3px solid #315c42;
+  outline-offset: -3px;
 }
 
 
@@ -108,20 +123,17 @@
 
 .faq-icon {
   position: relative;
-
   flex: 0 0 auto;
 
   width: 22px;
   height: 22px;
 }
 
-
 .faq-icon::before,
 .faq-icon::after {
   content: "";
 
   position: absolute;
-
   top: 50%;
   left: 50%;
 
@@ -133,9 +145,6 @@
   transform: translate(-50%, -50%);
 }
 
-
-/* 垂直線 = + */
-
 .faq-icon::after {
   transform:
     translate(-50%, -50%)
@@ -143,7 +152,6 @@
 
   transition: transform 0.2s ease;
 }
-
 
 /* 展開後變成 - */
 
@@ -159,23 +167,46 @@
 ========================= */
 
 .faq-answer {
-  padding:
-    0
-    75px
-    30px
-    32px;
+  padding: 0 75px 30px 32px;
 }
-
 
 .faq-answer p {
   max-width: 800px;
-
   margin: 0;
 
   font-size: 1rem;
   line-height: 1.85;
-
   color: #555564;
+
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================
+   補充連結 / LINE
+========================= */
+
+.faq-answer .faq-answer-link {
+  margin-top: 12px;
+}
+
+.faq-answer-link a {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: #191a2f;
+  font-size: 0.95rem;
+  font-weight: 750;
+
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.faq-answer-link a:hover {
+  color: #315c42;
 }
 
 
@@ -189,53 +220,154 @@
 
 
 /* =========================
+   查看更多
+========================= */
+
+.faq-more-wrap {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 32px;
+}
+
+.faq-more-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  min-width: 185px;
+  min-height: 50px;
+
+  padding: 12px 26px;
+
+  background-color: #fffdf8;
+  color: #191a2f;
+
+  border: 1px solid #191a2f;
+  border-radius: 13px;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.faq-more-button:hover {
+  background-color: #e5ecdf;
+  transform: translateY(-2px);
+}
+
+.faq-more-button[hidden] {
+  display: none !important;
+}
+
+.faq-more-button:focus-visible {
+  outline: 3px solid #315c42;
+  outline-offset: 3px;
+}
+
+.faq-more-arrow {
+  display: inline-block;
+  font-size: 1.15rem;
+
+  transition: transform 0.2s ease;
+}
+
+.faq-more-button.is-expanded .faq-more-arrow {
+  transform: rotate(180deg);
+}
+
+
+/* =========================
    Mobile
 ========================= */
 
 @media (max-width: 650px) {
 
   .faq-section {
-    padding:
-      80px 24px
-      90px;
+    padding: 80px 24px 90px;
+    scroll-margin-top: 145px;
   }
-
 
   .faq-heading {
     margin-bottom: 45px;
-
     text-align: left;
   }
-
 
   .faq-title {
     font-size: clamp(2.8rem, 13vw, 4rem);
   }
 
-
   .faq-list {
     gap: 14px;
   }
-
 
   .faq-item {
     border-radius: 16px;
   }
 
-
   .faq-item summary {
     padding: 22px 20px;
-
+    gap: 15px;
     font-size: 1rem;
   }
 
+  .faq-answer {
+    padding: 0 45px 24px 20px;
+  }
+
+  .faq-answer p {
+    font-size: 0.88rem;
+    line-height: 1.75;
+  }
+
+  .faq-answer-link a {
+    font-size: 0.85rem;
+  }
+
+  /* 查看更多 */
+
+  .faq-more-wrap {
+    margin-top: 22px;
+  }
+
+  .faq-more-button {
+    min-width: 160px;
+    min-height: 44px;
+
+    padding: 10px 20px;
+
+    border-radius: 11px;
+    font-size: 0.85rem;
+  }
+
+}
+
+
+/* =========================
+   Small Mobile
+========================= */
+
+@media (max-width: 360px) {
+
+  .faq-section {
+    padding: 60px 16px 70px;
+  }
+
+  .faq-item summary {
+    padding: 17px 15px;
+    font-size: 0.9rem;
+  }
 
   .faq-answer {
-    padding:
-      0
-      45px
-      24px
-      20px;
+    padding: 0 20px 20px 15px;
   }
 
 }

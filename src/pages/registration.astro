@@ -1,9 +1,12 @@
+
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { sanityClient } from "../lib/sanity";
-
 import "../styles/registration.css";
 
+// =====================================
+// Sanity 課程資料
+// =====================================
 
 const rawCourses = await sanityClient.fetch(`
   *[
@@ -17,7 +20,6 @@ const rawCourses = await sanityClient.fetch(`
     "slug": slug.current,
 
     status,
-    registrationMode,
     level,
     unit,
 
@@ -30,34 +32,41 @@ const rawCourses = await sanityClient.fetch(`
     time,
     location,
 
+    registrationMode,
     registrationType,
     registrationUrl,
+
+    beclassUrl,
+    enableWacRegistration,
+    wacUrl,
+
     pretestUrl,
     detailUrl,
+
+    additionalLinks[]{
+      label,
+      url
+    },
+
     notice
   }
 `);
 
+// =====================================
+// 中文顯示名稱
+// =====================================
 
 const statusLabels: Record<string, string> = {
   enrolling: "報名開放",
   closed: "停止報名",
 };
 
-
-const registrationLabels: Record<string, string> = {
-  wac: "WAC 選課",
-  online: "線上報名",
-};
-
-
 const levelLabels: Record<string, string> = {
   professional: "專業領域",
   basic: "AI 基礎",
-  advanced: "AI 進階",
+  advanced: "AI 應用",
   practical: "AI 技術實務",
 };
-
 
 const unitLabels: Record<string, string> = {
   nursing: "護理學系",
@@ -68,80 +77,131 @@ const unitLabels: Record<string, string> = {
   taica: "TAICA 臺灣大專院校人工智慧學程聯盟",
 };
 
+// =====================================
+// 整理課程資料
+// 同時支援新版與舊版 Sanity 欄位
+// =====================================
 
-const courses = rawCourses.map((course: any) => ({
-  id: course.slug,
+const courses = (rawCourses ?? []).map((course: any) => {
 
-  status: course.status,
+  const legacyMode = course.registrationMode;
+  const legacyUrl = course.registrationUrl ?? "";
 
-  statusLabel:
-    statusLabels[course.status] ?? course.status,
+  // 新版 WAC Checkbox 優先
+  // 未設定時沿用舊版 registrationMode
 
-  title: course.title,
+  const needsWac =
+    typeof course.enableWacRegistration === "boolean"
+      ? course.enableWacRegistration
+      : legacyMode === "wac";
 
-  registrationMode:
-    course.registrationMode,
+  // BeClass 網址
+  // 舊線上報名課程使用 registrationUrl
 
-  registrationModeLabel:
-    registrationLabels[course.registrationMode]
-      ?? course.registrationMode,
+  const beclassUrl =
+    course.beclassUrl ||
+    (
+      legacyMode !== "wac"
+        ? legacyUrl
+        : ""
+    ) ||
+    "";
 
-  level: course.level,
+  // WAC 網址
+  // 舊 WAC 課程使用 registrationUrl
 
-  levelLabel:
-    levelLabels[course.level]
-      ?? course.level,
+  const wacUrl = needsWac
+    ? (
+        course.wacUrl ||
+        (
+          legacyMode === "wac"
+            ? legacyUrl
+            : ""
+        ) ||
+        ""
+      )
+    : "";
 
-  unit: course.unit,
+  // 是否有雙報名方式
 
-  unitLabel:
-    unitLabels[course.unit]
-      ?? course.unit,
+  const hasMethodSwitch =
+    Boolean(beclassUrl) && needsWac;
 
-  instructors:
-    course.instructors ?? "",
+  // 補充連結
 
-  description:
-    course.description ?? "",
+  const additionalLinks = (
+    course.additionalLinks ?? []
+  ).filter(
+    (link: any) =>
+      Boolean(link?.label && link?.url)
+  );
 
-  delivery:
-    course.delivery ?? "",
+  const notice = course.notice ?? [];
 
-  date:
-    course.dateText ?? "",
+  // 是否有可顯示的報名入口
 
-  time:
-    course.time ?? "",
+  const hasRegistrationEntry =
+    Boolean(beclassUrl) || needsWac;
 
-  location:
-    course.location ?? "",
+  return {
+    id: course.slug || course._id,
+    title: course.title,
 
-  registrationType:
-    course.registrationType ?? "",
+    status: course.status,
+    statusLabel:
+      statusLabels[course.status] ??
+      course.status ??
+      "未設定",
 
-  registrationUrl:
-    course.registrationUrl ?? "",
+    levelLabel:
+      levelLabels[course.level] ??
+      course.level ??
+      "未分類",
 
-  pretestUrl:
-    course.pretestUrl ?? "",
+    unitLabel:
+      unitLabels[course.unit] ??
+      course.unit ??
+      "未設定",
 
-  detailUrl:
-    course.detailUrl ?? "",
+    instructors: course.instructors ?? "",
+    description: course.description ?? "",
+    delivery: course.delivery ?? "",
 
-  notice:
-    course.notice ?? [],
-}));
+    date: course.dateText ?? "",
+    time: course.time ?? "",
+    location: course.location ?? "",
+
+    needsWac,
+    beclassUrl,
+    wacUrl,
+
+    hasMethodSwitch,
+    hasRegistrationEntry,
+
+    registrationModeLabel:
+      needsWac
+        ? (
+            beclassUrl
+              ? "BeClass＋WAC"
+              : "WAC 選課"
+          )
+        : "線上報名",
+
+    pretestUrl: course.pretestUrl ?? "",
+    detailUrl: course.detailUrl ?? "",
+
+    additionalLinks,
+    notice,
+  };
+});
 ---
 
-<BaseLayout title="課程報名｜AI × 照護">
-
-  <section class="registration-page">
+<BaseLayout
+  title="課程報名｜醫療照護創新與人工智慧應用人才培育計畫"
+>
+  <main class="registration-page">
 
     <div class="registration-container">
-
-      <!-- =========================
-           Heading
-      ========================== -->
 
       <header class="registration-heading">
 
@@ -149,21 +209,15 @@ const courses = rawCourses.map((course: any) => ({
           REGISTRATION
         </p>
 
-        <h1>
-          課程報名
-        </h1>
+        <h1>課程報名</h1>
 
         <p>
-          選擇欲參加的課程，
-          查看報名方式、課程資訊與相關注意事項。
+          選擇欲參加的課程，查看報名方式、
+          課程資訊與相關注意事項。
         </p>
 
       </header>
 
-
-      <!-- =========================
-           Course Selector
-      ========================== -->
 
       <div class="registration-selector">
 
@@ -173,107 +227,107 @@ const courses = rawCourses.map((course: any) => ({
 
         <select id="course-select">
 
-          {
-            courses.map((course) => (
-              <option value={course.id}>
-                {
-                    course.status === "closed"
-                    ? `【報名截止】${course.title}`
-                    : `【${course.statusLabel}】${course.title}`
-                }
-              </option>
-            ))
-          }
+          {courses.map((course: any) => (
+            <option value={course.id}>
+              {`【${course.statusLabel}】${course.title}`}
+            </option>
+          ))}
 
         </select>
 
       </div>
 
 
-      <!-- =========================
-           Course Panels
-      ========================== -->
-
       <div class="registration-panels">
 
-        {
-          courses.map((course) => (
+        {courses.map((course: any) => (
 
-            <section
-              class="registration-course"
-              data-registration-course={course.id}
-              hidden
-            >
+          <section
+            class="registration-course"
+            data-registration-course={course.id}
+            hidden
+          >
 
-              <!-- 課程資訊 -->
+            <div class="registration-course-info">
 
-              <div class="registration-course-info">
+              <div class="registration-course-title">
 
-                <div class="registration-course-title">
+                <span
+                  class:list={[
+                    "registration-status",
+                    `registration-status--${course.status}`,
+                  ]}
+                >
+                  {course.statusLabel}
+                </span>
 
-                  <span
-                    class:list={[
-                      "registration-status",
-                      `registration-status--${course.status}`
-                    ]}
-                  >
-                    {course.statusLabel}
-                  </span>
+                <h2>{course.title}</h2>
 
-                  <h2>
-                    {course.title}
-                  </h2>
+              </div>
+
+
+              <div class="registration-tags">
+
+                <span>{course.levelLabel}</span>
+
+                <span>{course.unitLabel}</span>
+
+                <span>
+                  {course.registrationModeLabel}
+                </span>
+
+              </div>
+
+
+              <div class="registration-meta">
+
+                <div>
+                  <span>日期</span>
+                  <strong>
+                    {course.date || "依公告為準"}
+                  </strong>
+                </div>
+
+                <div>
+                  <span>時間</span>
+                  <strong>
+                    {course.time || "依公告為準"}
+                  </strong>
+                </div>
+
+                <div>
+                  <span>地點</span>
+                  <strong>
+                    {course.location || "依公告為準"}
+                  </strong>
+                </div>
+
+                <div>
+                  <span>授課教師</span>
+                  <strong>
+                    {course.instructors || "依公告為準"}
+                  </strong>
+                </div>
+
+              </div>
+
+
+              {course.delivery && (
+
+                <div class="registration-delivery">
+
+                  <span>上課方式</span>
+
+                  <strong>
+                    {course.delivery}
+                  </strong>
 
                 </div>
 
-
-                <!-- Tags -->
-
-                <div class="registration-tags">
-
-                  <span>
-                    {course.levelLabel}
-                  </span>
-
-                  <span>
-                    {course.unitLabel}
-                  </span>
-
-                  <span>
-                    {course.registrationModeLabel}
-                  </span>
-
-                </div>
+              )}
 
 
-                <!-- 基本資料 -->
-
-                <div class="registration-meta">
-
-                  <div>
-                    <span>日期</span>
-                    <strong>{course.date}</strong>
-                  </div>
-
-                  <div>
-                    <span>時間</span>
-                    <strong>{course.time}</strong>
-                  </div>
-
-                  <div>
-                    <span>地點</span>
-                    <strong>{course.location}</strong>
-                  </div>
-
-                  <div>
-                    <span>授課教師</span>
-                    <strong>{course.instructors}</strong>
-                  </div>
-
-                </div>
-
-
-                <!-- Description -->
+              {course.description && (
 
                 <div class="registration-description">
 
@@ -281,227 +335,365 @@ const courses = rawCourses.map((course: any) => ({
                     COURSE DESCRIPTION
                   </p>
 
-                  <p>
-                    {course.description}
-                  </p>
+                  <p>{course.description}</p>
 
                 </div>
 
-
-                <!-- Notices -->
-
-                {
-                  course.notice?.length > 0 && (
-
-                    <div class="registration-notice">
-
-                      <h3>
-                        報名前注意事項
-                      </h3>
-
-                      <ol>
-                        {
-                          course.notice.map((item) => (
-                            <li>{item}</li>
-                          ))
-                        }
-                      </ol>
-
-                    </div>
-
-                  )
-                }
+              )}
 
 
-                {
-                  course.detailUrl && (
+              {course.notice.length > 0 && (
 
-                    <a
-                      class="course-detail-button"
-                      href={course.detailUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                <div class="registration-notice">
+
+                  <h3>報名前注意事項</h3>
+
+                  <ol>
+
+                    {course.notice.map((item: string) => (
+                      <li>{item}</li>
+                    ))}
+
+                  </ol>
+
+                </div>
+
+              )}
+
+
+              {course.detailUrl && (
+
+                <div class="registration-detail-actions">
+
+                  <a
+                    class="course-detail-button"
+                    href={course.detailUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+
+                    <span>
                       查看詳細課程安排
-                      <span aria-hidden="true">↗</span>
-                    </a>
+                    </span>
 
-                  )
-                }
+                    <span aria-hidden="true">
+                      ↗
+                    </span>
+
+                  </a>
+
+                </div>
+
+              )}
+
+
+              {course.additionalLinks.length > 0 && (
+
+                <div class="registration-resources">
+
+                  <h3>其他補充資源</h3>
+
+                  <div class="registration-resource-links">
+
+                    {course.additionalLinks.map((link: any) => (
+
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+
+                        <span>{link.label}</span>
+
+                        <span aria-hidden="true">
+                          ↗
+                        </span>
+
+                      </a>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+              )}
+
+            </div>
+
+
+            {course.status === "closed" ? (
+
+              <div class="closed-registration">
+
+                <p class="closed-registration-eyebrow">
+                  REGISTRATION CLOSED
+                </p>
+
+                <h3>本課程已停止報名</h3>
+
+                <p>
+                  目前已停止接受報名，
+                  歡迎查看其他開放中的課程。
+                </p>
+
+                <div class="closed-registration-actions">
+
+                  <a
+                    class="closed-primary-button"
+                    href="/courses"
+                  >
+
+                    查看其他課程
+
+                    <span aria-hidden="true">
+                      →
+                    </span>
+
+                  </a>
+
+                </div>
 
               </div>
 
+            ) : (
 
-              <!-- =========================
-                   Embed Registration
-              ========================== -->
+              <div class="registration-steps">
 
-              {
-                course.status === "closed" ? (
+                {course.hasRegistrationEntry && (
 
-                    <div class="closed-registration">
+                  <section
+                    class="registration-step-card registration-entry-card"
+                  >
 
-                    <p class="closed-registration-eyebrow">
-                        REGISTRATION CLOSED
-                    </p>
+                    <div class="form-card-heading">
 
-                    <h3>
-                        本課程已停止報名
-                    </h3>
+                      <p>STEP 01</p>
 
-                    <p>
-                        此課程目前已超過報名期限，
-                        您可以前往近期課程尋找其他開放中的課程。
-                    </p>
+                      <h3>課程報名</h3>
 
-                    <div class="closed-registration-actions">
+                    </div>
 
-                        <a
-                        class="closed-primary-button"
-                        href="/courses"
+
+                    {course.hasMethodSwitch && (
+
+                      <div
+                        class="registration-method-switch"
+                        aria-label="選擇報名方式"
+                      >
+
+                        <button
+                          type="button"
+                          class="registration-method-tab is-active"
+                          data-reg-method-button="beclass"
+                          aria-pressed="true"
                         >
-                        查看其他開放課程
-                        <span aria-hidden="true">→</span>
-                        </a>
+                          BeClass 線上報名
+                        </button>
 
-                    </div>
+                        <button
+                          type="button"
+                          class="registration-method-tab"
+                          data-reg-method-button="wac"
+                          aria-pressed="false"
+                        >
+                          WAC 校務選課
+                        </button>
 
-                    </div>
+                      </div>
 
-                ) : course.registrationType === "embed" ? (
+                    )}
 
-                    <div class="registration-forms">
 
-                    <!-- STEP 01 -->
+                    {course.beclassUrl && (
 
-                    <section class="registration-form-card">
+                      <div
+                        class="registration-method-panel"
+                        data-reg-method-view="beclass"
+                      >
 
-                        <div class="form-card-heading">
+                        <iframe
+                          title={`${course.title} BeClass 報名表`}
+                          data-src={course.beclassUrl}
+                          loading="lazy"
+                        ></iframe>
 
-                        <p>
-                            STEP 01
-                        </p>
+                        <div class="registration-step-content">
 
-                        <h3>
-                            課程報名
-                        </h3>
+                          <a
+                            class="registration-action-button registration-action-button--outline"
+                            href={course.beclassUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+
+                            <span>
+                              在新分頁開啟報名表
+                            </span>
+
+                            <span aria-hidden="true">
+                              ↗
+                            </span>
+
+                          </a>
 
                         </div>
 
+                      </div>
 
-                        <iframe
-                        title={`${course.title} 課程報名表`}
-                        data-src={course.registrationUrl}
-                        loading="lazy"
-                        >
-                        </iframe>
+                    )}
 
 
-                        <a
-                        class="form-external-link"
-                        href={course.registrationUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        >
-                        無法顯示？
-                        在新分頁開啟報名表 ↗
-                        </a>
+                    {course.needsWac && (
 
-                    </section>
+                      <div
+                        class="registration-method-panel"
+                        data-reg-method-view="wac"
+                        hidden={Boolean(course.beclassUrl)}
+                      >
 
+                        <div class="registration-step-content">
 
-                    <!-- STEP 02 -->
+                          <h4>WAC 校務選課</h4>
 
-                    {
-                        course.pretestUrl && (
+                          <p>
+                            本課程提供 WAC 校務選課入口。
+                            請依課程公告確認選課規定及期限。
+                          </p>
 
-                        <section class="registration-form-card">
-
-                            <div class="form-card-heading">
-
-                            <p>
-                                STEP 02
-                            </p>
-
-                            <h3>
-                                課程前測
-                            </h3>
-
-                            </div>
-
-
-                            <iframe
-                            title={`${course.title} 課程前測`}
-                            data-src={course.pretestUrl}
-                            loading="lazy"
-                            >
-                            </iframe>
-
+                          {course.wacUrl ? (
 
                             <a
-                            class="form-external-link"
-                            href={course.pretestUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                              class="registration-action-button registration-action-button--outline"
+                              href={course.wacUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
                             >
-                            無法顯示？
-                            在新分頁填寫前測 ↗
+
+                              <span>
+                                前往 WAC 選課系統
+                              </span>
+
+                              <span aria-hidden="true">
+                                ↗
+                              </span>
+
                             </a>
 
-                        </section>
+                          ) : (
 
-                        )
-                    }
+                            <p class="registration-step-hint">
+                              WAC 選課連結尚未提供，
+                              請依學校公告辦理。
+                            </p>
+
+                          )}
+
+                        </div>
+
+                      </div>
+
+                    )}
+
+                  </section>
+
+                )}
+
+
+                {course.pretestUrl && (
+
+                  <section class="registration-step-card">
+
+                    <div class="form-card-heading">
+
+                      <p>
+                        {course.hasRegistrationEntry
+                          ? "STEP 02"
+                          : "STEP 01"}
+                      </p>
+
+                      <h3>課程前測</h3>
 
                     </div>
 
-                ) : course.registrationType === "external" ? (
 
-                    <div class="external-registration">
-
-                    <p class="external-registration-eyebrow">
-                        EXTERNAL REGISTRATION
-                    </p>
-
-                    <h3>
-                        本課程透過校務／WAC 系統選課
-                    </h3>
-
-                    <p>
-                        點擊下方按鈕前往選課系統，
-                        並依校方公告與選課時間完成登記。
-                    </p>
+                    <iframe
+                      title={`${course.title} 課程前測`}
+                      data-src={course.pretestUrl}
+                      loading="lazy"
+                    ></iframe>
 
 
-                    <a
-                        href={course.registrationUrl}
+                    <div class="registration-step-content">
+
+                      <a
+                        class="registration-action-button registration-action-button--outline"
+                        href={course.pretestUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                    >
-                        前往 WAC 選課
-                        <span aria-hidden="true">↗</span>
-                    </a>
+                      >
+
+                        <span>
+                          在新分頁填寫前測
+                        </span>
+
+                        <span aria-hidden="true">
+                          ↗
+                        </span>
+
+                      </a>
 
                     </div>
 
-                ) : null
-                }
+                  </section>
 
-            </section>
+                )}
 
-          ))
-        }
+
+                {!course.hasRegistrationEntry &&
+                  !course.pretestUrl && (
+
+                    <div class="registration-empty">
+
+                      <h3>報名資訊尚未公布</h3>
+
+                      <p>
+                        請留意近期課程公告。
+                      </p>
+
+                    </div>
+
+                  )}
+
+              </div>
+
+            )}
+
+          </section>
+
+        ))}
 
       </div>
 
+
+      {courses.length === 0 && (
+
+        <div class="registration-empty">
+
+          <h3>目前尚無可顯示的課程</h3>
+
+          <p>
+            請稍後查看近期課程公告。
+          </p>
+
+        </div>
+
+      )}
+
     </div>
 
-  </section>
+  </main>
 
-
-  <!-- =========================
-       Client interaction
-  ========================== -->
 
   <script>
 
@@ -510,12 +702,55 @@ const courses = rawCourses.map((course: any) => ({
         "#course-select"
       );
 
-
     const panels =
       document.querySelectorAll<HTMLElement>(
         "[data-registration-course]"
       );
 
+
+    // =====================================
+    // 只載入目前顯示的 iframe
+    // =====================================
+
+    function loadVisibleIframes(panel: HTMLElement) {
+
+      if (panel.hidden) {
+        return;
+      }
+
+      const iframes =
+        panel.querySelectorAll<HTMLIFrameElement>(
+          "iframe[data-src]"
+        );
+
+      iframes.forEach((iframe) => {
+
+        const methodPanel =
+          iframe.closest<HTMLElement>(
+            "[data-reg-method-view]"
+          );
+
+        if (methodPanel?.hidden) {
+          return;
+        }
+
+        const src = iframe.dataset.src;
+
+        if (
+          src &&
+          !iframe.getAttribute("src")
+        ) {
+          iframe.setAttribute("src", src);
+        }
+
+      });
+
+    }
+
+
+    // =====================================
+    // 顯示指定課程
+    // =====================================
 
     function showCourse(courseId: string) {
 
@@ -524,39 +759,10 @@ const courses = rawCourses.map((course: any) => ({
         const active =
           panel.dataset.registrationCourse === courseId;
 
-
         panel.hidden = !active;
 
-
         if (active) {
-
-          /*
-            iframe 一開始只有 data-src，
-            選到該課程才真正載入。
-
-            避免進頁面就一次載入
-            所有 BeClass / Google Form。
-          */
-
-          panel
-            .querySelectorAll<HTMLIFrameElement>(
-              "iframe[data-src]"
-            )
-            .forEach((iframe) => {
-
-              if (!iframe.src) {
-
-                const src =
-                  iframe.dataset.src;
-
-                if (src) {
-                  iframe.src = src;
-                }
-
-              }
-
-            });
-
+          loadVisibleIframes(panel);
         }
 
       });
@@ -564,17 +770,17 @@ const courses = rawCourses.map((course: any) => ({
     }
 
 
+    // =====================================
+    // 更新網址
+    // =====================================
+
     function updateURL(courseId: string) {
 
-      const url =
-        new URL(window.location.href);
+      const url = new URL(window.location.href);
 
-      url.searchParams.set(
-        "course",
-        courseId
-      );
+      url.searchParams.set("course", courseId);
 
-      history.replaceState(
+      window.history.replaceState(
         {},
         "",
         url
@@ -583,73 +789,150 @@ const courses = rawCourses.map((course: any) => ({
     }
 
 
+    // =====================================
+    // 初始化課程
+    // =====================================
+
     function initializeCourse() {
 
       if (!select) {
         return;
       }
 
-
       const params =
-        new URLSearchParams(
-          window.location.search
-        );
-
+        new URLSearchParams(window.location.search);
 
       const requestedCourse =
         params.get("course");
 
-
       const exists =
-        [...select.options]
-          .some(
-            option =>
-              option.value === requestedCourse
-          );
-
+        Array.from(select.options).some(
+          (option) =>
+            option.value === requestedCourse
+        );
 
       const initialCourse =
         requestedCourse && exists
           ? requestedCourse
           : select.options[0]?.value;
 
-
       if (!initialCourse) {
         return;
       }
 
+      select.value = initialCourse;
 
-      select.value =
-        initialCourse;
-
-
-      showCourse(
-        initialCourse
-      );
+      showCourse(initialCourse);
 
     }
 
 
-    select?.addEventListener(
-      "change",
-      () => {
+    // =====================================
+    // 切換課程
+    // =====================================
 
-        const courseId =
-          select.value;
+    select?.addEventListener("change", () => {
+
+      showCourse(select.value);
+
+      updateURL(select.value);
+
+    });
 
 
-        showCourse(
-          courseId
+    // =====================================
+    // BeClass / WAC 切換
+    // =====================================
+
+    const entryCards =
+      document.querySelectorAll<HTMLElement>(
+        ".registration-entry-card"
+      );
+
+
+    entryCards.forEach((card) => {
+
+      const buttons =
+        card.querySelectorAll<HTMLButtonElement>(
+          "[data-reg-method-button]"
+        );
+
+      const views =
+        card.querySelectorAll<HTMLElement>(
+          "[data-reg-method-view]"
         );
 
 
-        updateURL(
-          courseId
-        );
+      buttons.forEach((button) => {
 
-      }
-    );
+        button.addEventListener("click", () => {
 
+          const method =
+            button.dataset.regMethodButton;
+
+          // 更新切換按鈕狀態
+
+          buttons.forEach((item) => {
+
+            const active =
+              item.dataset.regMethodButton === method;
+
+            item.classList.toggle(
+              "is-active",
+              active
+            );
+
+            item.setAttribute(
+              "aria-pressed",
+              String(active)
+            );
+
+          });
+
+
+          // 顯示選擇的報名方式
+
+          views.forEach((view) => {
+
+            view.hidden =
+              view.dataset.regMethodView !== method;
+
+          });
+
+
+          // 必要時載入 iframe
+
+          const coursePanel =
+            card.closest<HTMLElement>(
+              ".registration-course"
+            );
+
+          if (
+            coursePanel &&
+            !coursePanel.hidden
+          ) {
+            loadVisibleIframes(coursePanel);
+          }
+
+        });
+
+      });
+
+    });
+
+
+    // =====================================
+    // 瀏覽器上一頁 / 下一頁
+    // =====================================
+
+    window.addEventListener("popstate", () => {
+      initializeCourse();
+    });
+
+
+    // =====================================
+    // 啟動
+    // =====================================
 
     initializeCourse();
 

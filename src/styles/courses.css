@@ -1,20 +1,17 @@
+
 /* =========================
    Courses Page
 ========================= */
 
 .courses-page {
-  padding:
-    110px 5vw
-    130px;
+  padding: 65px 5vw 95px;
 
   background-color: #eef1f8;
   color: #191a2f;
 }
 
-
 .courses-page-container {
   max-width: 1450px;
-
   margin: 0 auto;
 }
 
@@ -25,52 +22,39 @@
 
 .courses-page-heading {
   max-width: 850px;
-
-  margin:
-    0 auto
-    90px;
+  margin: 0 auto 55px;
 
   text-align: center;
 }
 
-
 .courses-page-eyebrow {
-  margin:
-    0 0
-    18px;
+  margin: 0 0 14px;
 
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.16em;
 }
 
-
 .courses-page-heading h1 {
   margin: 0;
 
-  font-size:
-    clamp(
-      4rem,
-      8vw,
-      8rem
-    );
+  font-size: clamp(
+    2.7rem,
+    5vw,
+    4.2rem
+  );
 
   font-weight: 500;
-
-  line-height: 0.95;
-
-  letter-spacing: -0.06em;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
 }
-
 
 .courses-page-heading > p:last-child {
   max-width: 650px;
+  margin: 22px auto 0;
 
-  margin:
-    35px auto 0;
-
-  font-size: 1rem;
-  line-height: 1.8;
+  font-size: 0.95rem;
+  line-height: 1.75;
 
   color: #555564;
 }
@@ -82,23 +66,19 @@
 
 .course-filters {
   display: grid;
-
-  grid-template-columns:
-    repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 
   gap: 14px;
-
-  margin-bottom: 25px;
+  margin-bottom: 22px;
 }
-
 
 .filter-field {
   display: flex;
   flex-direction: column;
 
-  gap: 9px;
+  gap: 7px;
+  min-width: 0;
 }
-
 
 .filter-field > span {
   font-size: 0.7rem;
@@ -106,30 +86,19 @@
   letter-spacing: 0.08em;
 }
 
-
 .filter-field select {
   width: 100%;
+  min-height: 46px;
 
-  min-height: 54px;
+  padding: 0 38px 0 16px;
 
-  padding:
-    0
-    45px
-    0
-    18px;
-
-  border:
-    1px solid
-    #191a2f;
-
+  border: 1px solid #191a2f;
   border-radius: 999px;
 
   background-color: #fffdf8;
-
   color: #191a2f;
 
-  font-size: 0.9rem;
-
+  font-size: 0.85rem;
   cursor: pointer;
 }
 
@@ -140,43 +109,30 @@
 
 .courses-result-bar {
   display: flex;
-
-  justify-content:
-    space-between;
-
+  justify-content: space-between;
   align-items: center;
 
-  margin-bottom: 45px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
 
-  padding-bottom: 20px;
-
-  border-bottom:
-    1px solid
-    rgba(25, 26, 47, 0.4);
+  border-bottom: 1px solid rgba(25, 26, 47, 0.4);
 }
-
 
 .courses-result-bar p {
   margin: 0;
-
   font-size: 0.8rem;
 }
 
-
 .filter-reset {
   padding: 0;
-
   border: 0;
 
   background: none;
-
   color: #191a2f;
 
-  border-bottom:
-    1px solid #191a2f;
+  border-bottom: 1px solid #191a2f;
 
   font-size: 0.8rem;
-
   cursor: pointer;
 }
 
@@ -187,31 +143,25 @@
 
 .courses-grid {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  grid-template-columns:
-    repeat(2, 1fr);
-
-  gap: 28px;
+  gap: 20px;
 }
-
 
 .course-card {
   display: flex;
   flex-direction: column;
 
-  min-height: 570px;
+  min-width: 0;
+  min-height: 0;
 
-  padding: 40px;
+  padding: 26px;
 
-  border:
-    1px solid
-    #191a2f;
-
-  border-radius: 24px;
+  border: 1px solid #191a2f;
+  border-radius: 19px;
 
   background-color: #fffdf8;
 }
-
 
 .course-card[hidden] {
   display: none;
@@ -224,16 +174,11 @@
 
 .course-card-header {
   display: grid;
-
-  grid-template-columns:
-    auto
-    1fr;
+  grid-template-columns: auto minmax(0, 1fr);
 
   align-items: start;
-
-  gap: 22px;
+  gap: 16px;
 }
-
 
 .course-status {
   display: inline-flex;
@@ -241,54 +186,45 @@
   align-items: center;
   justify-content: center;
 
-  padding:
-    7px 13px;
+  padding: 6px 11px;
 
-  border:
-    1px solid
-    #191a2f;
-
+  border: 1px solid #191a2f;
   border-radius: 999px;
 
   white-space: nowrap;
 
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
 }
-
 
 .course-status--enrolling {
   background-color: #d2efc9;
 }
 
-
 .course-status--ongoing {
   background-color: #d7e7ff;
 }
 
-
 .course-status--closed {
   background-color: #e4e4e4;
-
   color: #666;
 }
-
 
 .course-card-title {
   margin: 0;
 
-  font-size:
-    clamp(
-      1.7rem,
-      2.6vw,
-      2.8rem
-    );
+  font-size: clamp(
+    1.25rem,
+    1.75vw,
+    1.7rem
+  );
 
-  font-weight: 550;
+  font-weight: 600;
 
-  line-height: 1.18;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
 
-  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
 }
 
 
@@ -300,25 +236,18 @@
   display: flex;
   flex-wrap: wrap;
 
-  gap: 8px;
-
-  margin:
-    26px 0
-    38px;
+  gap: 7px;
+  margin: 18px 0 22px;
 }
 
-
 .course-tags span {
-  padding:
-    5px 10px;
+  padding: 4px 9px;
 
-  border:
-    1px solid
-    rgba(25,26,47,0.65);
-
+  border: 1px solid rgba(25, 26, 47, 0.65);
   border-radius: 999px;
 
-  font-size: 0.68rem;
+  font-size: 0.66rem;
+  line-height: 1.5;
 }
 
 
@@ -328,40 +257,34 @@
 
 .course-main-info {
   display: grid;
-
-  gap: 27px;
+  gap: 16px;
 }
-
 
 .course-info-block {
   display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
 
-  grid-template-columns:
-    145px
-    1fr;
-
-  gap: 20px;
+  gap: 14px;
 }
-
 
 .course-info-label {
   margin: 0;
 
   font-size: 0.65rem;
   font-weight: 700;
-
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 
   color: #666675;
 }
-
 
 .course-info-value,
 .course-description {
   margin: 0;
 
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   line-height: 1.7;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -371,155 +294,133 @@
 
 .course-schedule {
   display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
-  grid-template-columns:
-    repeat(3, 1fr);
+  gap: 14px;
 
-  gap: 18px;
+  margin-top: 24px;
+  padding-top: 17px;
 
-  margin-top: 38px;
-
-  padding-top: 25px;
-
-  border-top:
-    1px solid
-    rgba(25,26,47,0.3);
+  border-top: 1px solid rgba(25, 26, 47, 0.3);
 }
-
 
 .course-schedule div {
   display: flex;
   flex-direction: column;
 
-  gap: 7px;
+  min-width: 0;
+  gap: 5px;
 }
-
 
 .course-schedule span {
   font-size: 0.65rem;
-
   color: #666675;
 }
-
 
 .course-schedule strong {
   font-size: 0.78rem;
   line-height: 1.5;
+
+  overflow-wrap: anywhere;
 }
 
 
 /* =========================
-   Footer
+   Card Footer
 ========================= */
 
 .course-card-footer {
   margin-top: auto;
-
-  padding-top: 40px;
+  padding-top: 24px;
 }
-
 
 .course-detail-link {
   display: flex;
-
   align-items: center;
 
-  justify-content:
-    space-between;
+  justify-content: space-between;
 
-  padding-top: 20px;
+  padding-top: 14px;
 
-  border-top:
-    1px solid #191a2f;
+  border-top: 1px solid #191a2f;
 
   color: #191a2f;
 
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   font-weight: 700;
 
   text-decoration: none;
 }
 
-
 .course-detail-link span {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 
-  transition:
-    transform 0.2s ease;
+  transition: transform 0.2s ease;
 }
-
 
 .course-detail-link:hover span {
-  transform:
-    translateX(5px);
+  transform: translateX(5px);
 }
+
 
 /* =========================
    Course Calendar
 ========================= */
 
 .course-calendar {
-  margin-top: 120px;
-  padding-top: 80px;
+  margin-top: 90px;
+  padding-top: 60px;
 
   border-top: 1px solid #191a2f;
 }
 
-
 .course-calendar-heading {
   display: grid;
 
-  grid-template-columns:
-    1fr
-    0.7fr;
-
+  grid-template-columns: 1fr 0.7fr;
   align-items: end;
 
-  gap: 50px;
-
-  margin-bottom: 45px;
+  gap: 35px;
+  margin-bottom: 35px;
 }
 
-
 .course-calendar-eyebrow {
-  margin: 0 0 15px;
+  margin: 0 0 12px;
 
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.15em;
 }
 
-
 .course-calendar-heading h2 {
   margin: 0;
 
-  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-size: clamp(
+    2rem,
+    4vw,
+    3.5rem
+  );
+
   font-weight: 500;
-
-  letter-spacing: -0.05em;
+  letter-spacing: -0.045em;
 }
-
 
 .course-calendar-heading > p {
   max-width: 430px;
-
   margin: 0;
 
   line-height: 1.8;
-
   color: #555564;
 }
-
 
 .calendar-frame {
   overflow: hidden;
 
   border: 1px solid #191a2f;
-  border-radius: 24px;
+  border-radius: 20px;
 
   background: white;
 }
-
 
 .calendar-frame iframe {
   display: block;
@@ -531,63 +432,28 @@
 }
 
 
-@media (max-width: 750px) {
-
-  .course-calendar {
-    margin-top: 80px;
-    padding-top: 60px;
-  }
-
-
-  .course-calendar-heading {
-    grid-template-columns: 1fr;
-
-    gap: 20px;
-  }
-
-
-  .calendar-frame {
-    border-radius: 16px;
-  }
-
-
-  .calendar-frame iframe {
-    height: 600px;
-  }
-
-}
-
-
 /* =========================
    No Results
 ========================= */
 
 .no-results {
-  padding:
-    80px
-    30px;
+  padding: 60px 25px;
 
   text-align: center;
 
-  border:
-    1px solid
-    #191a2f;
-
-  border-radius: 24px;
+  border: 1px solid #191a2f;
+  border-radius: 19px;
 
   background: #fffdf8;
 }
-
 
 .no-results button {
   margin-top: 15px;
 
   border: 0;
-
   background: none;
 
   text-decoration: underline;
-
   cursor: pointer;
 }
 
@@ -599,70 +465,248 @@
 @media (max-width: 1000px) {
 
   .course-filters {
-    grid-template-columns:
-      repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
 
   .courses-grid {
     grid-template-columns: 1fr;
+  }
+
+  .course-card {
+    min-height: 0;
+  }
+
+  .course-card-title {
+    font-size: clamp(1.25rem, 2.5vw, 1.65rem);
   }
 
 }
 
 
 /* =========================
-   Mobile
+   Course Calendar - Tablet
+========================= */
+
+@media (max-width: 750px) {
+
+  .course-calendar {
+    margin-top: 65px;
+    padding-top: 45px;
+  }
+
+  .course-calendar-heading {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .calendar-frame {
+    border-radius: 16px;
+  }
+
+  .calendar-frame iframe {
+    height: 600px;
+  }
+
+}
+
+
+
+/* =========================
+   Mobile - Compact Layout
 ========================= */
 
 @media (max-width: 620px) {
 
   .courses-page {
-    padding:
-      75px 24px
-      90px;
+    padding: 36px 16px 60px;
   }
 
-
+  /* Heading */
   .courses-page-heading {
-    margin-bottom: 60px;
-
-    text-align: left;
+    margin-bottom: 30px;
+    text-align: center;
   }
 
+  .courses-page-heading h1 {
+    font-size: clamp(2rem, 8vw, 2.7rem);
+    line-height: 1.15;
+  }
 
+  .courses-page-heading > p:last-child {
+    margin-top: 12px;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  /* Filters：兩欄 */
   .course-filters {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 18px;
   }
 
+  .filter-field {
+    gap: 4px;
+  }
+
+  .filter-field > span {
+    font-size: 0.65rem;
+  }
+
+  .filter-field select {
+    min-height: 40px;
+    padding: 0 22px 0 10px;
+    font-size: 0.75rem;
+  }
+
+  /* Results */
+  .courses-result-bar {
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+  }
+
+  /* Cards */
+  .courses-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
 
   .course-card {
     min-height: 0;
-
-    padding: 28px 24px;
-
-    border-radius: 18px;
+    padding: 16px;
+    border-radius: 14px;
   }
 
-
+  /* Card Header */
   .course-card-header {
     grid-template-columns: 1fr;
-
-    gap: 16px;
+    gap: 9px;
   }
 
+  .course-status {
+    width: fit-content;
+    padding: 4px 9px;
+    font-size: 0.62rem;
+  }
+
+  .course-card-title {
+    font-size: 1.15rem;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+  }
+
+  /* Tags */
+  .course-tags {
+    gap: 5px;
+    margin: 12px 0 16px;
+  }
+
+  .course-tags span {
+    padding: 3px 7px;
+    font-size: 0.62rem;
+  }
+
+  /* 課程詳細資訊 */
+  .course-main-info {
+    gap: 11px;
+  }
 
   .course-info-block {
-    grid-template-columns: 1fr;
-
-    gap: 7px;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 8px;
+    align-items: start;
   }
 
+  .course-info-label {
+    font-size: 0.63rem;
+    line-height: 1.6;
+  }
+
+  .course-info-value,
+  .course-description {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+
+  /* 日期、時間、地點：三欄 */
+  .course-schedule {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+
+    margin-top: 16px;
+    padding-top: 12px;
+  }
+
+  .course-schedule div {
+    min-width: 0;
+    gap: 4px;
+  }
+
+  .course-schedule span {
+    font-size: 0.6rem;
+  }
+
+  .course-schedule strong {
+    font-size: 0.72rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
+  /* Footer Link */
+  .course-card-footer {
+    margin-top: auto;
+    padding-top: 16px;
+  }
+
+  .course-detail-link {
+    padding-top: 12px;
+    font-size: 0.78rem;
+  }
+
+  .course-detail-link span {
+    font-size: 1rem;
+  }
+
+  /* Calendar */
+  .course-calendar {
+    margin-top: 55px;
+    padding-top: 35px;
+  }
+
+  .calendar-frame iframe {
+    height: 480px;
+  }
+
+  /* No Results */
+  .no-results {
+    padding: 40px 16px;
+  }
+}
+
+/* =========================
+   Small Mobile
+========================= */
+
+@media (max-width: 360px) {
+
+  .courses-page {
+    padding-inline: 12px;
+  }
+
+  .course-card {
+    padding: 14px;
+  }
+
+  .course-info-block {
+    grid-template-columns: 65px minmax(0, 1fr);
+  }
 
   .course-schedule {
-    grid-template-columns: 1fr;
-
-    gap: 18px;
+    gap: 5px;
   }
 
+  .course-schedule strong {
+    font-size: 0.68rem;
+  }
 }
